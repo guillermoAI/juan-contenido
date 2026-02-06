@@ -94,11 +94,15 @@ Los referentes que estudié tienen algo en común: **backend sistemático** que 
 
 ```
 workspace/
-├── RESEARCH_CONSULTORIA.md   ← Análisis completo de referentes
+├── RESEARCH_CONSULTORIA.md   ← Análisis completo de referentes + herramientas
 ├── PLAN_ACCION_BACKEND.md    ← Plan detallado de 2 semanas
+├── GUIA_GRABAR_MODULOS.md    ← Cómo grabar módulos de coaching eficientemente
+├── PRICING_OPTIONS.md        ← Opciones de estructura de precios (3 tiers)
 ├── RESUMEN_ESTUDIO.md        ← Este documento
 └── MEMORY.md                 ← Actualizado con todo lo aprendido
 ```
+
+**Total: 5 documentos de trabajo + 1 actualización**
 
 ---
 
