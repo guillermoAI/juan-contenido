@@ -17,21 +17,27 @@
 
 ---
 
+## 🎾 Mañana
+
+- **09:00** - Pádel
+
+---
+
 ## 📞 Calls del día
 
 - **14:00** - Consultoría Juan Pablo Rojas
 
 ---
 
-## 🏋️ Gym
+## 📱 Personal
 
-- **Espalda + bíceps**
+- [ ] **Llamar a papá**
 
 ---
 
 ## ⚠️ Recordatorio
 
-- **8 feb 4:00am** - Vuelo a Vietnam (preparar maleta hoy por la noche)
+- **8 feb 4:00am** - Vuelo a Vietnam (preparar maleta por la noche)
 
 ---
 
