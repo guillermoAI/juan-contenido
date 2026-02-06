@@ -64,3 +64,27 @@ Es ambicioso pero no superficial. Aprende genuinamente, piensa en sistemas, estu
 - Grabar módulos core
 - Configurar secuencia emails en Brevo
 - Probar con clientes actuales
+
+---
+
+## 📅 Rutina Actual (6 feb 2026)
+
+**Horarios:**
+- 9:00am - Despertar
+- 9:00-9:30am - Trabajo (ordenador, prep)
+- 9:30-10:30am - Gimnasio (ayunas, fuerza)
+- 10:30-11:30am - Piscina + sol (SIN música deliberadamente)
+- 11:30am-12pm - Baño + secado al sol
+- 12:00-7:00pm - Trabajo (todo el día)
+- 12:00-1:00pm - Desayuno/comida
+- 7:00-8:00pm - Cena
+- Entre medio - Alguna partida de billar
+
+**Contexto:**
+- Ubicación: Ekkamai, Bangkok
+- Solo tiene 1 amigo en el edificio
+- No sale mucho, pocas actividades externas
+- Muy ambicioso - quiere ser el mejor
+
+**Nota importante sobre dopamina:**
+Evita música al levantarse deliberadamente porque siente que si tiene mucha dopamina recién levantado después le cuesta ponerme a trabajar. Es una estrategia consciente de preservación de capacidad de trabajo.
