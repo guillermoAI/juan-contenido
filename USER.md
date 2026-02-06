@@ -55,7 +55,7 @@
 - **Clientes actuales:** 5 (todos B2C de momento, ~12k€ ingreso reciente)
   - Mix: 2×2k€, 1×3k€, 1×5k€, +1 (monto no especificado)
 - **Canales de captación:** 
-  - YouTube: @guillehernandezf
+  - YouTube: @GuilleHernandezF (https://www.youtube.com/@GuilleHernandezF)
   - Instagram: @guillermo.hernandezf
   - Parados últimamente por enfoque en backend
 - **Problema principal:** Backend débil
