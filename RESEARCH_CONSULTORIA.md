@@ -10,16 +10,24 @@
 ### 1. Nik Setting (@niksetting)
 - **Edad:** 21-22 años, Netherlands
 - **Revenue:** $250k-$300k/mes PROFIT
-- **Método principal:** "The Profile Funnel"
-- **Enfoque:** Appointment-setting, conversion funnel, follow-ups sistemáticos
-- **Canales:** YouTube, Instagram
+- **Clientes:** $115M en revenue trackado
+- **Followers IG:** 119K
+- **Método principal:** "The Profile Funnel™"
 - **Web:** niksetting.com
+
+**Profile Funnel - Estructura:**
+1. **TOF (Top of Funnel):** Instagram Reels + YouTube para atraer leads cualificados
+2. **Perfil optimizado:** Bio clara + Highlights (Lifestyle, Resultados, Quién soy)
+3. **CTA:** "DM me INFO" → Entra en pipeline automatizado
+4. **Sistema dual:** Outbound automatizado + Profile Funnel Ads
+5. **Cierre:** Por DM o llamada corta (15 min)
 
 **Lo que hace bien:**
 - Sistema de profile funnel muy estructurado
-- Appointment-setting automatizado
+- Appointment-setting 100% automatizado
 - Contenido que educa y vende al mismo tiempo
-- Testimonials channel separado
+- Canal de testimonios separado (@niksettingtestimonials)
+- Tracking de revenue de clientes ($115M)
 
 ---
 
@@ -227,5 +235,34 @@
 
 ---
 
+---
+
+## 🛠️ Herramientas para Delivery de Coaching
+
+### Plataformas All-in-One
+- **Mighty Networks** - Comunidad + cursos + coaching
+- **Teachable** - Cursos online simples
+- **Coach Vantage** - Específico para coaches
+- **Coaching Loft** - Calendario + notas + milestones
+
+### Herramientas Simples (Recomendadas para empezar)
+- **Google Suite** (Drive, Sheets, Docs, Forms) - Ya usa Guillermo
+- **Notion** - Para recursos y bases de conocimiento
+- **Cal.com / Calendly** - Scheduling gratuito
+- **Brevo** - Email automation gratuito hasta 300/día
+- **Loom** - Videos rápidos de feedback
+
+### Automatización
+- **Zapier** - Conectar herramientas
+- **Make (Integromat)** - Alternativa a Zapier
+- **n8n** - Ya sabe usar Guillermo
+
+### Para escalar después
+- **Circle** - Comunidad premium
+- **Skool** - Comunidad + cursos (simple)
+- **Kajabi** - All-in-one premium
+
+---
+
 *Documento actualizado: 5 febrero 2026*
-*Próximos pasos: Revisar canales de YouTube/Instagram de Guillermo y competidores*
+*Próximos pasos: Ejecutar plan de backend*
