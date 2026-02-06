@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Juan Contenido | GH Consulting</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -12,8 +12,34 @@
             background: #0a0a0a;
             color: #e5e5e5;
             line-height: 1.7;
+            overflow-x: hidden;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: #111;
+            border-bottom: 1px solid #262626;
+            z-index: 1000;
+            padding: 0 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mobile-header h1 { font-size: 1.1rem; color: #fff; }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+        }
         
         /* Sidebar */
         .sidebar {
@@ -26,6 +52,8 @@
             border-right: 1px solid #262626;
             padding: 1.5rem;
             overflow-y: auto;
+            z-index: 999;
+            transition: transform 0.3s ease;
         }
         .sidebar h1 { font-size: 1.3rem; color: #fff; margin-bottom: 0.25rem; }
         .sidebar .subtitle { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
@@ -39,7 +67,7 @@
         }
         .nav-item {
             display: block;
-            padding: 0.5rem 0.75rem;
+            padding: 0.6rem 0.75rem;
             color: #ccc;
             text-decoration: none;
             border-radius: 6px;
@@ -51,6 +79,33 @@
         .nav-item:hover { background: #1a1a1a; color: #fff; }
         .nav-item.active { background: #262626; color: #fff; }
         .nav-item .emoji { margin-right: 0.5rem; }
+        
+        /* Close button for mobile sidebar */
+        .close-sidebar {
+            display: none;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 998;
+        }
+        .overlay.active { display: block; }
         
         /* Content */
         .content {
@@ -68,8 +123,9 @@
             background: #1a1a1a; 
             padding: 0.2rem 0.4rem; 
             border-radius: 4px; 
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #f97316;
+            word-break: break-word;
         }
         .content pre { 
             background: #161616; 
@@ -78,6 +134,7 @@
             padding: 1rem; 
             overflow-x: auto;
             margin: 1rem 0;
+            -webkit-overflow-scrolling: touch;
         }
         .content pre code { background: none; padding: 0; color: #e5e5e5; }
         .content blockquote {
@@ -87,35 +144,92 @@
             color: #999;
             font-style: italic;
         }
-        .content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .content table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 1rem 0; 
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         .content th, .content td { 
             border: 1px solid #333; 
             padding: 0.75rem; 
-            text-align: left; 
+            text-align: left;
+            white-space: nowrap;
         }
         .content th { background: #1a1a1a; color: #fff; }
         .content hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
         .content strong { color: #fff; }
-        .content a { color: #60a5fa; }
-        
-        /* Checkbox styling */
+        .content a { color: #60a5fa; word-break: break-word; }
         .content input[type="checkbox"] { margin-right: 0.5rem; }
         
-        /* Mobile */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .sidebar { 
-                position: relative; 
-                width: 100%; 
-                height: auto; 
-                border-right: none;
-                border-bottom: 1px solid #262626;
+            .mobile-header { display: flex; }
+            
+            .sidebar {
+                transform: translateX(-100%);
+                width: 85%;
+                max-width: 320px;
+                padding-top: 1rem;
             }
-            .content { margin-left: 0; padding: 1.5rem; }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar h1 { display: none; }
+            .sidebar .subtitle { display: none; }
+            .close-sidebar { display: block; }
+            
+            .nav-item {
+                padding: 0.85rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 56px 1rem 2rem 1rem;
+                min-height: calc(100vh - 56px);
+            }
+            .content h1 { 
+                font-size: 1.5rem; 
+                margin-top: 1rem;
+                padding-bottom: 0.75rem;
+            }
+            .content h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+            .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; }
+            .content p, .content li { font-size: 1rem; line-height: 1.6; }
+            .content ul, .content ol { padding-left: 1.25rem; }
+            
+            .content pre {
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            .content th, .content td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .content { padding: 56px 0.75rem 1.5rem 0.75rem; }
+            .content h1 { font-size: 1.35rem; }
+            .nav-item { padding: 0.75rem; font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
-    <nav class="sidebar">
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <h1>📦 Juan Contenido</h1>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </header>
+    
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="closeBtn" aria-label="Cerrar menú">✕</button>
         <h1>📦 Juan Contenido</h1>
         <p class="subtitle">Tu hub de recursos</p>
         
@@ -251,13 +365,33 @@
     
     <main class="content" id="content">
         <h1>👋 Bienvenido</h1>
-        <p>Selecciona un documento del menú lateral.</p>
+        <p>Selecciona un documento del menú.</p>
         <p style="color: #666; margin-top: 2rem;">Última actualización: 6 feb 2026</p>
     </main>
 
     <script>
         const content = document.getElementById('content');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
         const navItems = document.querySelectorAll('.nav-item');
+        
+        // Mobile menu toggle
+        function openMenu() {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
         
         async function loadFile(file) {
             try {
@@ -272,6 +406,14 @@
                 
                 // Save to URL
                 history.pushState({file}, '', `?doc=${encodeURIComponent(file)}`);
+                
+                // Close menu on mobile after selection
+                if (window.innerWidth <= 768) {
+                    closeMenu();
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
             } catch (e) {
                 content.innerHTML = '<h1>Error</h1><p>No se pudo cargar el archivo.</p>';
             }
@@ -291,6 +433,13 @@
         // Handle back/forward
         window.addEventListener('popstate', (e) => {
             if (e.state?.file) loadFile(e.state.file);
+        });
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
         });
     </script>
 </body>
