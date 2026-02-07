@@ -10,6 +10,13 @@
 
 ---
 
+## 🛠️ Backend
+
+- [ ] **Meter entregables en Podia** (todo rebrandeado con marca)
+- [ ] **Rehacer roadmap** (solo onboarding)
+
+---
+
 ## 📱 Contenido
 
 - [ ] **Reel acabado** (editar + publicar)
