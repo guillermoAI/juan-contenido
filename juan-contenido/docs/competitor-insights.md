@@ -11,8 +11,10 @@
 2. [Nik Setting](#nik-setting)
 3. [Iman Gadzhi](#iman-gadzhi)
 4. [Soowei](#soowei)
-5. [Frameworks Comunes](#frameworks-comunes)
-6. [Aplicación para GH Consulting](#aplicación-para-gh-consulting)
+5. [Dustin Varano](#dustin-varano) 🆕
+6. [Sigurd Foss](#sigurd-foss) 🆕
+7. [Frameworks Comunes](#frameworks-comunes)
+8. [Aplicación para GH Consulting](#aplicación-para-gh-consulting)
 
 ---
 
@@ -353,6 +355,218 @@ Resultado: Offer de $18K con 60% close rate
 
 ---
 
+## Dustin Varano
+
+### 🎬 Videos Analizados
+- **$246k/month Coaching Funnel Breakdown** - Desglose completo del content funnel
+- **$138k from 1 YouTube Video** - Presentación en vivo sobre Flywheel VSSL
+- **Raw Funnel Setup $57k/mo Client** - Setup técnico completo
+
+### 🔑 Key Insights
+
+#### 1. Flywheel VSSL - El Núcleo del Sistema
+> "Este video de 6.5 horas es el backbone de todo mi negocio. Elimina la necesidad de setters, closers, y landing pages."
+
+**Concepto:**
+- Un video largo (1-6+ horas) que funciona como VSSL perpetuo en YouTube
+- Contiene curso gratuito A-Z sobre el business model
+- Convierte top-of-funnel traffic en clientes pre-sold
+
+**Resultados reales:**
+- 25,000 views → $138,000 cash collected
+- 506 applications → 81 qualified → 34 calls → 19 clients
+- 68% close rate sin tactics de venta
+
+#### 2. Content Funnel (No External Funnel)
+> "No necesitas landing page. No necesitas VSSL externo. El funnel está dentro de YouTube."
+
+**Estructura del Content Funnel:**
+```
+Top of Funnel (Lifestyle) → Middle of Funnel (Flywheel VSSL) → 
+Bottom of Funnel (Nurture Videos) → Testimonials → Type Form → Call
+```
+
+**Tipos de contenido:**
+| Nivel | Tipo | Propósito | Views |
+|-------|------|-----------|-------|
+| **TOF** | Lifestyle vlogs | Atraer eyeballs | Alto |
+| **MOF** | Flywheel VSSL (1-6h) | Convertir | Medio |
+| **BOF** | Tutoriales detallados | Nurturar | Bajo |
+| **Social Proof** | Testimonials | Cerrar | Variable |
+
+#### 3. Session Time > Watch Time
+> "YouTube te premia por mantener gente EN la plataforma, no solo en TU video."
+
+**El hack:**
+- Todos tus videos linkean al Flywheel VSSL en descripción
+- YouTube detecta que mantienes gente en plataforma
+- Algoritmo empieza a recomendar tu VSSL a tu ICP exacto
+- Eventualmente no necesitas TOF content - el VSSL se promociona solo
+
+#### 4. Pre-Sold Calls = Zero Sales Tactics
+> "Si alguien vio un video de 6 horas, ya decidió. La call es solo para resolver 2-3 dudas."
+
+**El cambio de paradigma:**
+- No necesitas closers expertos
+- No necesitas manejar objeciones
+- 20-minute calls máximo
+- Tú decides si quieres trabajar con ellos (no al revés)
+
+#### 5. Type Form como Único Funnel
+> "Mi funnel es literalmente un Type Form. No hay nada que funnel-hackear."
+
+**Estructura del Type Form:**
+1. Preguntas de calificación (budget, situación)
+2. Auto-disqualificación para leads sin dinero
+3. Redirect a Calendly para qualified leads
+4. Workflows automáticos (no setters)
+
+**Filtros de dinero:**
+- ¿Tienes múltiples 4 figuras para invertir?
+- ¿Eres adulto en USA o tienes credit card? (para financing)
+- Si no califican → Video/curso gratis para nurturar
+
+#### 6. 1-2 Hours Rule para High Ticket
+> "Para que alguien compre high ticket, necesita haber consumido 1-2 horas de VALUE content tuyo."
+
+- Instagram reels NO cumplen esto (aunque vean 100)
+- Un video de YouTube de 2h = suficiente para convertir
+- Oneshot > Múltiples touchpoints pequeños
+
+#### 7. Lifestyle Content NO Convierte (Pero Atrae)
+> "Los videos de lifestyle traen la peor calidad demográfica, pero el mayor volumen."
+
+**La estrategia:**
+- Lifestyle content → Máximos eyeballs, mínima conversión directa
+- Value content → Mínimos views, máxima conversión
+- El truco: Funnelerar del lifestyle AL value (Flywheel VSSL)
+
+#### 8. Zero Paid Ads Strategy
+> "$246K profit month, $0 in ad spend. 100% organic YouTube."
+
+**Por qué funciona:**
+- YouTube algorithm hace el trabajo de targeting
+- Content largo = más data para el algoritmo
+- ICP se auto-selecciona al ver 6+ horas
+
+#### 9. Financing como Game Changer
+> "SplitIt permite financiar $6K a $500/mes, 0% interés, 12 meses. Solo necesitan credit card."
+
+**Procesadores:**
+- USA: Klarna, Afterpay, Zip (via Fanbasis)
+- International: SplitIt (único que funciona global)
+- Aumenta conversion de "no budget" en 30-40%
+
+#### 10. Fulfillment = Reputation = Marketing
+> "La reputación es más importante que cualquier funnel. Set expectations SIEMPRE."
+
+**Sistema de onboarding:**
+- Onboarding call personal (no delegado)
+- Acceso a coaches vía group chat
+- Booking de calls sin fricción
+- Tareas iniciales claras
+
+### 📦 Frameworks Identificados
+
+| Framework | Uso |
+|-----------|-----|
+| Flywheel VSSL | Video largo como funnel principal |
+| Content Funnel Pyramid | TOF→MOF→BOF→Testimonial |
+| Session Time Optimization | Hackear algoritmo YouTube |
+| Type Form Qualification | Auto-filtrado de leads |
+| 1-2 Hour Rule | Threshold para high ticket |
+
+---
+
+## Sigurd Foss
+
+### 🎬 Fuentes Analizadas
+- **High Ticket Offer Video** - Transcripción completa
+- **Capital City Times Profile** - Caso de estudio
+- **Stallion Acquisition Model** - Framework de negocio
+
+### 🔑 Key Insights
+
+#### 1. Automated Instagram Ecosystem
+> "Un flywheel que trae followers via paid ads, los nurturea con contenido, y los convierte via DM setters."
+
+**Los 3 componentes:**
+1. **Follower Ads** - Atraer el público correcto
+2. **Content Systems** - Construir trust y demand
+3. **DM Appointment Setters** - Bookear calls pre-sold
+
+**Resultado:** $80K/month a los 16 años
+
+#### 2. Attract, Don't Chase
+> "Escalar un coaching business es fácil - si instalas los sistemas correctos de client acquisition."
+
+**El principio:**
+- NO perseguir leads manualmente
+- Construir pipelines que generen citas calificadas en autopilot
+- El prospect viene a ti ya convencido
+
+#### 3. Three-Pillar Scaling System
+**Paid Traffic + Organic Content + DM Setting = Trifecta**
+
+| Pilar | Función | Resultado |
+|-------|---------|-----------|
+| Paid Ads | Follower growth targeting | Audiencia calificada |
+| Content | Trust building | Pre-selling |
+| DM Setters | Conversion | Calls booked |
+
+#### 4. Client Results como Proof
+> "Client satisfaction delivered at scale makes advertising irrelevant."
+
+**Casos documentados:**
+- Julius: $4K → $50K/month
+- Julian Wallace: $300K primer año ($50K/month consistente)
+- $5M+ en revenue de clientes
+
+#### 5. Speed of Execution
+> "El hecho de escalar tan rápido a mi edad es el mejor marketing."
+
+**Mentalidad:**
+- Dropeo de high school a 16 años
+- 7-figure run rate pre-18
+- La velocidad DE resultados es el marketing
+
+#### 6. Backend Infrastructure
+> "Track y optimiza cada pieza del funnel."
+
+**Componentes técnicos:**
+- Follower Ads optimizados
+- Content systems automatizados
+- DM setters entrenados
+- Dashboard de métricas completo
+
+#### 7. No Generic Advice
+> "En una industria de consejos genéricos y funnels reciclados, los resultados destacan."
+
+**Diferenciadores:**
+- Método battle-tested, no teórico
+- Ejecución rápida y precisa
+- Hands-on approach
+- Resultados medibles
+
+#### 8. Software as Evolution
+> "Construyendo una plataforma de software que potencia todo el ecosystem de client acquisition."
+
+**Visión:**
+- Productizar el sistema
+- Escalar más allá de consulting 1:1
+- Crear herramientas para el mercado
+
+### 📦 Frameworks Identificados
+
+| Framework | Uso |
+|-----------|-----|
+| Automated IG Ecosystem | Sistema completo de adquisición |
+| Three-Pillar Scaling | Paid + Organic + DMs |
+| Attract vs Chase | Filosofía de lead gen |
+| Speed Marketing | La velocidad como diferenciador |
+
+---
+
 ## Frameworks Comunes
 
 ### 🔄 Patrones Repetidos Entre Todos
@@ -377,12 +591,14 @@ La velocidad de resultados es el mejor marketing posible.
 
 ### 📐 Matrix de Comparación
 
-| Aspecto | Hormozi | Nik | Iman | Soowei |
-|---------|---------|-----|------|--------|
-| **Precio Offer** | Workshops $6K+ | $15-30K | $500-6K | $11.5-18K |
-| **Main Channel** | YouTube | Instagram Ads | Cold Outreach | YouTube + IG |
-| **Modelo** | Education + Events | Done-For-You | Agency Incubator | Consulting |
-| **Fortaleza** | Frameworks | Paid Traffic | Sales Systems | Middle Funnel |
+| Aspecto | Hormozi | Nik | Iman | Soowei | Dustin | Sigurd |
+|---------|---------|-----|------|--------|--------|--------|
+| **Precio Offer** | $6K+ | $15-30K | $500-6K | $11.5-18K | $6-12K | $5-15K |
+| **Main Channel** | YouTube | IG Ads | Cold Outreach | YouTube + IG | YouTube | IG Ads + DMs |
+| **Modelo** | Education | DFY | Agency Incubator | Consulting | Info Operating | Growth Partner |
+| **Fortaleza** | Frameworks | Paid Traffic | Sales Systems | Middle Funnel | Flywheel VSSL | IG Ecosystem |
+| **Edad/Background** | 35+ / Gym Launch | 20s / Content | 20s / Agency | 20 / Dorm Room | 21 / 6yr info | 16 / Dropout |
+| **Revenue** | $100M+ | $3M+ | $30M+ | $150K/mo | $246K/mo | $80K/mo |
 
 ---
 
@@ -390,21 +606,28 @@ La velocidad de resultados es el mejor marketing posible.
 
 ### ✅ Acciones Inmediatas
 
-1. **Crear curso gratuito de alto valor** (Soowei's 7-hour rule)
+1. **Crear Flywheel VSSL** - Video de 2-6 horas A-Z sobre el servicio (Dustin)
 2. **Implementar Business Scorecard** como herramienta de diagnóstico (Hormozi)
 3. **Estructurar offer con elementos DFY** para aumentar precio (Soowei)
-4. **Configurar tracking dashboard** con todas las métricas clave (Nik)
+4. **Configurar Content Funnel en YouTube** - TOF→MOF→BOF (Dustin)
 5. **Desarrollar Profile Funnel** en Instagram (Nik)
+6. **Optimizar Session Time** - Linkear todo al video largo (Dustin)
+7. **Configurar Type Form con auto-qualification** (Dustin)
+8. **Setup DM Setters con sistema de freebies** (Sigurd/Soowei)
 
 ### 🎯 Frameworks para Adoptar
 
 | Framework | Fuente | Aplicación |
 |-----------|--------|------------|
+| **Flywheel VSSL** | Dustin | Video largo como funnel principal |
 | Business Scorecard | Hormozi | Diagnóstico inicial de clientes |
-| Profile Funnel | Nik | Sistema de adquisición |
+| Profile Funnel | Nik | Sistema de adquisición IG |
 | Value Debt | Soowei | Estrategia de conversión |
 | CLOSER | Hormozi | Proceso de ventas |
 | 8-Step Outreach | Iman | Prospección activa |
+| Content Funnel Pyramid | Dustin | Estructura TOF→MOF→BOF |
+| Automated IG Ecosystem | Sigurd | Paid ads + content + DM setters |
+| Session Time Optimization | Dustin | Hackear algoritmo YouTube |
 
 ### 💰 Modelo de Pricing Sugerido
 
@@ -445,6 +668,11 @@ Tier 3: Growth Partnership → Revenue Share
 - Nik Setting: [Profile Funnel](https://youtube.com/watch?v=njWXZNfCm28)
 - Iman Gadzhi: [Cold Outreach](https://youtube.com/watch?v=foUoLz3yLo8)
 - Soowei: [$151K Month](https://youtube.com/watch?v=KK-t4AoEpzA)
+- Soowei: [$45K in 24 Days](https://youtube.com/watch?v=KL80Q7-ekTs)
+- Soowei: [$100K in 30 mins](https://youtube.com/watch?v=roTepcuyhHI)
+- Dustin Varano: [$246K Funnel](https://youtube.com/watch?v=AZs4vZqquHs)
+- Dustin Varano: [$138K from 1 Video](https://youtube.com/watch?v=Y_VS2X2N9uo)
+- Dustin Varano: [$57K Raw Funnel](https://youtube.com/watch?v=FuyAEhXgJzk)
 
 ### Tools Mencionados
 - GoHighLevel - CRM y automation
@@ -454,5 +682,47 @@ Tier 3: Growth Partnership → Revenue Share
 
 ---
 
+---
+
+## 📚 Videos Adicionales Analizados (Febrero 2026)
+
+### SooWei - Nuevos Insights
+
+#### From "$45K in 24 Days" Case Study:
+- **5 Pilares del Scaling**: Sales Assets, Consulting, Appointment Setting, Offer, Data Review
+- **Freebie → Book Call Script**: Convierte freebies en calls cualificadas
+- **Triple Qualification**: 2 preguntas en DMs + 1 en booking page
+- **VSSL Structure**: Story → Why Different → 4-Step Process → Case Studies → CTA
+- **Setter KPIs**: 150 follow-ups + 50 outreaches diarios mínimo
+- **Whoop Bands para Sales Team**: Trackear salud = mejor performance
+- **Closer Mindset**: "Cada call es un one-day close, incluso sin budget"
+
+#### From "$100K in 30 mins" Breakdown:
+- **Middle Funnel = A+ Problem**: El constraint #1 para la mayoría
+- **Instagram NO convierte** - Solo pica curiosidad → YouTube nurturea
+- **$/Follower Calculation**: 130K followers debería = $130K+/month
+- **Reverse Engineer Why People Buy**: Profundizar más allá de "authentic"
+- **One Limiting Belief per Video**: No intentar resolver todo
+- **Value Vlogs > Pure Vlogs**: Combinar lifestyle con enseñanzas
+- **"Bring yourself down to their level"**: Hacer el éxito alcanzable
+
+### Dustin Varano - Stats Adicionales
+- Portfolio: 8 offers operados + ~12 con equity minoritaria
+- Total across offers: ~$2M/month
+- Info game: 6 años (desde los 14)
+- Primer éxito: Discord $1.2M revenue, 125K members en <1 año
+- Video de 6.5h: 20,000+ views en 3 meses
+
+### Sigurd Foss - Background
+- 13 años: Primer dropshipping store con paid ads
+- 14 años: Agency de contenido, 100M+ views para marcas
+- 16 años: $80K/month, 7-figure run rate
+- Empresa: Stallion Acquisition
+- Focus: Coaches y online experts
+
+---
+
 *Documentación creada para GH Consulting - Febrero 2026*
+*Actualizado: 16 Febrero 2026*
 *Compilado de transcripciones de videos de competidores*
+*Total referentes analizados: 6 (Hormozi, Nik, Iman, Soowei, Dustin, Sigurd)*
