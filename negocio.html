@@ -104,6 +104,31 @@
             margin: 10px 0;
             border-radius: 0 8px 8px 0;
         }
+        .warning {
+            background: #0d1117;
+            border-left: 3px solid #ffc800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .question {
+            background: #0d1117;
+            border-left: 3px solid #00d4ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        @media (max-width: 768px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 800; color: #00d4ff; }
+        .stat-label { color: #666; font-size: 0.8rem; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -122,6 +147,26 @@
         
         <!-- MÉTRICAS CLAVE -->
         <h2 class="section-title" id="metricas">📊 Métricas del Negocio</h2>
+        
+        <div class="stat-grid">
+            <div class="stat">
+                <div class="stat-value">€12K</div>
+                <div class="stat-label">Revenue Feb 2026</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Clientes Activos</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">55+</div>
+                <div class="stat-label">Calls (Ene-Feb)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">€2,400</div>
+                <div class="stat-label">Ticket Promedio</div>
+            </div>
+        </div>
+        
         <div class="grid">
             <div class="card">
                 <h3>Revenue 2026</h3>
@@ -143,7 +188,7 @@
                 <h3>KPIs Target vs Actual</h3>
                 <div class="metric-row">
                     <span>Clientes activos</span>
-                    <span class="metric-value">5 / ?</span>
+                    <span class="metric-value">6 / ?</span>
                 </div>
                 <div class="metric-row">
                     <span>Ticket promedio</span>
@@ -163,57 +208,114 @@
         <!-- CLIENTES -->
         <h2 class="section-title" id="clientes">👥 Clientes Actuales</h2>
         <div class="card">
+            <h3>Clientes Activos (Feb 2026)</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Paquete</th>
-                        <th>Fase</th>
+                        <th>Email</th>
+                        <th>Calls</th>
                         <th>Estado</th>
                         <th>Notas</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Cliente 1</td>
-                        <td>€2,000</td>
-                        <td>?</td>
-                        <td><span class="tag tag-green">Activo</span></td>
-                        <td>Enero 2026</td>
+                        <td><strong>Alejandro Ramos</strong></td>
+                        <td>-</td>
+                        <td>8</td>
+                        <td><span class="tag tag-green">Muy activo</span></td>
+                        <td>Más calls, buen engagement</td>
                     </tr>
                     <tr>
-                        <td>Cliente 2</td>
-                        <td>€2,000</td>
-                        <td>?</td>
+                        <td><strong>Marcos Garcia</strong></td>
+                        <td>marcosgarciamiguel05@gmail.com</td>
+                        <td>5</td>
                         <td><span class="tag tag-green">Activo</span></td>
-                        <td>Enero 2026</td>
+                        <td>Fathom recaps disponibles</td>
                     </tr>
                     <tr>
-                        <td>Cliente 3</td>
-                        <td>€3,000</td>
-                        <td>?</td>
+                        <td><strong>theperfectman</strong></td>
+                        <td>-</td>
+                        <td>3</td>
                         <td><span class="tag tag-green">Activo</span></td>
-                        <td>Febrero 2026</td>
+                        <td>Early adopter</td>
                     </tr>
                     <tr>
-                        <td>Cliente 4</td>
-                        <td>€5,000</td>
-                        <td>?</td>
-                        <td><span class="tag tag-green">Activo</span></td>
-                        <td>Febrero 2026</td>
+                        <td><strong>Nel Vilella</strong></td>
+                        <td>nelvil2004@gmail.com</td>
+                        <td>2</td>
+                        <td><span class="tag tag-yellow">Necesita 1a1</span></td>
+                        <td>Onboarding reciente</td>
                     </tr>
                     <tr>
-                        <td>Cliente 5</td>
-                        <td>?</td>
-                        <td>?</td>
-                        <td><span class="tag tag-yellow">Pendiente</span></td>
-                        <td>Sin datos</td>
+                        <td><strong>Pablo Perez</strong></td>
+                        <td>-</td>
+                        <td>3</td>
+                        <td><span class="tag tag-yellow">Necesita 1a1</span></td>
+                        <td>Onboarding reciente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Néstor</strong></td>
+                        <td>-</td>
+                        <td>6</td>
+                        <td><span class="tag tag-red">26 días inactivo</span></td>
+                        <td>⚠️ Reactivar</td>
                     </tr>
                 </tbody>
             </table>
-            <p style="color: #666; margin-top: 20px; font-size: 0.9rem;">
-                ⚠️ Necesito más info: nombres/apodos, fase actual de cada uno, fechas de entrada
-            </p>
+        </div>
+        
+        <div class="card">
+            <h3>Leads Calientes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lead</th>
+                        <th>Estado</th>
+                        <th>Última interacción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Giovanna</td>
+                        <td><span class="tag tag-green">HOT</span></td>
+                        <td>Esta semana</td>
+                    </tr>
+                    <tr>
+                        <td>Redlivah</td>
+                        <td><span class="tag tag-green">HOT</span></td>
+                        <td>Esta semana</td>
+                    </tr>
+                    <tr>
+                        <td>Alvaro (alvarppampa@gmail.com)</td>
+                        <td><span class="tag tag-yellow">Warm</span></td>
+                        <td>11 feb</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h3>Clientes Históricos (Enero 2026)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Última Call</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>David Torrens</td><td>5 ene (Programa TTA)</td></tr>
+                    <tr><td>Jordi Alvarez</td><td>7 ene</td></tr>
+                    <tr><td>Jan Vera</td><td>8 ene</td></tr>
+                    <tr><td>Nini Medina</td><td>9 ene</td></tr>
+                    <tr><td>Joan Josep</td><td>15 ene</td></tr>
+                    <tr><td>Marc</td><td>15 ene</td></tr>
+                    <tr><td>Frank Diaz</td><td>18 ene</td></tr>
+                    <tr><td>Alberto González Fernández</td><td>18 ene</td></tr>
+                </tbody>
+            </table>
         </div>
         
         <!-- PROBLEMAS -->
@@ -223,29 +325,37 @@
                 <h3>Críticos</h3>
                 <div class="problem">
                     <strong>Backend débil</strong><br>
-                    Solo tienes calls 1-1. Necesitas: clases grabadas, entregables, roadmap funcional, emails automatizados.
-                    <br><br>
+                    Solo tienes calls 1-1. Necesitas: clases grabadas, entregables, roadmap funcional, emails automatizados.<br><br>
                     <em>Impacto: No puedes escalar. Cada cliente = más tiempo tuyo.</em>
+                </div>
+                <div class="problem">
+                    <strong>Néstor 26 días inactivo</strong><br>
+                    Cliente pagante sin contacto en casi 1 mes.<br>
+                    <em>Acción: Enviar mensaje de reactivación HOY</em>
                 </div>
             </div>
             
             <div class="card">
                 <h3>Medio</h3>
-                <div class="problem" style="border-color: #ffc800;">
+                <div class="warning">
                     <strong>Solo 3 clases grabadas</strong><br>
                     Necesitas mínimo 10+ para tener un backend sólido.
                 </div>
-                <div class="problem" style="border-color: #ffc800;">
+                <div class="warning">
                     <strong>Sin automatización de emails</strong><br>
-                    Brevo configurado pero sin secuencias activas.
+                    Brevo mencionado pero sin secuencias activas.
                 </div>
-                <div class="problem" style="border-color: #ffc800;">
+                <div class="warning">
                     <strong>Contenido pausado</strong><br>
                     YouTube e Instagram parados por enfoque en backend.
                 </div>
-                <div class="problem" style="border-color: #ffc800;">
+                <div class="warning">
                     <strong>Sin tracking de métricas</strong><br>
                     No sabes close rate, $/follower, LTV, CAC.
+                </div>
+                <div class="warning">
+                    <strong>Nel + Pablo necesitan 1a1</strong><br>
+                    Clientes nuevos sin primera sesión de trabajo.
                 </div>
             </div>
         </div>
@@ -256,31 +366,39 @@
             <div class="card">
                 <h3>Inmediatas (esta semana)</h3>
                 <div class="optimization">
-                    <strong>1. Grabar 3 clases core más</strong><br>
+                    <strong>1. Mensaje a Néstor</strong><br>
+                    Reactivar cliente inactivo. Pregunta abierta sobre su progreso.
+                </div>
+                <div class="optimization">
+                    <strong>2. Agendar 1a1 con Nel y Pablo</strong><br>
+                    Clientes nuevos esperando primera sesión de trabajo.
+                </div>
+                <div class="optimization">
+                    <strong>3. Grabar 3 clases core más</strong><br>
                     Prioridad: las que más se repiten en calls 1-1
                 </div>
                 <div class="optimization">
-                    <strong>2. Configurar secuencia de onboarding</strong><br>
-                    5 emails automáticos post-compra
-                </div>
-                <div class="optimization">
-                    <strong>3. Crear dashboard de tracking</strong><br>
-                    Google Sheets con métricas clave
+                    <strong>4. Diagnóstico inicial a TODOS</strong><br>
+                    Template que todos los clientes llenen para tener baseline.
                 </div>
             </div>
             
             <div class="card">
                 <h3>Corto plazo (2 semanas)</h3>
                 <div class="optimization">
-                    <strong>4. Lead magnet de alto valor</strong><br>
-                    Siguiendo modelo Dustin Varano: curso gratuito 2-3h
+                    <strong>5. Configurar secuencia onboarding</strong><br>
+                    5 emails automáticos post-compra
                 </div>
                 <div class="optimization">
-                    <strong>5. Reactivar contenido</strong><br>
+                    <strong>6. Dashboard de tracking</strong><br>
+                    Google Sheets con métricas clave por cliente
+                </div>
+                <div class="optimization">
+                    <strong>7. Reactivar contenido</strong><br>
                     1 YouTube/semana + 3-5 reels
                 </div>
                 <div class="optimization">
-                    <strong>6. Implementar Profile Funnel</strong><br>
+                    <strong>8. Implementar Profile Funnel</strong><br>
                     Instagram como funnel principal (Nik Setting model)
                 </div>
             </div>
@@ -295,6 +413,7 @@
                     <li><strong>Qué:</strong> Consultoría para negocios online que ya facturan</li>
                     <li><strong>Avatar:</strong> Infoproductores/consultores +€5k/mes</li>
                     <li><strong>Servicios:</strong> Embudos, posicionamiento, backend</li>
+                    <li><strong>Duración:</strong> 4 meses</li>
                     <li><strong>Canales:</strong> YouTube + Instagram (pausados)</li>
                 </ul>
             </div>
@@ -307,8 +426,19 @@
                     <li>Paquete premium: €5,000</li>
                 </ul>
                 <p style="color: #888; margin-top: 15px;">
-                    💡 Sugerencia: Según research, podrías subir a €8-15k con elementos DFY
+                    💡 <strong>Sugerencia:</strong> Según research, podrías subir a €8-15k con elementos DFY (editor, scripts, setter)
                 </p>
+            </div>
+            
+            <div class="card">
+                <h3>Backend Actual</h3>
+                <ul>
+                    <li><strong>Roadmap:</strong> Google Sheets (4 fases + onboarding)</li>
+                    <li><strong>Clases grabadas:</strong> 3 (sobre oferta/pricing)</li>
+                    <li><strong>Entregables:</strong> Templates básicos</li>
+                    <li><strong>Emails:</strong> Sin automatización</li>
+                    <li><strong>Tracking:</strong> Manual</li>
+                </ul>
             </div>
         </div>
         
@@ -322,7 +452,6 @@
                         <th>Handle</th>
                         <th>Followers</th>
                         <th>Estado</th>
-                        <th>Última actividad</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -331,21 +460,18 @@
                         <td>@GuilleHernandezF</td>
                         <td>?</td>
                         <td><span class="tag tag-yellow">Pausado</span></td>
-                        <td>?</td>
                     </tr>
                     <tr>
                         <td>Instagram</td>
                         <td>@guillermo.hernandezf</td>
                         <td>?</td>
                         <td><span class="tag tag-yellow">Pausado</span></td>
-                        <td>?</td>
                     </tr>
                     <tr>
                         <td>Anterior IG</td>
                         <td>@guille.ia</td>
                         <td>7,000</td>
                         <td><span class="tag tag-red">Inactivo</span></td>
-                        <td>Jun 2025</td>
                     </tr>
                 </tbody>
             </table>
@@ -362,10 +488,33 @@
                 <li><strong>Mar 2025:</strong> Agencia IA - n8n, chatbots, descubrió pasión por info products</li>
                 <li><strong>Jun 2025:</strong> Content creator @guille.ia - 7k followers, €8k en mentorías</li>
                 <li><strong>Nov 2025:</strong> Mudanza a Bangkok - "Quemar barcos"</li>
-                <li><strong>Dic 2025:</strong> Pivote a consultoría - Learning phase</li>
-                <li><strong>Ene 2026:</strong> Primeros clientes - 2×€2k</li>
-                <li><strong>Feb 2026:</strong> Escala - €12k, 5 clientes</li>
+                <li><strong>Dic 2025:</strong> Pivote a consultoría - Learning phase (Cashvertising, Blue Ocean)</li>
+                <li><strong>Ene 2026:</strong> Primeros clientes - 2×€2k = €4k</li>
+                <li><strong>Feb 2026:</strong> Escala - €12k, 6 clientes activos</li>
             </ul>
+        </div>
+        
+        <!-- PREGUNTAS -->
+        <h2 class="section-title">❓ Preguntas Para Completar Datos</h2>
+        <div class="card">
+            <div class="question">
+                <strong>Fases de clientes:</strong> ¿En qué fase está cada cliente? (Onboarding, Fase 1, 2, 3, 4)
+            </div>
+            <div class="question">
+                <strong>Fathom:</strong> ¿Puedes regenerar la API key? La actual da error 401.
+            </div>
+            <div class="question">
+                <strong>Objetivos Q1:</strong> ¿Cuál es tu target de revenue para marzo 2026?
+            </div>
+            <div class="question">
+                <strong>Contenido backlog:</strong> ¿Cuántos videos tienes grabados pendientes de subir?
+            </div>
+            <div class="question">
+                <strong>Email tool:</strong> ¿Brevo está configurado? ¿O usas otra cosa?
+            </div>
+            <div class="question">
+                <strong>Followers actuales:</strong> ¿Cuántos en YouTube e Instagram ahora mismo?
+            </div>
         </div>
         
         <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #222; text-align: center; color: #444;">

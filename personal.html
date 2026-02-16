@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal - GH Command Center</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; }
+        .logo span { color: #00d4ff; }
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            padding: 12px 24px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        nav a:hover, nav a.active {
+            background: #00d4ff;
+            color: #000;
+            border-color: #00d4ff;
+        }
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h3 { margin-bottom: 20px; font-size: 1.2rem; }
+        .section-title {
+            font-size: 1.4rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #222;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+        th { color: #888; font-weight: 600; }
+        .tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag-green { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .tag-yellow { background: rgba(255,200,0,0.2); color: #ffc800; }
+        .tag-red { background: rgba(255,68,68,0.2); color: #ff4444; }
+        .tag-blue { background: rgba(0,212,255,0.2); color: #00d4ff; }
+        ul { list-style: none; }
+        li { padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
+        li:last-child { border-bottom: none; }
+        .progress-bar {
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            border-radius: 4px;
+        }
+        .optimization {
+            background: #0d1117;
+            border-left: 3px solid #00ff88;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .problem {
+            background: #0d1117;
+            border-left: 3px solid #ff4444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning {
+            background: #0d1117;
+            border-left: 3px solid #ffc800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .question {
+            background: #0d1117;
+            border-left: 3px solid #00d4ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        @media (max-width: 768px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 800; color: #00d4ff; }
+        .stat-label { color: #666; font-size: 0.8rem; margin-top: 5px; }
+        .todo-day {
+            background: #0d1117;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .todo-day h4 {
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .todo-item:last-child { border-bottom: none; }
+        .todo-done { color: #00ff88; text-decoration: line-through; opacity: 0.7; }
+        .todo-pending { color: #ffc800; }
+        .suggestion {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 44, 191, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .suggestion h4 { color: #00d4ff; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">GH <span>Command Center</span></div>
+        </header>
+        
+        <nav>
+            <a href="index.html">📊 Dashboard</a>
+            <a href="negocio.html">💼 Negocio</a>
+            <a href="personal.html" class="active">🧠 Personal</a>
+            <a href="ideas.html">💡 Ideas</a>
+            <a href="docs/competitor-insights.md">📚 Research</a>
+        </nav>
+        
+        <!-- TO-DO LISTS -->
+        <h2 class="section-title" id="tareas">📋 To-Do Lists</h2>
+        
+        <div class="todo-day">
+            <h4>📅 16 Febrero 2026 - HOY</h4>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Completar proteína del día (+16g)</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Probar plan nutricional low carb (comidas 1-2)</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Revisar hub GitHub actualizado</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Responder preguntas del dashboard para completar datos</span>
+            </div>
+        </div>
+        
+        <div class="todo-day">
+            <h4>📅 14 Febrero 2026</h4>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Preparar video (estilo key?)</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Grabar reel</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Grabar clase percepción</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Clawdbot Fathom</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Escribir clases siguientes</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Secuencia START HERE</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">LLC Mercury</span>
+            </div>
+        </div>
+        
+        <div class="todo-day">
+            <h4>📅 13 Febrero 2026</h4>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Configurar Fathom API</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Crear skill de Fathom para OpenClaw</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Configurar Brave Search (cuenta)</span>
+            </div>
+        </div>
+        
+        <div class="todo-day">
+            <h4>📅 12 Febrero 2026</h4>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Conectar Google Workspace (gog)</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Analizar calendario (+50 calls)</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Documentar 7 clientes activos</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Localizar Fathom recaps</span>
+            </div>
+        </div>
+        
+        <div class="todo-day">
+            <h4>📅 6 Febrero 2026</h4>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Instalar OpenClaw toolbar</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Grabar 1 reel</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Grabar clase "Posicionamiento en el mercado"</span>
+            </div>
+            <div class="todo-item">
+                <span>☐</span>
+                <span class="todo-pending">Grabar clase "Secuencia de historias"</span>
+            </div>
+            <div class="todo-item">
+                <span>☑️</span>
+                <span class="todo-done">Research 5 referentes</span>
+            </div>
+        </div>
+        
+        <!-- NUTRICIÓN -->
+        <h2 class="section-title" id="nutricion">🍽️ Nutrición - 16 Feb 2026</h2>
+        
+        <div class="stat-grid">
+            <div class="stat">
+                <div class="stat-value">914</div>
+                <div class="stat-label">Calorías (target: 1750)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">67.6g</div>
+                <div class="stat-label">Proteína (target: 84g)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">129g</div>
+                <div class="stat-label">Carbos ⚠️</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">14g</div>
+                <div class="stat-label">Grasa ⚠️</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Comidas Hoy</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comida</th>
+                            <th>Kcal</th>
+                            <th>Prot</th>
+                            <th>Carbs</th>
+                            <th>Fat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Protein Pancakes + Jam</td>
+                            <td>507</td>
+                            <td>27.5g</td>
+                            <td style="color: #ff4444;">79.8g ⚠️</td>
+                            <td>8.5g</td>
+                        </tr>
+                        <tr>
+                            <td>Chicken Teriyaki Rice</td>
+                            <td>407</td>
+                            <td>40.1g</td>
+                            <td>49g</td>
+                            <td style="color: #ffc800;">5.6g</td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #1a1a1a;">
+                            <td>TOTAL</td>
+                            <td>914</td>
+                            <td>67.6g</td>
+                            <td>128.8g</td>
+                            <td>14.1g</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="problem" style="margin-top: 20px;">
+                    <strong>⚠️ Problema:</strong> 129g carbos con solo 14g grasa = pico de glucosa → crash de energía post-comida
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Plan Nutricional NUEVO</h3>
+                <div class="optimization">
+                    <strong>Comidas 1-2 (trabajo):</strong> LOW CARB<br>
+                    Pure Prep Keto: K06, K02, K07<br>
+                    <small style="color: #888;">Máx 20g carbos, +25g grasa</small>
+                </div>
+                <div class="optimization">
+                    <strong>Comidas 3-4 (tarde/noche):</strong> CARBOS OK<br>
+                    Teriyaki, pancakes keto, etc.<br>
+                    <small style="color: #888;">Ya no importa el crash</small>
+                </div>
+                <p style="color: #888; margin-top: 15px;">
+                    <strong>Targets:</strong><br>
+                    • 84g proteína (1.2 × 70kg)<br>
+                    • 1700-1800 kcal<br>
+                    • Recomposición corporal
+                </p>
+            </div>
+        </div>
+        
+        <!-- RUTINA -->
+        <h2 class="section-title" id="rutina">⏰ Rutina Diaria</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Estructura Actual</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Actividad</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>09:00</td><td>Despertar</td><td></td></tr>
+                        <tr><td>09:00-09:30</td><td>Prep/ordenador</td><td>Sin música (preservar dopamina)</td></tr>
+                        <tr><td>09:30-10:30</td><td>Gimnasio</td><td>Ayunas, fuerza</td></tr>
+                        <tr><td>10:30-11:30</td><td>Piscina + sol</td><td>Sin música deliberadamente</td></tr>
+                        <tr><td>11:30-12:00</td><td>Baño + secado</td><td></td></tr>
+                        <tr><td>12:00-19:00</td><td>Trabajo</td><td>Bloque principal</td></tr>
+                        <tr><td>~12:30</td><td>Comida 1</td><td style="color: #00ff88;">→ Cambiar a LOW CARB</td></tr>
+                        <tr><td>~15:00</td><td>Comida 2</td><td style="color: #00ff88;">→ Cambiar a LOW CARB</td></tr>
+                        <tr><td>19:00-20:00</td><td>Cena</td><td>Carbos OK aquí</td></tr>
+                        <tr><td>Entre medio</td><td>Billar</td><td>Social/descanso</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3>Hábitos Activos</h3>
+                <ul>
+                    <li>✅ <strong>Sin música AM:</strong> Preservar dopamina para trabajo</li>
+                    <li>✅ <strong>Gym ayunas:</strong> Fuerza, no cardio</li>
+                    <li>✅ <strong>Sol diario:</strong> 1h post-gym</li>
+                    <li>✅ <strong>Sin alcohol:</strong> 8+ meses</li>
+                    <li>✅ <strong>Sin cafeína:</strong> 2+ semanas</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- PROBLEMAS IDENTIFICADOS -->
+        <h2 class="section-title" id="problemas">🚨 Problemas Identificados</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Energía / Físico</h3>
+                <div class="problem">
+                    <strong>Crash de energía post-comida</strong><br>
+                    Carbos altos (129g) + grasa baja (14g) = pico glucosa brutal<br>
+                    <span style="color: #00ff88;">→ Solución: Plan low carb AM implementado</span>
+                </div>
+                <div class="warning">
+                    <strong>Sin cafeína 2 semanas</strong><br>
+                    Bueno para reset, pero sin buffer para crashes<br>
+                    <span style="color: #888;">→ Considerar café estratégico post-comida si necesario</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Social / Mental</h3>
+                <div class="warning">
+                    <strong>Solo 1 amigo en Bangkok</strong><br>
+                    Riesgo de aislamiento, menos networking<br>
+                    <span style="color: #888;">→ Considerar: gym buddy, coworking, eventos</span>
+                </div>
+                <div class="warning">
+                    <strong>Pocas actividades externas</strong><br>
+                    Todo el día en edificio (gym, piscina, trabajo, billar)<br>
+                    <span style="color: #888;">→ Potencial para monotonía</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SALUD MENTAL -->
+        <h2 class="section-title" id="salud">🧠 Salud Mental</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Contexto (Dic 2025)</h3>
+                <ul>
+                    <li><strong>Episodio:</strong> Ataque de pánico/ansiedad en Shanghai</li>
+                    <li><strong>Síntomas:</strong> Desrealización, sensación de desmayo, headlessness</li>
+                    <li><strong>Diagnóstico personal:</strong> Ansiedad + desrealización</li>
+                    <li><strong>Detonadores:</strong> Estrés, cambio ambiente, soledad, conflictos familiares</li>
+                    <li><strong>Referentes:</strong> Clara Weeks, @dpdrfounder</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Estado Actual (Feb 2026)</h3>
+                <div class="optimization">
+                    <strong>✅ Mejorando significativamente</strong><br>
+                    Últimas 2-3 semanas mucho mejor tras cambio de hábitos
+                </div>
+                <ul style="margin-top: 15px;">
+                    <li><strong>Estrategia:</strong> Aceptación, ignorar síntomas, hábitos saludables</li>
+                    <li><strong>Secuelas menores:</strong> Sensibilidad a ruidos, pensamientos ocasionales</li>
+                    <li><strong>Nota:</strong> No tratarlo como enfermo - es alguien que aprendió de la adversidad</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- OPTIMIZACIONES -->
+        <h2 class="section-title" id="optimizaciones">⚡ Optimizaciones Sugeridas</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Energía</h3>
+                <div class="optimization">
+                    <strong>1. Low carb en comidas 1-2</strong><br>
+                    Evita crash de glucosa durante trabajo<br>
+                    <span class="tag tag-green">Implementando</span>
+                </div>
+                <div class="optimization">
+                    <strong>2. Caminar 10-15min post-comida</strong><br>
+                    Reduce pico de glucosa 30-40%
+                </div>
+                <div class="optimization">
+                    <strong>3. Añadir grasas a comidas</strong><br>
+                    Aguacate, aceite, frutos secos - frena absorción
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Productividad</h3>
+                <div class="optimization">
+                    <strong>4. Mantener sin música AM</strong><br>
+                    Tu estrategia de dopamina funciona - no cambiar
+                </div>
+                <div class="optimization">
+                    <strong>5. Timeblock trabajo en 2 bloques</strong><br>
+                    12:00-15:00 (deep work) + 16:00-19:00 (tasks/calls)
+                </div>
+                <div class="optimization">
+                    <strong>6. "Shutdown ritual" a las 19:00</strong><br>
+                    Cerrar trabajo mentalmente, no solo físicamente
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Social</h3>
+                <div class="optimization">
+                    <strong>7. Un evento/meetup por semana</strong><br>
+                    Bangkok tiene comunidad de emprendedores activa
+                </div>
+                <div class="optimization">
+                    <strong>8. Coworking 1-2 días/semana</strong><br>
+                    Cambio de ambiente + networking pasivo
+                </div>
+            </div>
+        </div>
+        
+        <!-- SUGERENCIAS -->
+        <h2 class="section-title">💭 Sugerencias Que Quizás No Has Considerado</h2>
+        <div class="grid">
+            <div class="suggestion">
+                <h4>🌅 Morning sunlight (antes del gym)</h4>
+                <p>10 min de sol en los ojos al despertar resetea ritmo circadiano. Huberman protocol. Podría mejorar energía y sueño.</p>
+            </div>
+            
+            <div class="suggestion">
+                <h4>📱 Modo avión hasta las 12:00</h4>
+                <p>No checkear mensajes/email hasta después del gym. Deep work starts with deep rest.</p>
+            </div>
+            
+            <div class="suggestion">
+                <h4>🧊 Cold exposure post-gym</h4>
+                <p>Si la piscina está fría, 2-3 min. Dopamina natural, reduce necesidad de café.</p>
+            </div>
+            
+            <div class="suggestion">
+                <h4>📓 Journal de 5 min antes de dormir</h4>
+                <p>Ayuda con la ansiedad residual. Brain dump antes de sleep.</p>
+            </div>
+            
+            <div class="suggestion">
+                <h4>🍽️ Protein-first eating</h4>
+                <p>Comer la proteína ANTES de los carbos en cada comida. Reduce spike de glucosa.</p>
+            </div>
+            
+            <div class="suggestion">
+                <h4>📞 1 llamada social/semana</h4>
+                <p>Con amigos de España. Mantiene conexiones, bueno para mental health.</p>
+            </div>
+        </div>
+        
+        <!-- PREGUNTAS -->
+        <h2 class="section-title">❓ Preguntas Para Completar Datos</h2>
+        <div class="card">
+            <div class="question">
+                <strong>Sueño:</strong> ¿A qué hora te duermes normalmente? ¿Calidad del sueño?
+            </div>
+            <div class="question">
+                <strong>Suplementos:</strong> ¿Tomas algo? (creatina, vitamina D, omega-3, etc.)
+            </div>
+            <div class="question">
+                <strong>Gym:</strong> ¿Cuántos días/semana? ¿Split? ¿Progreso reciente?
+            </div>
+            <div class="question">
+                <strong>Hidratación:</strong> ¿Cuánta agua bebes al día aproximadamente?
+            </div>
+            <div class="question">
+                <strong>Energía:</strong> ¿A qué hora del día tienes más energía? ¿Y menos?
+            </div>
+            <div class="question">
+                <strong>Estrés:</strong> Del 1-10, ¿cómo de estresado estás esta semana?
+            </div>
+        </div>
+        
+        <!-- PERFIL -->
+        <h2 class="section-title">👤 Perfil Personal</h2>
+        <div class="card">
+            <div class="grid" style="gap: 40px;">
+                <div>
+                    <h3>Básicos</h3>
+                    <ul>
+                        <li><strong>Nombre:</strong> Guillermo</li>
+                        <li><strong>Edad:</strong> 18 años</li>
+                        <li><strong>Ubicación:</strong> Ekkamai, Bangkok</li>
+                        <li><strong>Desde:</strong> Noviembre 2025</li>
+                        <li><strong>Timezone:</strong> UTC+7</li>
+                        <li><strong>Idioma:</strong> Español nativo</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Físico</h3>
+                    <ul>
+                        <li><strong>Peso:</strong> 70kg</li>
+                        <li><strong>Objetivo:</strong> Recomposición (perder grasa + ganar músculo)</li>
+                        <li><strong>Proteína target:</strong> 84g/día</li>
+                        <li><strong>Calorías target:</strong> 1700-1800</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Personalidad</h3>
+                    <ul>
+                        <li>Introvertido pero sociable cuando decide</li>
+                        <li>Muy analítico, piensa en sistemas</li>
+                        <li>Ambicioso - quiere ser el mejor</li>
+                        <li>Se aburre rápido sin progreso</li>
+                        <li>Valora profesionalidad y documentación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #222; text-align: center; color: #444;">
+            GH Command Center • Personal
+        </footer>
+    </div>
+</body>
+</html>
