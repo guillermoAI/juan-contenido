@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas - GH Command Center</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; }
+        .logo span { color: #00d4ff; }
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            padding: 12px 24px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        nav a:hover, nav a.active {
+            background: #00d4ff;
+            color: #000;
+            border-color: #00d4ff;
+        }
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h3 { margin-bottom: 20px; font-size: 1.2rem; }
+        .section-title {
+            font-size: 1.4rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #222;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        .tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .tag-green { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .tag-yellow { background: rgba(255,200,0,0.2); color: #ffc800; }
+        .tag-red { background: rgba(255,68,68,0.2); color: #ff4444; }
+        .tag-blue { background: rgba(0,212,255,0.2); color: #00d4ff; }
+        .tag-purple { background: rgba(147,51,234,0.2); color: #a855f7; }
+        .idea {
+            background: #0d1117;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+        .idea:hover { border-color: #00d4ff; }
+        .idea h4 { margin-bottom: 10px; font-size: 1.1rem; }
+        .idea p { color: #888; line-height: 1.6; margin-bottom: 15px; }
+        .idea-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+        .content-idea {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #0d1117;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+        .content-idea .type {
+            min-width: 70px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .type-yt { background: #ff0000; color: white; }
+        .type-reel { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .type-story { background: #833AB4; color: white; }
+        .referent {
+            padding: 15px;
+            background: #0d1117;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">GH <span>Command Center</span></div>
+        </header>
+        
+        <nav>
+            <a href="index.html">📊 Dashboard</a>
+            <a href="negocio.html">💼 Negocio</a>
+            <a href="personal.html">🧠 Personal</a>
+            <a href="ideas.html" class="active">💡 Ideas</a>
+            <a href="docs/competitor-insights.md">📚 Research</a>
+        </nav>
+        
+        <!-- IDEAS DE NEGOCIO -->
+        <h2 class="section-title">💡 Ideas de Negocio</h2>
+        
+        <div class="grid">
+            <div>
+                <div class="idea">
+                    <h4>🎯 Lead Magnet: Curso Gratuito 6h</h4>
+                    <p>Siguiendo modelo Dustin Varano. Crear un curso completo gratuito como lead magnet. Dobló revenue de $75k a $150k para Soowei.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-yellow">2-3 semanas</span>
+                        <span class="tag tag-blue">Captación</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>🤖 GPT Analiza Calls Automático</h4>
+                    <p>Conectar Fathom transcripts a GPT. Genera reportes automáticos post-call, identifica patrones, sugiere mejoras para clientes.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-blue">Backend</span>
+                        <span class="tag tag-purple">Tech</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>📧 Sistema Nurturing Automatizado</h4>
+                    <p>Emails que se disparan según comportamiento. "Veo que no completaste X" → email automático. Reduce carga de 1-1s.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-yellow">1 semana</span>
+                        <span class="tag tag-blue">Backend</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>📊 Dashboard Público de Resultados</h4>
+                    <p>Como Nik Setting tiene canal de testimonials. Dashboard público con métricas anónimas de clientes. Social proof automático.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-yellow">Medio impacto</span>
+                        <span class="tag tag-blue">Captación</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>🎬 Canal de Testimonials</h4>
+                    <p>Canal separado solo con entrevistas a clientes. Nik Setting model. Prueba social concentrada.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-yellow">Medio impacto</span>
+                        <span class="tag tag-blue">Captación</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="idea">
+                    <h4>💰 Pricing DFY Stack</h4>
+                    <p>Cada elemento Done-For-You añade €2-3k al precio: DFY Editor, DFY Scripts, DFY Setter placement, DFY VSSL. Soowei cobra €18k con 60% close rate.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-red">Revenue</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>📱 Profile Funnel (Nik Setting)</h4>
+                    <p>Instagram como funnel principal. Ads → Perfil → Stories → DMs → Call → Close. VSSL funnels están outdated.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-blue">Captación</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>🎓 Posicionamiento "Nik Setting en español"</h4>
+                    <p>Tu avatar quiere a alguien como Nik Setting pero en español. Posiciónate explícitamente como esa alternativa.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-green">Alto impacto</span>
+                        <span class="tag tag-blue">Branding</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>📈 Business Scorecard como Herramienta</h4>
+                    <p>Framework Hormozi como herramienta de diagnóstico inicial. PDF/web app que clientes llenan antes de call.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-yellow">Medio impacto</span>
+                        <span class="tag tag-blue">Captación</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>🔄 Revenue Share Model</h4>
+                    <p>Tier premium: Todo incluido + ejecución completa por 15-30% del crecimiento. Mayor upside, menor fricción inicial.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-yellow">Medio impacto</span>
+                        <span class="tag tag-red">Revenue</span>
+                    </div>
+                </div>
+                
+                <div class="idea">
+                    <h4>🎪 Comunidad de Pago</h4>
+                    <p>Skool o Discord de pago para alumni. €97-297/mes. Revenue recurrente + networking entre clientes.</p>
+                    <div class="idea-meta">
+                        <span class="tag tag-yellow">Medio impacto</span>
+                        <span class="tag tag-red">Revenue</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- IDEAS DE CONTENIDO -->
+        <h2 class="section-title">🎥 Ideas de Contenido</h2>
+        
+        <div class="card">
+            <h3>YouTube (Long-form)</h3>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>Cómo hice €12k en febrero con 18 años desde Bangkok</strong>
+                    <p style="color: #888; margin-top: 5px;">Behind the scenes, sin BS, mostrando todo el proceso</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>Por qué dejé todo en España para irme a Tailandia (a los 18)</strong>
+                    <p style="color: #888; margin-top: 5px;">Historia personal, vulnerabilidad, "quemar barcos"</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>El Profile Funnel explicado (cómo Nik Setting hace $300k/mes)</strong>
+                    <p style="color: #888; margin-top: 5px;">Breakdown educativo del sistema, versión en español</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>Business Scorecard: Cómo saber si tu negocio vale algo</strong>
+                    <p style="color: #888; margin-top: 5px;">Framework Hormozi adaptado, herramienta práctica</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>De €0 a €12k/mes vendiendo info (sin producto propio)</strong>
+                    <p style="color: #888; margin-top: 5px;">La historia completa, de agencia IA a consultoría</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>7 frameworks de los top consultores (que puedes copiar)</strong>
+                    <p style="color: #888; margin-top: 5px;">Compilación del research, valor concentrado</p>
+                </div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-yt">YT</span>
+                <div>
+                    <strong>Mi rutina en Bangkok (optimizada para productividad)</strong>
+                    <p style="color: #888; margin-top: 5px;">Day in the life, pero con insights útiles</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Reels/Shorts</h3>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>Por qué no tomo café (y cómo mantengo energía)</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>El error que mata tu consultoría (backend débil)</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>€5k por cliente vs €500: La diferencia real</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>3 cosas que aprendí mudándome solo a Asia</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>Tu perfil de IG es un funnel (o debería serlo)</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>Cómo conseguí 5 clientes sin hacer outreach</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>La métrica que NADIE trackea ($/follower)</strong></div>
+            </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>POV: Vives en Bangkok con 18 años</strong></div>
+            </div>
+        </div>
+        
+        <!-- FRAMEWORKS DE REFERENTES -->
+        <h2 class="section-title">📚 Frameworks para Aplicar</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>De Alex Hormozi</h3>
+                <div class="referent">
+                    <strong>Business Scorecard</strong><br>
+                    <span style="color: #888;">Value Adders + Value Detractors para valorar negocios</span>
+                </div>
+                <div class="referent">
+                    <strong>CLOSER Framework</strong><br>
+                    <span style="color: #888;">Clarify → Label → Overview → Sell → Explain → Reinforce</span>
+                </div>
+                <div class="referent">
+                    <strong>Theory of Constraints</strong><br>
+                    <span style="color: #888;">Un constraint a la vez, enfoque total</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>De Nik Setting</h3>
+                <div class="referent">
+                    <strong>Profile Funnel</strong><br>
+                    <span style="color: #888;">Ads → Profile → Content → DMs → Call → Close</span>
+                </div>
+                <div class="referent">
+                    <strong>Paper-Ink-Heat</strong><br>
+                    <span style="color: #888;">Traffic + Offer + Conversion = Revenue</span>
+                </div>
+                <div class="referent">
+                    <strong>ROI Scaling Rules</strong><br>
+                    <span style="color: #888;">10x ROI = 3x spend, 4x = 2x spend</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>De Soowei</h3>
+                <div class="referent">
+                    <strong>7-Hour Rule</strong><br>
+                    <span style="color: #888;">7h de contenido antes de comprar</span>
+                </div>
+                <div class="referent">
+                    <strong>Value Debt</strong><br>
+                    <span style="color: #888;">Tanto valor que se sienten en deuda</span>
+                </div>
+                <div class="referent">
+                    <strong>$/Follower Ratio</strong><br>
+                    <span style="color: #888;">Target: $3-5 por follower</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>De Iman Gadzhi</h3>
+                <div class="referent">
+                    <strong>8-Step Outreach</strong><br>
+                    <span style="color: #888;">Sistema completo de prospección multi-canal</span>
+                </div>
+                <div class="referent">
+                    <strong>Bronze-Silver-Gold</strong><br>
+                    <span style="color: #888;">2000/3000/4000 mensajes/mes targets</span>
+                </div>
+                <div class="referent">
+                    <strong>Sell the Meeting</strong><br>
+                    <span style="color: #888;">No el servicio, solo la reunión</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SUGERENCIAS -->
+        <h2 class="section-title">💭 Sugerencias que quizás no has considerado</h2>
+        
+        <div class="card">
+            <div class="idea">
+                <h4>🎙️ Podcast con clientes</h4>
+                <p>Entrevistas mensuales a tus clientes sobre sus resultados. Contenido + social proof + relación con cliente. Triple win.</p>
+            </div>
+            
+            <div class="idea">
+                <h4>🌏 Contenido en inglés (paralelo)</h4>
+                <p>Tu historia (18, Bangkok, €12k) es interesante globalmente. Un canal en inglés podría abrirte mercado internacional.</p>
+            </div>
+            
+            <div class="idea">
+                <h4>📖 Documentar TODO públicamente</h4>
+                <p>Como build in public. Cada paso, cada cliente, cada error. La transparencia extrema genera confianza extrema (Soowei model).</p>
+            </div>
+            
+            <div class="idea">
+                <h4>🤝 Partnerships con tools</h4>
+                <p>GoHighLevel, Brevo, Fathom - conviértete en affiliate/partner. Revenue pasivo + credibilidad.</p>
+            </div>
+            
+            <div class="idea">
+                <h4>📍 Contenido "desde Bangkok"</h4>
+                <p>El location es parte de tu brand. "Consejos de negocio desde un rooftop en Bangkok" es más memorable que desde Madrid.</p>
+            </div>
+        </div>
+        
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #222; text-align: center; color: #444;">
+            GH Command Center • Ideas de Negocio
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negocio - GH Command Center</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; }
+        .logo span { color: #00d4ff; }
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            padding: 12px 24px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        nav a:hover, nav a.active {
+            background: #00d4ff;
+            color: #000;
+            border-color: #00d4ff;
+        }
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h3 { margin-bottom: 20px; font-size: 1.2rem; }
+        .section-title {
+            font-size: 1.4rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #222;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+        th { color: #888; font-weight: 600; }
+        .tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag-green { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .tag-yellow { background: rgba(255,200,0,0.2); color: #ffc800; }
+        .tag-red { background: rgba(255,68,68,0.2); color: #ff4444; }
+        .tag-blue { background: rgba(0,212,255,0.2); color: #00d4ff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        ul { list-style: none; }
+        li { padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
+        li:last-child { border-bottom: none; }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .metric-value { font-weight: 700; color: #00d4ff; }
+        .optimization {
+            background: #0d1117;
+            border-left: 3px solid #00ff88;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .problem {
+            background: #0d1117;
+            border-left: 3px solid #ff4444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">GH <span>Command Center</span></div>
+        </header>
+        
+        <nav>
+            <a href="index.html">📊 Dashboard</a>
+            <a href="negocio.html" class="active">💼 Negocio</a>
+            <a href="personal.html">🧠 Personal</a>
+            <a href="ideas.html">💡 Ideas</a>
+            <a href="docs/competitor-insights.md">📚 Research</a>
+        </nav>
+        
+        <!-- MÉTRICAS CLAVE -->
+        <h2 class="section-title" id="metricas">📊 Métricas del Negocio</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Revenue 2026</h3>
+                <div class="metric-row">
+                    <span>Enero 2026</span>
+                    <span class="metric-value">€4,000</span>
+                </div>
+                <div class="metric-row">
+                    <span>Febrero 2026 (parcial)</span>
+                    <span class="metric-value">€12,000</span>
+                </div>
+                <div class="metric-row">
+                    <span>Total Q1 (hasta ahora)</span>
+                    <span class="metric-value">€16,000</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>KPIs Target vs Actual</h3>
+                <div class="metric-row">
+                    <span>Clientes activos</span>
+                    <span class="metric-value">5 / ?</span>
+                </div>
+                <div class="metric-row">
+                    <span>Ticket promedio</span>
+                    <span class="metric-value">€2,400</span>
+                </div>
+                <div class="metric-row">
+                    <span>$/Follower ratio</span>
+                    <span class="metric-value">⚠️ No calculado</span>
+                </div>
+                <div class="metric-row">
+                    <span>Close rate</span>
+                    <span class="metric-value">⚠️ No trackado</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CLIENTES -->
+        <h2 class="section-title" id="clientes">👥 Clientes Actuales</h2>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Paquete</th>
+                        <th>Fase</th>
+                        <th>Estado</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cliente 1</td>
+                        <td>€2,000</td>
+                        <td>?</td>
+                        <td><span class="tag tag-green">Activo</span></td>
+                        <td>Enero 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Cliente 2</td>
+                        <td>€2,000</td>
+                        <td>?</td>
+                        <td><span class="tag tag-green">Activo</span></td>
+                        <td>Enero 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Cliente 3</td>
+                        <td>€3,000</td>
+                        <td>?</td>
+                        <td><span class="tag tag-green">Activo</span></td>
+                        <td>Febrero 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Cliente 4</td>
+                        <td>€5,000</td>
+                        <td>?</td>
+                        <td><span class="tag tag-green">Activo</span></td>
+                        <td>Febrero 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Cliente 5</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td><span class="tag tag-yellow">Pendiente</span></td>
+                        <td>Sin datos</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: #666; margin-top: 20px; font-size: 0.9rem;">
+                ⚠️ Necesito más info: nombres/apodos, fase actual de cada uno, fechas de entrada
+            </p>
+        </div>
+        
+        <!-- PROBLEMAS -->
+        <h2 class="section-title" id="problemas">🚨 Problemas Identificados</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Críticos</h3>
+                <div class="problem">
+                    <strong>Backend débil</strong><br>
+                    Solo tienes calls 1-1. Necesitas: clases grabadas, entregables, roadmap funcional, emails automatizados.
+                    <br><br>
+                    <em>Impacto: No puedes escalar. Cada cliente = más tiempo tuyo.</em>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Medio</h3>
+                <div class="problem" style="border-color: #ffc800;">
+                    <strong>Solo 3 clases grabadas</strong><br>
+                    Necesitas mínimo 10+ para tener un backend sólido.
+                </div>
+                <div class="problem" style="border-color: #ffc800;">
+                    <strong>Sin automatización de emails</strong><br>
+                    Brevo configurado pero sin secuencias activas.
+                </div>
+                <div class="problem" style="border-color: #ffc800;">
+                    <strong>Contenido pausado</strong><br>
+                    YouTube e Instagram parados por enfoque en backend.
+                </div>
+                <div class="problem" style="border-color: #ffc800;">
+                    <strong>Sin tracking de métricas</strong><br>
+                    No sabes close rate, $/follower, LTV, CAC.
+                </div>
+            </div>
+        </div>
+        
+        <!-- OPTIMIZACIONES -->
+        <h2 class="section-title">⚡ Optimizaciones Sugeridas</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Inmediatas (esta semana)</h3>
+                <div class="optimization">
+                    <strong>1. Grabar 3 clases core más</strong><br>
+                    Prioridad: las que más se repiten en calls 1-1
+                </div>
+                <div class="optimization">
+                    <strong>2. Configurar secuencia de onboarding</strong><br>
+                    5 emails automáticos post-compra
+                </div>
+                <div class="optimization">
+                    <strong>3. Crear dashboard de tracking</strong><br>
+                    Google Sheets con métricas clave
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Corto plazo (2 semanas)</h3>
+                <div class="optimization">
+                    <strong>4. Lead magnet de alto valor</strong><br>
+                    Siguiendo modelo Dustin Varano: curso gratuito 2-3h
+                </div>
+                <div class="optimization">
+                    <strong>5. Reactivar contenido</strong><br>
+                    1 YouTube/semana + 3-5 reels
+                </div>
+                <div class="optimization">
+                    <strong>6. Implementar Profile Funnel</strong><br>
+                    Instagram como funnel principal (Nik Setting model)
+                </div>
+            </div>
+        </div>
+        
+        <!-- ESTRUCTURA ACTUAL -->
+        <h2 class="section-title">🏗️ Estructura Actual del Negocio</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Modelo</h3>
+                <ul>
+                    <li><strong>Qué:</strong> Consultoría para negocios online que ya facturan</li>
+                    <li><strong>Avatar:</strong> Infoproductores/consultores +€5k/mes</li>
+                    <li><strong>Servicios:</strong> Embudos, posicionamiento, backend</li>
+                    <li><strong>Canales:</strong> YouTube + Instagram (pausados)</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Pricing Actual</h3>
+                <ul>
+                    <li>Paquete básico: €2,000</li>
+                    <li>Paquete medio: €3,000</li>
+                    <li>Paquete premium: €5,000</li>
+                </ul>
+                <p style="color: #888; margin-top: 15px;">
+                    💡 Sugerencia: Según research, podrías subir a €8-15k con elementos DFY
+                </p>
+            </div>
+        </div>
+        
+        <!-- CANALES -->
+        <h2 class="section-title">📱 Canales de Captación</h2>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Canal</th>
+                        <th>Handle</th>
+                        <th>Followers</th>
+                        <th>Estado</th>
+                        <th>Última actividad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>YouTube</td>
+                        <td>@GuilleHernandezF</td>
+                        <td>?</td>
+                        <td><span class="tag tag-yellow">Pausado</span></td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td>Instagram</td>
+                        <td>@guillermo.hernandezf</td>
+                        <td>?</td>
+                        <td><span class="tag tag-yellow">Pausado</span></td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td>Anterior IG</td>
+                        <td>@guille.ia</td>
+                        <td>7,000</td>
+                        <td><span class="tag tag-red">Inactivo</span></td>
+                        <td>Jun 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- TRAYECTORIA -->
+        <h2 class="section-title">📈 Trayectoria de Negocios</h2>
+        <div class="card">
+            <ul>
+                <li><strong>2022 (14 años):</strong> Fortnite competitivo - Liderazgo, competencia</li>
+                <li><strong>2023:</strong> Sneaker reselling - Primer contacto con dinero/estatus</li>
+                <li><strong>2024 (16 años):</strong> Gimnasio - Obsesión con biomecánica</li>
+                <li><strong>2024 (17 años):</strong> Dropshipping - Perdió €200, aprendió Meta Ads</li>
+                <li><strong>Mar 2025:</strong> Agencia IA - n8n, chatbots, descubrió pasión por info products</li>
+                <li><strong>Jun 2025:</strong> Content creator @guille.ia - 7k followers, €8k en mentorías</li>
+                <li><strong>Nov 2025:</strong> Mudanza a Bangkok - "Quemar barcos"</li>
+                <li><strong>Dic 2025:</strong> Pivote a consultoría - Learning phase</li>
+                <li><strong>Ene 2026:</strong> Primeros clientes - 2×€2k</li>
+                <li><strong>Feb 2026:</strong> Escala - €12k, 5 clientes</li>
+            </ul>
+        </div>
+        
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #222; text-align: center; color: #444;">
+            GH Command Center • Negocio
+        </footer>
+    </div>
+</body>
+</html>
