@@ -111,6 +111,7 @@
 | Dashboard Alex | https://guillermoai.github.io/juan-contenido/clientes/alex.html |
 | Dashboard Marcos | https://guillermoai.github.io/juan-contenido/clientes/marcos.html |
 | Template Propuesta | https://guillermoai.github.io/juan-contenido/propuesta/ |
+| Analytics | https://guillermoai.github.io/juan-contenido/analytics/ |
 
 ### Google Sheets
 | Sheet | ID | Uso |

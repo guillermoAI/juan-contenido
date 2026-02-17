@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .back-link { color: #888; text-decoration: none; }
+        .back-link:hover { color: #fff; }
+        
+        .section { margin-bottom: 2.5rem; }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        .resource-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        .resource-card:hover { border-color: #444; }
+        .resource-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .resource-title { font-weight: 600; margin-bottom: 0.5rem; }
+        .resource-desc { color: #888; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+        .resource-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .resource-link:hover { text-decoration: underline; }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: #1a1a2a;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #00d4ff;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        .search-box::placeholder { color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Biblioteca de Recursos</h1>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
+        </div>
+
+        <input type="text" class="search-box" placeholder="🔍 Buscar recursos...">
+
+        <div class="section">
+            <h2 class="section-title">🔬 Research</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">👥</div>
+                    <div class="resource-title">Referentes Detallado</div>
+                    <div class="resource-desc">Análisis de Dustin Varano, Sigurd Foss, Nik Setting, Iman Gadzhi - sus modelos, estrategias y patrones.</div>
+                    <span class="tag">Research</span>
+                    <span class="tag">Estrategia</span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎵</div>
+                    <div class="resource-title">TikTok Shop Hooks</div>
+                    <div class="resource-desc">Para Alex - Posonty como referente, patrones de hooks que funcionan, estrategia CVD.</div>
+                    <span class="tag">Para Alex</span>
+                    <span class="tag">Contenido</span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📺</div>
+                    <div class="resource-title">Videos de Referentes</div>
+                    <div class="resource-desc">Lista de videos clave de Dustin Varano y otros para estudiar - con análisis de títulos y patrones.</div>
+                    <span class="tag">YouTube</span>
+                    <span class="tag">Contenido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📧 Templates de Email</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🚀</div>
+                    <div class="resource-title">Secuencia de Onboarding</div>
+                    <div class="resource-desc">5 emails automatizados: bienvenida, recursos, check-in, recordatorio call, post-call.</div>
+                    <span class="tag">Email</span>
+                    <span class="tag">Automatización</span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📬</div>
+                    <div class="resource-title">Templates de Seguimiento</div>
+                    <div class="resource-desc">Emails para: leads fríos, post-call (no cerró), clientes activos, pedir testimonios, upsell.</div>
+                    <span class="tag">Email</span>
+                    <span class="tag">Ventas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📄 Documentos de Cliente</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-title">Template de Propuesta</div>
+                    <div class="resource-desc">Dossier editable post-llamada - aumenta cierre a 85%. Situación, problemas, solución, roadmap, inversión.</div>
+                    <a href="../propuesta/" class="resource-link">Abrir template →</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🚀</div>
+                    <div class="resource-title">Formulario de Onboarding</div>
+                    <div class="resource-desc">Formulario multi-step para nuevos clientes - captura toda la info necesaria.</div>
+                    <a href="../onboarding/" class="resource-link">Abrir formulario →</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <div class="resource-title">Formulario de Tracking</div>
+                    <div class="resource-desc">Para que clientes actualicen métricas semanales - seguidores, leads, ventas, contenido.</div>
+                    <a href="../tracking/" class="resource-link">Abrir formulario →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🔗 Google Sheets</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">👥</div>
+                    <div class="resource-title">Clientes Master</div>
+                    <div class="resource-desc">Base de datos central de todos los clientes, contratos, pagos y estado.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1HgGc_W_NLLON0a49GbhlsAQKf8w9qbTnMqCuwWRCHNY/edit" target="_blank" class="resource-link">Abrir Sheet →</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎙️</div>
+                    <div class="resource-title">Fathom Data</div>
+                    <div class="resource-desc">Transcripts automáticos de todas las calls con action items.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1DQL-x67xjo8QZntbW3D9lA2qwEYl2ZoOH2NwvrfvBt0/edit" target="_blank" class="resource-link">Abrir Sheet →</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-title">Roadmap</div>
+                    <div class="resource-desc">Roadmap del programa - fases, módulos, entregables.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1fBbHXbsj9BgceP7wmoPzZmeoG2RsvbfmT6_hxQVC7nw/edit" target="_blank" class="resource-link">Abrir Sheet →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">💡 Ideas y Planes</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🤖</div>
+                    <div class="resource-title">Ideas de Uso de Juan</div>
+                    <div class="resource-desc">Cómo usar OpenClaw para automatizar el backend - flujos, capacidades, implementación.</div>
+                    <span class="tag">Automatización</span>
+                    <span class="tag">Ideas</span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📝</div>
+                    <div class="resource-title">Plan de Backend</div>
+                    <div class="resource-desc">Roadmap completo para montar el backend automatizado de la consultoría.</div>
+                    <span class="tag">Plan</span>
+                    <span class="tag">Backend</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple search
+        document.querySelector('.search-box').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.resource-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
