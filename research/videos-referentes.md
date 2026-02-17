@@ -88,4 +88,49 @@ El video más reciente (7 días) muestra su funnel actual. La gente quiere:
 
 ---
 
+---
+
+## Nik Setting (@niksetting)
+
+### Videos Clave
+
+| Video | Views | Fecha |
+|-------|-------|-------|
+| I Built A $300k Per Month (Profit) Consulting Business Using This Profile Funnel | 8,889 | 4 meses |
+| How I Got 32k Instagram Followers and More Consulting Clients From The Profile Funnel | 35,166 | 11 meses |
+| How I Got 91k Instagram Followers and More Consulting Clients From This IG Funnel | 14,724 | 3 meses |
+
+### Patrones de Nik Setting
+1. **"Profile Funnel"** - término que acuñó
+2. **Números de seguidores + revenue** en títulos
+3. **Instagram como canal principal** de captación
+4. **Documentar crecimiento** público
+
+### Ideas para Guillermo
+- Implementar Profile Funnel en Instagram
+- Documentar crecimiento de seguidores públicamente
+- Crear contenido tipo "Cómo conseguí X clientes con mi perfil"
+
+---
+
+## Max Inhouse (@maxinhouse)
+
+### Videos Clave
+
+| Video | Views | Canal |
+|-------|-------|-------|
+| The Only Funnel You Need to Reach $100k/Month (Simple) | 1,042 | Max Inhouse |
+| The $100k/mo Instagram Ads Funnel That Gurus Sell For $20,000 | 2,502 | Max Inhouse |
+
+### Patrones de Max Inhouse
+1. **Simplificación extrema** - "The Only Funnel You Need"
+2. **Anti-guru positioning** - "That Gurus Sell For $20,000"
+3. **Números específicos** - $100k/mo
+
+### Colaboraciones
+- Video con Dustin Varano: "how we're making $10M info operating in 2026"
+- Modelo de colaboración para amplificar reach
+
+---
+
 *Nota: Los videos no tienen captions automáticos, hay que verlos manualmente.*
