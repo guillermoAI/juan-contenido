@@ -59,12 +59,13 @@
 - **Objetivo:** Vender cursos de ecommerce
 - **Estado:** Activo, transición
 
-### 3. Nel
+### 3. Nel Vilella Farias
 - **Handle:** @nel3d
 - **Nicho:** Impresión 3D
 - **Canal:** YouTube (potente)
 - **Proyecto:** Skool de pago
 - **Avatar:** Personas que quieren facturar con impresión 3D
+- **Contrato:** 6 meses desde 06/02/26
 - **Estado:** Activo
 
 ### 4. Alex
@@ -74,12 +75,13 @@
 - **Problema:** Contenido no pilla visitas, perdido en creación
 - **Estado:** Activo, ATENCIÓN REQUERIDA
 
-### 5. Marcos
+### 5. Marcos García
 - **Nicho:** Fitness / Transformación física
 - **Producto:** Mentorías 1-1
 - **Captación:** Orgánico
 - **Problema:** Leads poco cualificados
 - **Pendiente:** Página con formulario para filtrar leads
+- **Contrato:** 4 meses desde 16/01/26
 - **Estado:** Activo
 
 ### 6. Alejandro Ramos
