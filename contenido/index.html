@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas de Contenido | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .back-link { color: #888; text-decoration: none; }
+        .back-link:hover { color: #fff; }
+        
+        .intro {
+            background: linear-gradient(135deg, #1a1a2a 0%, #0a0a15 100%);
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .intro-title { color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem; }
+        .intro-text { color: #888; font-size: 0.9rem; line-height: 1.6; }
+        
+        .section { margin-bottom: 2.5rem; }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .idea-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .idea-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .idea-card:hover { border-color: #444; transform: translateY(-2px); }
+        .idea-type {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .type-reel { background: #2d1a2d; color: #e879f9; }
+        .type-youtube { background: #2d1a1a; color: #ef4444; }
+        .type-story { background: #1a2d2d; color: #22d3ee; }
+        .type-carousel { background: #2d2d1a; color: #facc15; }
+        
+        .idea-title { font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .idea-hook {
+            color: #4ade80;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: #0f2d1a;
+            border-radius: 6px;
+            font-style: italic;
+        }
+        .idea-desc { color: #888; font-size: 0.85rem; line-height: 1.5; }
+        .idea-tags {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .idea-tag {
+            padding: 0.2rem 0.5rem;
+            background: #1a1a1a;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+        
+        .generator {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .generator-title { font-weight: 600; margin-bottom: 1rem; }
+        .generator-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .generator-select {
+            flex: 1;
+            min-width: 150px;
+            padding: 0.75rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .generator-btn {
+            padding: 0.75rem 1.5rem;
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .generator-btn:hover { background: #00b8e0; }
+        .generator-output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #0a0a0a;
+            border-radius: 8px;
+            display: none;
+        }
+        .generator-output.active { display: block; }
+        
+        .calendar {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #0a0a0a;
+        }
+        .calendar-header div {
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 500;
+        }
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .calendar-day {
+            padding: 1rem;
+            border: 1px solid #1a1a1a;
+            min-height: 80px;
+        }
+        .calendar-day-num {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .calendar-content {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.4rem;
+            background: #1a2d1a;
+            color: #4ade80;
+            border-radius: 4px;
+            margin-bottom: 0.25rem;
+        }
+        .calendar-content.youtube { background: #2d1a1a; color: #ef4444; }
+        .calendar-content.story { background: #1a2d2d; color: #22d3ee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Ideas de Contenido</h1>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
+        </div>
+
+        <div class="intro">
+            <div class="intro-title">💡 Basado en el análisis de referentes</div>
+            <div class="intro-text">
+                Estas ideas están extraídas del estudio de Dustin Varano, Nik Setting, Max Inhouse y otros consultores exitosos. 
+                Los patrones que funcionan: números específicos, proceso real documentado, y prueba social visible.
+            </div>
+        </div>
+
+        <div class="generator">
+            <div class="generator-title">🎲 Generador de Ideas</div>
+            <div class="generator-row">
+                <select class="generator-select" id="formatSelect">
+                    <option value="">Formato...</option>
+                    <option value="reel">Reel/Short</option>
+                    <option value="youtube">Video YouTube</option>
+                    <option value="story">Story</option>
+                    <option value="carousel">Carousel</option>
+                </select>
+                <select class="generator-select" id="topicSelect">
+                    <option value="">Tema...</option>
+                    <option value="resultados">Mostrar resultados</option>
+                    <option value="proceso">Documentar proceso</option>
+                    <option value="error">Errores y aprendizajes</option>
+                    <option value="tutorial">Tutorial/How-to</option>
+                    <option value="opinion">Opinión controversial</option>
+                </select>
+                <button class="generator-btn" onclick="generateIdea()">Generar →</button>
+            </div>
+            <div class="generator-output" id="generatorOutput"></div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📱 Reels / Shorts</h2>
+            <div class="idea-grid">
+                <div class="idea-card">
+                    <span class="idea-type type-reel">REEL</span>
+                    <div class="idea-title">El número que cambió mi negocio</div>
+                    <div class="idea-hook">"€16 por suscriptor. Ese es mi ratio. Te explico..."</div>
+                    <div class="idea-desc">Mostrar el cálculo de revenue por suscriptor de YouTube. Comparar con el benchmark de la industria.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Prueba social</span>
+                        <span class="idea-tag">Números</span>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <span class="idea-type type-reel">REEL</span>
+                    <div class="idea-title">Un día facturando €X</div>
+                    <div class="idea-hook">"Son las 9am en Bangkok. Hoy tengo 3 calls..."</div>
+                    <div class="idea-desc">Documentar un día real con calls, trabajo, y lifestyle. Mostrar el behind the scenes.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Lifestyle</span>
+                        <span class="idea-tag">Day in the life</span>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <span class="idea-type type-reel">REEL</span>
+                    <div class="idea-title">El error que más me costó</div>
+                    <div class="idea-hook">"Perdí €X por no hacer esto..."</div>
+                    <div class="idea-desc">Compartir un error real y la lección aprendida. Vulnerable pero educativo.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Vulnerable</span>
+                        <span class="idea-tag">Lección</span>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <span class="idea-type type-reel">REEL</span>
+                    <div class="idea-title">Por qué dejé España a los 18</div>
+                    <div class="idea-hook">"Mis amigos están en la uni. Yo estoy en Bangkok..."</div>
+                    <div class="idea-desc">Historia personal de la decisión de mudarse. Contrarian, genera debate.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Historia</span>
+                        <span class="idea-tag">Contrarian</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📺 Videos YouTube (Largos)</h2>
+            <div class="idea-grid">
+                <div class="idea-card">
+                    <span class="idea-type type-youtube">YOUTUBE</span>
+                    <div class="idea-title">Mi sistema completo de consultoría</div>
+                    <div class="idea-hook">"Esto es todo lo que uso para facturar €12k/mes con 6 clientes"</div>
+                    <div class="idea-desc">Video de 30-60 min mostrando TODO: herramientas, proceso, pricing, captación. Estilo Dustin Varano.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Lead magnet</span>
+                        <span class="idea-tag">Valor masivo</span>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <span class="idea-type type-youtube">YOUTUBE</span>
+                    <div class="idea-title">Cómo conseguí 6 clientes en 2 meses</div>
+                    <div class="idea-hook">"Sin ads. Sin equipo. Solo con esto..."</div>
+                    <div class="idea-desc">Breakdown del proceso de captación: contenido, perfil, DMs, calls, cierre.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Tutorial</span>
+                        <span class="idea-tag">Proceso</span>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <span class="idea-type type-youtube">YOUTUBE</span>
+                    <div class="idea-title">Review de mi funnel actual</div>
+                    <div class="idea-hook">"Te muestro exactamente cómo funciona mi embudo de €X/mes"</div>
+                    <div class="idea-desc">Estilo Dustin Varano - mostrar el funnel real con números y proceso.</div>
+                    <div class="idea-tags">
+                        <span class="idea-tag">Behind the scenes</span>
+                        <span class="idea-tag">Transparencia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📅 Calendario de Contenido (Sugerido)</h2>
+            <div class="calendar">
+                <div class="calendar-header">
+                    <div>Lun</div>
+                    <div>Mar</div>
+                    <div>Mié</div>
+                    <div>Jue</div>
+                    <div>Vie</div>
+                    <div>Sáb</div>
+                    <div>Dom</div>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">17</div>
+                        <div class="calendar-content">Reel</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">18</div>
+                        <div class="calendar-content story">Story</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">19</div>
+                        <div class="calendar-content">Reel</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">20</div>
+                        <div class="calendar-content youtube">YouTube</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">21</div>
+                        <div class="calendar-content">Reel</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">22</div>
+                        <div class="calendar-content story">Story</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">23</div>
+                        <div class="calendar-content">Descanso</div>
+                    </div>
+                </div>
+            </div>
+            <p style="color: #666; font-size: 0.8rem; margin-top: 1rem; text-align: center;">
+                Sugerencia: 3-4 reels/semana + 1 video YouTube largo + stories diarias
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🎯 Hooks que Funcionan (Patrones)</h2>
+            <div class="idea-grid">
+                <div class="idea-card">
+                    <div class="idea-title">Patrón: Número + Tiempo</div>
+                    <div class="idea-hook">"€X en Y días/meses"</div>
+                    <div class="idea-desc">Ejemplo: "€12k en febrero con 6 clientes"</div>
+                </div>
+                <div class="idea-card">
+                    <div class="idea-title">Patrón: Contrarian</div>
+                    <div class="idea-hook">"Todo el mundo dice X, pero..."</div>
+                    <div class="idea-desc">Ejemplo: "Todo el mundo dice que necesitas miles de seguidores..."</div>
+                </div>
+                <div class="idea-card">
+                    <div class="idea-title">Patrón: Secret Reveal</div>
+                    <div class="idea-hook">"Nadie te cuenta esto sobre..."</div>
+                    <div class="idea-desc">Ejemplo: "Nadie te cuenta esto sobre la consultoría online"</div>
+                </div>
+                <div class="idea-card">
+                    <div class="idea-title">Patrón: POV/Story</div>
+                    <div class="idea-hook">"POV: eres consultor y..."</div>
+                    <div class="idea-desc">Ejemplo: "POV: acabas de cerrar un cliente de €5k"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ideas = {
+            reel: {
+                resultados: "Reel mostrando dashboard de revenue o métricas reales. Hook: 'Este número cambió todo...'",
+                proceso: "Reel tipo 'day in the life' mostrando cómo es tu día de consultor.",
+                error: "Reel vulnerable sobre un error que cometiste y qué aprendiste.",
+                tutorial: "Mini-tutorial de 60 segundos sobre un concepto clave (oferta, pricing, etc).",
+                opinion: "Opinión controversial sobre el mundo de la consultoría. Genera debate."
+            },
+            youtube: {
+                resultados: "Video largo (30-60min) mostrando TODO tu sistema con números reales.",
+                proceso: "Breakdown completo de cómo captas clientes: desde contenido hasta cierre.",
+                error: "Video de 'Los X errores que cometí montando mi consultoría'.",
+                tutorial: "Curso gratuito de 1-2h sobre tu metodología (estilo Dustin Varano).",
+                opinion: "Video ensayo sobre por qué la consultoría es el mejor modelo de negocio."
+            },
+            story: {
+                resultados: "Story celebrando un win (cliente cerrado, métrica conseguida).",
+                proceso: "Behind the scenes de tu día - calls, trabajo, Bangkok.",
+                error: "Story honesta sobre un día difícil o un challenge.",
+                tutorial: "Quick tip en story con texto overlay.",
+                opinion: "Poll o pregunta para generar engagement."
+            },
+            carousel: {
+                resultados: "Carousel de 'X clientes en Y meses - cómo lo hice'.",
+                proceso: "Carousel paso a paso de tu proceso de trabajo.",
+                error: "Carousel de 'X errores que no debes cometer'.",
+                tutorial: "Carousel educativo sobre un tema específico.",
+                opinion: "Carousel de 'X cosas que ojalá supiera antes'."
+            }
+        };
+
+        function generateIdea() {
+            const format = document.getElementById('formatSelect').value;
+            const topic = document.getElementById('topicSelect').value;
+            const output = document.getElementById('generatorOutput');
+            
+            if (!format || !topic) {
+                output.innerHTML = '<span style="color: #ef4444;">Selecciona formato y tema</span>';
+                output.classList.add('active');
+                return;
+            }
+            
+            const idea = ideas[format][topic];
+            output.innerHTML = `
+                <strong style="color: #4ade80;">💡 Idea generada:</strong><br><br>
+                ${idea}<br><br>
+                <span style="color: #666;">Formato: ${format.toUpperCase()} | Tema: ${topic}</span>
+            `;
+            output.classList.add('active');
+        }
+    </script>
+</body>
+</html>
