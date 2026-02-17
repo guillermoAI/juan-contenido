@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GH Consulting | Guillermo Hernández</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, #1a1a2a 0%, #0a0a0a 70%);
+            z-index: -1;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #fff;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
+        
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            color: #888;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .about-content { grid-template-columns: 1fr; }
+        }
+        .about-text h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .about-text p { color: #888; margin-bottom: 1rem; }
+        .about-image {
+            background: linear-gradient(135deg, #1a1a2a 0%, #0a0a15 100%);
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .about-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #4ade80);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+        }
+        .about-name { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .about-location { color: #888; }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .result-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .result-value { font-size: 3rem; font-weight: 700; color: #4ade80; }
+        .result-label { color: #888; margin-top: 0.5rem; }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .service-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .service-desc { color: #888; font-size: 0.9rem; }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a2a 0%, #0a0a15 100%);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+        .cta-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .cta-text { color: #888; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #00d4ff, #4ade80);
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .cta-btn:hover { transform: translateY(-2px); }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #1a1a1a;
+        }
+        .footer a { color: #00d4ff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1 class="hero-title">GH Consulting</h1>
+        <p class="hero-subtitle">Consultoría para creadores e infoproductores que quieren escalar su negocio online.</p>
+        <a href="https://cal.com/guillermohernandez" class="hero-cta">Agendar Call →</a>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Sobre mí</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>De España a Bangkok, construyendo negocios online</h3>
+                <p>A los 18 años tomé una decisión que mis amigos no entendieron: dejé España para mudarme a Bangkok y enfocarme 100% en construir mi negocio online.</p>
+                <p>Después de probar dropshipping, agencias de IA, y creación de contenido, encontré mi verdadera pasión: ayudar a otros creadores a escalar sus negocios con sistemas claros y metodología probada.</p>
+                <p>Hoy trabajo con clientes de diferentes nichos (ecommerce, finanzas, fitness, tech) ayudándoles a construir ofertas irresistibles, embudos que convierten, y sistemas que escalan.</p>
+            </div>
+            <div class="about-image">
+                <div class="about-avatar">G</div>
+                <div class="about-name">Guillermo Hernández</div>
+                <div class="about-location">📍 Bangkok, Tailandia</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #0d0d0d; max-width: none; padding: 5rem 2rem;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 class="section-title">Resultados</h2>
+            <p class="section-subtitle">Números reales, no promesas vacías</p>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-value">6</div>
+                    <div class="result-label">Clientes activos</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">€12k+</div>
+                    <div class="result-label">MRR Febrero 2026</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">55+</div>
+                    <div class="result-label">Calls realizadas</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">€16.17</div>
+                    <div class="result-label">Revenue por suscriptor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Cómo te puedo ayudar</h2>
+        <p class="section-subtitle">Servicios de consultoría 1-1 para creadores</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <div class="service-title">Oferta y Posicionamiento</div>
+                <div class="service-desc">Construimos una oferta irresistible que te diferencia de la competencia y atrae a tu cliente ideal.</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <div class="service-title">Contenido y Autoridad</div>
+                <div class="service-desc">Estrategia de contenido que construye autoridad y genera leads cualificados de forma orgánica.</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <div class="service-title">Funnel y Sistemas</div>
+                <div class="service-desc">Implementamos el embudo de ventas completo: desde la captación hasta el cierre y la entrega.</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <div class="service-title">Escala y Optimización</div>
+                <div class="service-desc">Optimizamos lo que funciona y automatizamos procesos para escalar sin quemar tu tiempo.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">¿Listo para escalar tu negocio?</h2>
+        <p class="cta-text">Agenda una call conmigo para ver si podemos trabajar juntos. Sin compromiso, sin ventas agresivas. Solo una conversación honesta sobre tu negocio.</p>
+        <a href="https://cal.com/guillermohernandez" class="cta-btn">Agendar Call Gratis →</a>
+    </section>
+
+    <footer class="footer">
+        <p>GH Consulting © 2026 | <a href="https://instagram.com/guillermo.hernandezf">Instagram</a> | <a href="https://youtube.com/@GuilleHernandezF">YouTube</a></p>
+    </footer>
+</body>
+</html>
