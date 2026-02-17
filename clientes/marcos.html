@@ -4,104 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcos García | GH Consulting</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0a0a0a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
+        body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar { width: 280px; background: #0a0a0a; border-right: 1px solid #1a1a1a; padding: 1.5rem; position: fixed; height: 100vh; overflow-y: auto; }
-        .main { flex: 1; margin-left: 280px; padding: 2rem; }
-        .client-avatar { width: 72px; height: 72px; border-radius: 16px; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
-        .client-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.25rem; }
-        .client-handle { color: #10b981; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; background: #0f2d1a; color: #4ade80; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
-        .contract-badge { display: inline-block; padding: 0.3rem 0.8rem; background: #1a2d1a; color: #4ade80; border-radius: 20px; font-size: 0.75rem; margin-top: 0.5rem; }
-        .sidebar-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #1a1a1a; }
-        .sidebar-label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
-        .sidebar-value { font-size: 0.9rem; color: #ccc; margin-bottom: 0.5rem; }
-        .sidebar-actions { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-        .btn { display: block; width: 100%; padding: 0.75rem 1rem; text-align: center; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
-        .btn-primary { background: #fff; color: #0a0a0a; }
-        .btn-primary:hover { background: #e5e5e5; }
-        .btn-secondary { background: #111; color: #fff; border: 1px solid #222; }
-        .btn-secondary:hover { background: #1a1a1a; border-color: #333; }
-        .back-link { display: block; margin-top: 1.5rem; color: #555; text-decoration: none; font-size: 0.85rem; }
-        .back-link:hover { color: #888; }
-        .section { margin-bottom: 2rem; }
-        .section-title { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; font-weight: 600; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
-        @media (max-width: 900px) { .sidebar { display: none; } .main { margin-left: 0; } .grid { grid-template-columns: 1fr; } }
-        .metric-card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 1.25rem; }
-        .metric-label { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
-        .metric-value { font-size: 2rem; font-weight: 700; }
-        .metric-value.green { color: #4ade80; }
-        .card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+        .sidebar { width: 260px; background: #000; border-right: 1px solid #111; padding: 2rem 1.5rem; position: fixed; height: 100vh; overflow-y: auto; }
+        .main { flex: 1; margin-left: 260px; padding: 2rem 2.5rem; background: #000; }
+        .brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; }
+        .client-card { background: #0a0a0a; border: 1px solid #151515; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+        .client-avatar { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .client-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .client-meta { font-size: 0.8rem; color: #10b981; }
+        .client-status { display: inline-block; padding: 0.25rem 0.6rem; background: #0a1a0a; color: #22c55e; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-top: 0.75rem; text-transform: uppercase; }
+        .contract-badge { display: inline-block; padding: 0.25rem 0.6rem; background: #0a1a1a; color: #06b6d4; border-radius: 4px; font-size: 0.65rem; font-weight: 600; margin-left: 0.25rem; }
+        .sidebar-section { margin-bottom: 1.5rem; }
+        .sidebar-label { font-size: 0.65rem; color: #444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-weight: 600; }
+        .sidebar-value { font-size: 0.85rem; color: #888; line-height: 1.4; }
+        .sidebar-value.warning { color: #facc15; font-weight: 500; }
+        .sidebar-actions { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .btn { display: block; width: 100%; padding: 0.7rem 1rem; text-align: center; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.15s; border: none; cursor: pointer; }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-secondary { background: #0a0a0a; color: #888; border: 1px solid #1a1a1a; }
+        .back-link { display: block; margin-top: 1.5rem; color: #333; text-decoration: none; font-size: 0.8rem; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .page-title { font-size: 1.75rem; font-weight: 700; }
+        .header-meta { font-size: 0.8rem; color: #444; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .metric-card { background: #0a0a0a; border: 1px solid #111; border-radius: 12px; padding: 1.25rem; }
+        .metric-label { font-size: 0.7rem; color: #444; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+        .metric-value { font-size: 1.75rem; font-weight: 700; }
+        .metric-value.green { color: #22c55e; }
+        .metric-change { font-size: 0.75rem; color: #444; margin-top: 0.25rem; }
+        .metric-change.up { color: #22c55e; }
+        .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .chart-card { background: #0a0a0a; border: 1px solid #111; border-radius: 12px; padding: 1.5rem; }
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .chart-title { font-size: 0.8rem; color: #666; font-weight: 600; }
+        .chart-period { font-size: 0.7rem; color: #333; padding: 0.25rem 0.5rem; background: #111; border-radius: 4px; }
+        .chart-container { height: 200px; position: relative; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .card { background: #0a0a0a; border: 1px solid #111; border-radius: 12px; padding: 1.5rem; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .card-title { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-        .card-action { font-size: 0.8rem; color: #555; }
-        .roadmap { display: flex; flex-direction: column; gap: 0.5rem; }
+        .card-title { font-size: 0.8rem; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card-action { font-size: 0.75rem; color: #333; }
         .roadmap-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; }
-        .roadmap-dot { width: 10px; height: 10px; border-radius: 50%; background: #333; flex-shrink: 0; }
-        .roadmap-dot.done { background: #4ade80; }
-        .roadmap-dot.current { background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.2); }
-        .roadmap-text { font-size: 0.9rem; color: #666; }
-        .roadmap-text.done { color: #4ade80; }
+        .roadmap-dot { width: 8px; height: 8px; border-radius: 50%; background: #222; }
+        .roadmap-dot.done { background: #22c55e; }
+        .roadmap-dot.current { background: #fff; }
+        .roadmap-text { font-size: 0.85rem; color: #444; }
+        .roadmap-text.done { color: #22c55e; }
         .roadmap-text.current { color: #fff; font-weight: 500; }
-        .progress-bar { height: 4px; background: #222; border-radius: 2px; margin-top: 1rem; overflow: hidden; }
-        .progress-fill { height: 100%; background: #fff; border-radius: 2px; }
-        .todo-list { display: flex; flex-direction: column; }
-        .todo-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #1a1a1a; }
-        .todo-item:last-child { border-bottom: none; }
-        .todo-checkbox { width: 20px; height: 20px; border: 2px solid #333; border-radius: 4px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        .todo-checkbox:hover { border-color: #555; }
-        .todo-checkbox.done { background: #4ade80; border-color: #4ade80; }
-        .todo-checkbox.done::after { content: '✓'; color: #0a0a0a; font-size: 0.7rem; font-weight: 700; }
-        .todo-text { flex: 1; font-size: 0.9rem; line-height: 1.4; color: #ccc; }
-        .todo-text.done { text-decoration: line-through; color: #555; }
-        .todo-delete { opacity: 0; background: none; border: none; color: #555; cursor: pointer; }
-        .todo-item:hover .todo-delete { opacity: 1; }
-        .todo-delete:hover { color: #ef4444; }
-        .todo-input-row { display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1a1a1a; }
-        .todo-input { flex: 1; padding: 0.6rem 0.75rem; background: #0a0a0a; border: 1px solid #222; border-radius: 6px; color: #fff; font-size: 0.85rem; }
-        .todo-input:focus { outline: none; border-color: #333; }
-        .todo-input::placeholder { color: #444; }
-        .todo-add { padding: 0.6rem 1rem; background: #1a1a1a; border: none; border-radius: 6px; color: #888; font-size: 0.85rem; cursor: pointer; }
-        .todo-add:hover { background: #222; color: #fff; }
-        .notes-list { display: flex; flex-direction: column; gap: 0.75rem; }
-        .note-item { background: #0a0a0a; border-radius: 8px; padding: 1rem; position: relative; }
-        .note-date { font-size: 0.7rem; color: #444; margin-bottom: 0.5rem; }
-        .note-text { font-size: 0.9rem; color: #999; line-height: 1.5; }
-        .note-delete { position: absolute; top: 0.75rem; right: 0.75rem; opacity: 0; background: none; border: none; color: #444; cursor: pointer; }
+        .progress-bar { height: 3px; background: #111; border-radius: 2px; margin-top: 1rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: #fff; }
+        .task-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid #111; }
+        .task-item:last-child { border-bottom: none; }
+        .task-checkbox { width: 16px; height: 16px; border: 1.5px solid #333; border-radius: 4px; cursor: pointer; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+        .task-checkbox.done { background: #22c55e; border-color: #22c55e; }
+        .task-checkbox.done::after { content: '✓'; color: #000; font-size: 0.6rem; font-weight: 700; }
+        .task-text { font-size: 0.85rem; color: #888; line-height: 1.4; }
+        .task-text.done { text-decoration: line-through; color: #333; }
+        .task-delete { opacity: 0; background: none; border: none; color: #333; cursor: pointer; margin-left: auto; }
+        .task-item:hover .task-delete { opacity: 1; }
+        .task-input-row { display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #111; }
+        .task-input { flex: 1; padding: 0.5rem 0.75rem; background: #000; border: 1px solid #1a1a1a; border-radius: 6px; color: #fff; font-size: 0.8rem; }
+        .task-input::placeholder { color: #333; }
+        .task-add { padding: 0.5rem 0.75rem; background: #111; border: none; border-radius: 6px; color: #666; font-size: 0.8rem; cursor: pointer; }
+        .note-item { background: #050505; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; position: relative; }
+        .note-date { font-size: 0.65rem; color: #333; margin-bottom: 0.25rem; }
+        .note-text { font-size: 0.8rem; color: #666; line-height: 1.4; }
+        .note-delete { position: absolute; top: 0.5rem; right: 0.5rem; opacity: 0; background: none; border: none; color: #333; cursor: pointer; }
         .note-item:hover .note-delete { opacity: 1; }
-        .note-delete:hover { color: #ef4444; }
-        .note-input { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #222; border-radius: 8px; color: #fff; font-size: 0.85rem; resize: none; min-height: 80px; margin-top: 1rem; }
-        .note-input:focus { outline: none; border-color: #333; }
-        .note-input::placeholder { color: #444; }
-        .note-submit { margin-top: 0.5rem; padding: 0.5rem 1rem; background: #1a1a1a; border: none; border-radius: 6px; color: #888; font-size: 0.85rem; cursor: pointer; }
-        .note-submit:hover { background: #222; color: #fff; }
-        .empty-state { text-align: center; padding: 2rem; color: #444; font-size: 0.9rem; }
+        .note-input { width: 100%; padding: 0.6rem 0.75rem; background: #000; border: 1px solid #1a1a1a; border-radius: 6px; color: #fff; font-size: 0.8rem; resize: none; min-height: 60px; margin-top: 0.75rem; }
+        .note-input::placeholder { color: #333; }
+        .note-submit { margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #111; border: none; border-radius: 6px; color: #666; font-size: 0.75rem; cursor: pointer; }
+        .funnel-row { display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #0a0a0a; }
+        .funnel-row:last-child { border-bottom: none; }
+        .funnel-label { width: 100px; font-size: 0.8rem; color: #555; }
+        .funnel-bar { flex: 1; height: 20px; background: #111; border-radius: 4px; overflow: hidden; margin: 0 0.75rem; }
+        .funnel-fill { height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 4px; }
+        .funnel-value { width: 50px; text-align: right; font-size: 0.85rem; font-weight: 600; }
+        @media (max-width: 1200px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } .charts-grid, .content-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .sidebar { display: none; } .main { margin-left: 0; } }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="client-avatar">M</div>
-            <div class="client-name">Marcos García</div>
-            <div class="client-handle">Fitness / Transformación</div>
-            <span class="status-badge">Activo</span>
-            <div class="contract-badge">4 meses desde 16/01/26</div>
-            <div class="sidebar-section">
-                <div class="sidebar-label">Nicho</div>
-                <div class="sidebar-value">Fitness / Transformación física</div>
+            <div class="brand">GH<span>.</span></div>
+            <div class="client-card">
+                <div class="client-avatar">M</div>
+                <div class="client-name">Marcos García</div>
+                <div class="client-meta">Fitness / Transformación</div>
+                <div class="client-status">Activo</div>
+                <span class="contract-badge">4 meses</span>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-label">Producto</div>
                 <div class="sidebar-value">Mentorías 1-1</div>
             </div>
             <div class="sidebar-section">
+                <div class="sidebar-label">Captación</div>
+                <div class="sidebar-value">Orgánico (IG)</div>
+            </div>
+            <div class="sidebar-section">
                 <div class="sidebar-label">Problema</div>
-                <div class="sidebar-value" style="color: #facc15;">Leads poco cualificados</div>
+                <div class="sidebar-value warning">Leads poco cualificados</div>
             </div>
             <div class="sidebar-actions">
                 <a href="../tracking/update.html?c=marcos" class="btn btn-primary">Actualizar métricas</a>
@@ -110,116 +118,137 @@
             <a href="index.html" class="back-link">← Todos los clientes</a>
         </aside>
         <main class="main">
-            <section class="section">
-                <div class="section-title">Métricas actuales</div>
-                <div class="grid">
-                    <div class="metric-card">
-                        <div class="metric-label">Facturación mes</div>
-                        <div class="metric-value green" id="metricRevenue">—</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Seguidores</div>
-                        <div class="metric-value" id="metricFollowers">—</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Clientes activos</div>
-                        <div class="metric-value" id="metricClients">—</div>
-                    </div>
+            <div class="header">
+                <h1 class="page-title">Dashboard</h1>
+                <div class="header-meta">Contrato desde 16/01/26</div>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Facturación Febrero</div>
+                    <div class="metric-value green">€4,200</div>
+                    <div class="metric-change up">+18% vs enero</div>
                 </div>
-            </section>
-            <div class="grid-2">
+                <div class="metric-card">
+                    <div class="metric-label">Clientes Activos</div>
+                    <div class="metric-value">6</div>
+                    <div class="metric-change">Mentorías 1-1</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Seguidores IG</div>
+                    <div class="metric-value">5,890</div>
+                    <div class="metric-change up">+420 este mes</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tasa Cierre</div>
+                    <div class="metric-value">22%</div>
+                    <div class="metric-change">Objetivo: 35%</div>
+                </div>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">Ingresos Mensuales</div>
+                        <div class="chart-period">2026</div>
+                    </div>
+                    <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">Calidad Leads</div>
+                        <div class="chart-period">Este mes</div>
+                    </div>
+                    <div class="chart-container"><canvas id="leadsChart"></canvas></div>
+                </div>
+            </div>
+            <div class="content-grid">
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Roadmap</span>
-                        <span class="card-action" id="roadmapPhase">Fase 2 de 4</span>
+                        <span class="card-action">Fase 2 de 4</span>
                     </div>
-                    <div class="roadmap" id="roadmapList"></div>
-                    <div class="progress-bar"><div class="progress-fill" id="roadmapProgress" style="width: 50%"></div></div>
+                    <div class="roadmap-item"><div class="roadmap-dot done"></div><span class="roadmap-text done">Onboarding</span></div>
+                    <div class="roadmap-item"><div class="roadmap-dot current"></div><span class="roadmap-text current">Cualificación de leads</span></div>
+                    <div class="roadmap-item"><div class="roadmap-dot"></div><span class="roadmap-text">Página con formulario</span></div>
+                    <div class="roadmap-item"><div class="roadmap-dot"></div><span class="roadmap-text">Escalar ventas</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 37%"></div></div>
                 </div>
                 <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Tareas pendientes</span>
-                        <span class="card-action" id="todoCount">0 de 0</span>
+                    <div class="card-header"><span class="card-title">Embudo Actual</span></div>
+                    <div class="funnel-row">
+                        <span class="funnel-label">DMs</span>
+                        <div class="funnel-bar"><div class="funnel-fill" style="width: 100%"></div></div>
+                        <span class="funnel-value">45</span>
                     </div>
-                    <div class="todo-list" id="todoList"></div>
-                    <div class="todo-input-row">
-                        <input type="text" class="todo-input" id="todoInput" placeholder="Añadir tarea...">
-                        <button class="todo-add" id="todoAdd">Añadir</button>
+                    <div class="funnel-row">
+                        <span class="funnel-label">Interesados</span>
+                        <div class="funnel-bar"><div class="funnel-fill" style="width: 44%"></div></div>
+                        <span class="funnel-value">20</span>
+                    </div>
+                    <div class="funnel-row">
+                        <span class="funnel-label">Calls</span>
+                        <div class="funnel-bar"><div class="funnel-fill" style="width: 20%"></div></div>
+                        <span class="funnel-value">9</span>
+                    </div>
+                    <div class="funnel-row">
+                        <span class="funnel-label">Ventas</span>
+                        <div class="funnel-bar"><div class="funnel-fill" style="width: 4.4%"></div></div>
+                        <span class="funnel-value">2</span>
                     </div>
                 </div>
             </div>
-            <section class="section" style="margin-top: 1.5rem;">
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Tareas Pendientes</span>
+                        <span class="card-action" id="taskCount">0 de 5</span>
+                    </div>
+                    <div id="taskList">
+                        <div class="task-item"><div class="task-checkbox"></div><span class="task-text">Crear página con formulario filtrador</span><button class="task-delete">×</button></div>
+                        <div class="task-item"><div class="task-checkbox"></div><span class="task-text">Definir preguntas de cualificación</span><button class="task-delete">×</button></div>
+                        <div class="task-item"><div class="task-checkbox"></div><span class="task-text">Contenido para atraer leads serios</span><button class="task-delete">×</button></div>
+                        <div class="task-item"><div class="task-checkbox"></div><span class="task-text">Criterios de cliente ideal</span><button class="task-delete">×</button></div>
+                        <div class="task-item"><div class="task-checkbox"></div><span class="task-text">Proceso de venta estructurado</span><button class="task-delete">×</button></div>
+                    </div>
+                    <div class="task-input-row">
+                        <input type="text" class="task-input" id="taskInput" placeholder="Nueva tarea...">
+                        <button class="task-add" id="taskAdd">Añadir</button>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-header"><span class="card-title">Notas</span></div>
-                    <div class="notes-list" id="notesList"></div>
-                    <textarea class="note-input" id="noteInput" placeholder="Añadir una nota..."></textarea>
-                    <button class="note-submit" id="noteAdd">Guardar nota</button>
+                    <div id="noteList">
+                        <div class="note-item">
+                            <div class="note-date">16 ene 2026</div>
+                            <div class="note-text">Marcos vende mentorías 1-1 de fitness/transformación. Captación orgánica por IG. Problema: leads poco cualificados. Solución: formulario filtrador en landing.</div>
+                            <button class="note-delete">×</button>
+                        </div>
+                    </div>
+                    <textarea class="note-input" id="noteInput" placeholder="Añadir nota..."></textarea>
+                    <button class="note-submit" id="noteAdd">Guardar</button>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
     <script>
-        const CLIENT = {
-            id: 'marcos',
-            roadmap: [
-                { text: 'Onboarding', status: 'done' },
-                { text: 'Cualificación de leads', status: 'current' },
-                { text: 'Página con formulario', status: 'pending' },
-                { text: 'Escalar ventas', status: 'pending' }
-            ],
-            defaultTodos: [
-                'Crear página con formulario para filtrar leads',
-                'Definir preguntas de cualificación',
-                'Optimizar contenido para atraer leads más serios',
-                'Establecer criterios de cliente ideal',
-                'Crear proceso de venta más estructurado'
-            ],
-            defaultNotes: [
-                { date: '2026-01-16', text: 'Marcos vende mentorías 1-1 de fitness/transformación. Captación orgánica. Problema principal: leads poco cualificados. Solución: página con formulario para filtrar.' }
-            ]
-        };
-        const STORAGE = { todos: `gh_todos_${CLIENT.id}`, notes: `gh_notes_${CLIENT.id}`, metrics: `gh_metrics_${CLIENT.id}` };
-        function init() { renderRoadmap(); renderTodos(); renderNotes(); renderMetrics();
-            document.getElementById('todoAdd').addEventListener('click', addTodo);
-            document.getElementById('todoInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTodo(); });
-            document.getElementById('noteAdd').addEventListener('click', addNote);
-        }
-        function renderRoadmap() {
-            const c = document.getElementById('roadmapList'); c.innerHTML = '';
-            let current = 0, done = 0;
-            CLIENT.roadmap.forEach((item, i) => {
-                if (item.status === 'done') done++;
-                if (item.status === 'current') current = i + 1;
-                c.innerHTML += `<div class="roadmap-item"><div class="roadmap-dot ${item.status}"></div><span class="roadmap-text ${item.status}">${item.text}</span></div>`;
-            });
-            document.getElementById('roadmapProgress').style.width = `${(done / CLIENT.roadmap.length) * 100}%`;
-            document.getElementById('roadmapPhase').textContent = `Fase ${current || done} de ${CLIENT.roadmap.length}`;
-        }
-        function getTodos() { const s = localStorage.getItem(STORAGE.todos); return s ? JSON.parse(s) : CLIENT.defaultTodos.map(t => ({ text: t, done: false })); }
-        function saveTodos(t) { localStorage.setItem(STORAGE.todos, JSON.stringify(t)); }
-        function renderTodos() {
-            const c = document.getElementById('todoList'), todos = getTodos(); c.innerHTML = '';
-            if (!todos.length) c.innerHTML = '<div class="empty-state">Sin tareas</div>';
-            else todos.forEach((t, i) => { c.innerHTML += `<div class="todo-item"><div class="todo-checkbox ${t.done ? 'done' : ''}" data-i="${i}"></div><span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span><button class="todo-delete" data-i="${i}">×</button></div>`; });
-            document.getElementById('todoCount').textContent = `${todos.filter(t => t.done).length} de ${todos.length}`;
-            c.querySelectorAll('.todo-checkbox').forEach(cb => cb.addEventListener('click', () => toggleTodo(+cb.dataset.i)));
-            c.querySelectorAll('.todo-delete').forEach(b => b.addEventListener('click', () => deleteTodo(+b.dataset.i)));
-        }
-        function toggleTodo(i) { const t = getTodos(); t[i].done = !t[i].done; saveTodos(t); renderTodos(); }
-        function deleteTodo(i) { const t = getTodos(); t.splice(i, 1); saveTodos(t); renderTodos(); }
-        function addTodo() { const input = document.getElementById('todoInput'), text = input.value.trim(); if (!text) return; const t = getTodos(); t.push({ text, done: false }); saveTodos(t); renderTodos(); input.value = ''; }
-        function getNotes() { const s = localStorage.getItem(STORAGE.notes); return s ? JSON.parse(s) : CLIENT.defaultNotes || []; }
-        function saveNotes(n) { localStorage.setItem(STORAGE.notes, JSON.stringify(n)); }
-        function renderNotes() {
-            const c = document.getElementById('notesList'), notes = getNotes(); c.innerHTML = '';
-            if (!notes.length) c.innerHTML = '<div class="empty-state">Sin notas</div>';
-            else notes.forEach((n, i) => { c.innerHTML += `<div class="note-item"><div class="note-date">${new Date(n.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</div><div class="note-text">${n.text}</div><button class="note-delete" data-i="${i}">×</button></div>`; });
-            c.querySelectorAll('.note-delete').forEach(b => b.addEventListener('click', () => deleteNote(+b.dataset.i)));
-        }
-        function deleteNote(i) { const n = getNotes(); n.splice(i, 1); saveNotes(n); renderNotes(); }
-        function addNote() { const input = document.getElementById('noteInput'), text = input.value.trim(); if (!text) return; const n = getNotes(); n.unshift({ date: new Date().toISOString(), text }); saveNotes(n); renderNotes(); input.value = ''; }
-        function renderMetrics() { const s = localStorage.getItem(STORAGE.metrics); if (s) { const m = JSON.parse(s); if (m.revenue) document.getElementById('metricRevenue').textContent = `€${m.revenue.toLocaleString()}`; if (m.followers) document.getElementById('metricFollowers').textContent = m.followers.toLocaleString(); if (m.clients) document.getElementById('metricClients').textContent = m.clients; } }
-        init();
+        new Chart(document.getElementById('revenueChart').getContext('2d'), {
+            type: 'bar',
+            data: { labels: ['Ene', 'Feb'], datasets: [{ label: 'Ingresos', data: [3550, 4200], backgroundColor: '#10b981', borderRadius: 4 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { color: '#444' } }, y: { grid: { color: '#111' }, ticks: { color: '#444', callback: (v) => '€' + v } } } }
+        });
+        new Chart(document.getElementById('leadsChart').getContext('2d'), {
+            type: 'doughnut',
+            data: { labels: ['Cualificados', 'No cualificados'], datasets: [{ data: [22, 78], backgroundColor: ['#10b981', '#111'], borderWidth: 0, cutout: '70%' }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+        document.querySelectorAll('.task-checkbox').forEach(cb => cb.addEventListener('click', function() { this.classList.toggle('done'); this.nextElementSibling.classList.toggle('done'); updateCount(); }));
+        document.querySelectorAll('.task-delete').forEach(b => b.addEventListener('click', function() { this.parentElement.remove(); updateCount(); }));
+        document.getElementById('taskAdd').addEventListener('click', addTask);
+        document.getElementById('taskInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTask(); });
+        function addTask() { const input = document.getElementById('taskInput'), text = input.value.trim(); if (!text) return; const item = document.createElement('div'); item.className = 'task-item'; item.innerHTML = `<div class="task-checkbox"></div><span class="task-text">${text}</span><button class="task-delete">×</button>`; document.getElementById('taskList').appendChild(item); item.querySelector('.task-checkbox').addEventListener('click', function() { this.classList.toggle('done'); this.nextElementSibling.classList.toggle('done'); updateCount(); }); item.querySelector('.task-delete').addEventListener('click', function() { this.parentElement.remove(); updateCount(); }); input.value = ''; updateCount(); }
+        function updateCount() { const t = document.querySelectorAll('.task-item').length; const d = document.querySelectorAll('.task-checkbox.done').length; document.getElementById('taskCount').textContent = `${d} de ${t}`; }
+        updateCount();
+        document.getElementById('noteAdd').addEventListener('click', function() { const input = document.getElementById('noteInput'), text = input.value.trim(); if (!text) return; const item = document.createElement('div'); item.className = 'note-item'; item.innerHTML = `<div class="note-date">${new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</div><div class="note-text">${text}</div><button class="note-delete">×</button>`; document.getElementById('noteList').insertBefore(item, document.getElementById('noteList').firstChild); item.querySelector('.note-delete').addEventListener('click', function() { this.parentElement.remove(); }); input.value = ''; });
+        document.querySelectorAll('.note-delete').forEach(b => b.addEventListener('click', function() { this.parentElement.remove(); }));
     </script>
 </body>
 </html>
