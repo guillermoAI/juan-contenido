@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @media print {
+            body { background: #fff !important; }
+            .no-print { display: none !important; }
+        }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
+            border: 1px solid #222;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        .logo { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .logo span { color: #00d4ff; }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .for { color: #888; font-size: 1.1rem; }
+        .header .client-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-top: 0.5rem;
+        }
+        .header .date { color: #666; margin-top: 1rem; font-size: 0.9rem; }
+        
+        .section {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-icon { font-size: 1.5rem; }
+        
+        .situation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 600px) {
+            .situation-grid { grid-template-columns: 1fr; }
+        }
+        .situation-item h4 {
+            color: #888;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .situation-item p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .editable {
+            background: #0a0a0a;
+            border: 1px dashed #333;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            min-height: 2.5rem;
+            cursor: text;
+        }
+        .editable:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        .problem-list {
+            list-style: none;
+        }
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .problem-list li:last-child { border-bottom: none; }
+        .problem-icon { color: #ef4444; font-size: 1.2rem; }
+        
+        .solution-list {
+            list-style: none;
+        }
+        .solution-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .solution-list li:last-child { border-bottom: none; }
+        .solution-icon { color: #4ade80; font-size: 1.2rem; }
+        
+        .roadmap {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #00d4ff, #4ade80);
+            border-radius: 2px;
+        }
+        .roadmap-phase {
+            position: relative;
+            padding: 1rem 0 2rem 1.5rem;
+        }
+        .roadmap-phase:last-child { padding-bottom: 0; }
+        .roadmap-dot {
+            position: absolute;
+            left: -2rem;
+            top: 1rem;
+            width: 20px;
+            height: 20px;
+            background: #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #000;
+        }
+        .roadmap-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .roadmap-desc { color: #888; font-size: 0.9rem; line-height: 1.5; }
+        
+        .investment {
+            text-align: center;
+            padding: 2.5rem;
+        }
+        .investment-label { color: #888; font-size: 1rem; margin-bottom: 0.5rem; }
+        .investment-price {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .investment-period { color: #888; font-size: 1.1rem; margin-top: 0.5rem; }
+        .investment-note { color: #666; font-size: 0.9rem; margin-top: 1rem; }
+        
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 600px) {
+            .bonus-grid { grid-template-columns: 1fr; }
+        }
+        .bonus-item {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .bonus-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .bonus-title { font-weight: 600; margin-bottom: 0.25rem; }
+        .bonus-desc { color: #888; font-size: 0.85rem; }
+        
+        .cta {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0f2d1a 0%, #0a1a0f 100%);
+            border: 1px solid #1a4a2a;
+        }
+        .cta-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #4ade80;
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .cta-btn:hover { background: #22c55e; transform: translateY(-2px); }
+        .cta-note { color: #666; font-size: 0.85rem; margin-top: 1rem; }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .toolbar {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .toolbar-btn {
+            padding: 0.75rem 1.25rem;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .toolbar-btn:hover { background: #222; border-color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">GH<span>.</span></div>
+            <h1>Propuesta de Consultoría</h1>
+            <div class="for">Preparada para</div>
+            <div class="client-name" contenteditable="true">[Nombre del Cliente]</div>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">📋</span>
+                Tu Situación Actual
+            </div>
+            <div class="situation-grid">
+                <div class="situation-item">
+                    <h4>Nicho</h4>
+                    <div class="editable" contenteditable="true">[Nicho/industria del cliente]</div>
+                </div>
+                <div class="situation-item">
+                    <h4>Producto Actual</h4>
+                    <div class="editable" contenteditable="true">[Descripción del producto]</div>
+                </div>
+                <div class="situation-item">
+                    <h4>Facturación Actual</h4>
+                    <div class="editable" contenteditable="true">[€X/mes]</div>
+                </div>
+                <div class="situation-item">
+                    <h4>Objetivo</h4>
+                    <div class="editable" contenteditable="true">[€X/mes en X meses]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">🎯</span>
+                Problemas Identificados
+            </div>
+            <ul class="problem-list">
+                <li>
+                    <span class="problem-icon">✗</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Problema 1 identificado en la call]</div>
+                </li>
+                <li>
+                    <span class="problem-icon">✗</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Problema 2 identificado en la call]</div>
+                </li>
+                <li>
+                    <span class="problem-icon">✗</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Problema 3 identificado en la call]</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">💡</span>
+                La Solución
+            </div>
+            <ul class="solution-list">
+                <li>
+                    <span class="solution-icon">✓</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Solución 1 que ofrecemos]</div>
+                </li>
+                <li>
+                    <span class="solution-icon">✓</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Solución 2 que ofrecemos]</div>
+                </li>
+                <li>
+                    <span class="solution-icon">✓</span>
+                    <div class="editable" contenteditable="true" style="flex: 1;">[Solución 3 que ofrecemos]</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">🗺️</span>
+                El Proceso (Roadmap)
+            </div>
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <div class="roadmap-dot">1</div>
+                    <div class="roadmap-title">Fase 1: Diagnóstico y Oferta</div>
+                    <div class="roadmap-desc" contenteditable="true">Analizamos tu situación actual, definimos tu avatar ideal y creamos una oferta irresistible que se diferencie en el mercado.</div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-dot">2</div>
+                    <div class="roadmap-title">Fase 2: Contenido y Posicionamiento</div>
+                    <div class="roadmap-desc" contenteditable="true">Optimizamos tu perfil, creamos una estrategia de contenido que atraiga a tu ICP y construimos tu autoridad en el nicho.</div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-dot">3</div>
+                    <div class="roadmap-title">Fase 3: Funnel y Captación</div>
+                    <div class="roadmap-desc" contenteditable="true">Implementamos tu embudo de ventas, configuramos el sistema de captación y optimizamos la conversión de leads a clientes.</div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-dot">4</div>
+                    <div class="roadmap-title">Fase 4: Escala y Optimización</div>
+                    <div class="roadmap-desc" contenteditable="true">Escalamos lo que funciona, automatizamos procesos y optimizamos para maximizar beneficios con el menor esfuerzo.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section investment">
+            <div class="investment-label">Tu inversión</div>
+            <div class="investment-price" contenteditable="true">€X,XXX</div>
+            <div class="investment-period" contenteditable="true">por 3 meses</div>
+            <div class="investment-note">Incluye calls semanales 1-1 + acceso a todos los recursos</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">🎁</span>
+                Bonus Incluidos
+            </div>
+            <div class="bonus-grid">
+                <div class="bonus-item">
+                    <div class="bonus-icon">📊</div>
+                    <div class="bonus-title">Dashboard Personalizada</div>
+                    <div class="bonus-desc">Tu propio panel con métricas y progreso en tiempo real</div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-icon">🎓</div>
+                    <div class="bonus-title">Acceso a Clases</div>
+                    <div class="bonus-desc">Biblioteca de módulos sobre oferta, pricing, contenido</div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-icon">💬</div>
+                    <div class="bonus-title">Soporte Directo</div>
+                    <div class="bonus-desc">Acceso a WhatsApp para dudas entre calls</div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-icon">🤖</div>
+                    <div class="bonus-title">Análisis IA de Calls</div>
+                    <div class="bonus-desc">Transcripts y action items automáticos de cada sesión</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section cta">
+            <div class="cta-title">¿Listo para empezar?</div>
+            <a href="#" class="cta-btn" contenteditable="true">Confirmar y Pagar →</a>
+            <div class="cta-note">O responde a este documento con cualquier duda</div>
+        </div>
+
+        <div class="footer">
+            <p>GH Consulting • guillermo.hernandez.fuertes@gmail.com</p>
+            <p style="margin-top: 0.5rem;">Esta propuesta es válida por 7 días</p>
+        </div>
+    </div>
+
+    <div class="toolbar no-print">
+        <button class="toolbar-btn" onclick="window.print()">🖨️ Imprimir/PDF</button>
+        <button class="toolbar-btn" onclick="window.location.href='../index.html'">← Hub</button>
+    </div>
+
+    <script>
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    </script>
+</body>
+</html>
