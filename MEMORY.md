@@ -1,5 +1,8 @@
 # MEMORY.md - Long-Term Memory
 
+> **BASE DE DATOS COMPLETA DEL NEGOCIO:** Ver `/root/.openclaw/workspace/NEGOCIO.md`
+> Contiene: clientes, herramientas, URLs, credenciales, contexto - TODO en un solo lugar.
+
 ## Feb 2026 Snapshot
 
 Guillermo tiene 18 años, vive en Bangkok desde nov 2025. Es un builder serio con trayectoria de negocios real:
@@ -64,6 +67,23 @@ Es ambicioso pero no superficial. Aprende genuinamente, piensa en sistemas, estu
 - Grabar módulos core
 - Configurar secuencia emails en Brevo
 - Probar con clientes actuales
+
+---
+
+## 📺 YouTube Conectado (17 feb 2026)
+
+- **Channel:** @guillehernandezfuertes
+- **Stats:** 743 subs, 8,319 views, 9 videos
+- **$/sub ratio:** €16.17 (muy bueno, 3-5x target de Soowei)
+- **Tokens:** `/root/.openclaw/youtube-tokens.json`
+
+---
+
+## 📊 Stats Corregidos (17 feb 2026)
+
+- **Peso real:** 63kg (no 70kg como antes)
+- **Altura:** 1.69m
+- **Proteína target:** 100-126g/día (1.6-2.0g/kg)
 
 ---
 

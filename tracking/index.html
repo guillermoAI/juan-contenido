@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Métricas | GH Consulting</title>
+    <title>Tracking Semanal | GH Consulting</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -14,155 +14,237 @@
             padding: 2rem;
         }
         .container { max-width: 600px; margin: 0 auto; }
+        
         .header {
             text-align: center;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #1a1a1a;
         }
-        .header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .header p { color: #888; font-size: 0.95rem; }
+        .logo { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .logo span { color: #00d4ff; }
+        .header h1 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .header p { color: #555; font-size: 0.85rem; }
         
         .card {
             background: #111;
-            border: 1px solid #222;
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
         }
         .card-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #fff;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .form-group { margin-bottom: 1.25rem; }
+        .form-group { margin-bottom: 1rem; }
         .form-label {
             display: block;
             font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #ccc;
+            margin-bottom: 0.4rem;
+            color: #999;
         }
-        .form-input, .form-select {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 0.875rem 1rem;
+            padding: 0.75rem 1rem;
             background: #0a0a0a;
-            border: 1px solid #333;
+            border: 1px solid #222;
             border-radius: 8px;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: border-color 0.2s;
         }
-        .form-input:focus, .form-select:focus {
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: #666;
+            border-color: #444;
         }
-        .form-input::placeholder { color: #555; }
+        .form-input::placeholder, .form-textarea::placeholder { color: #444; }
+        .form-textarea { min-height: 70px; resize: vertical; }
+        .form-select option { background: #111; }
         
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 0.75rem;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+        }
+        @media (max-width: 500px) {
+            .form-row, .form-row-3 { grid-template-columns: 1fr; }
         }
         
-        .metric-input {
-            position: relative;
+        .input-prefix {
+            display: flex;
         }
-        .metric-input .prefix {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
+        .input-prefix .prefix {
+            padding: 0.75rem 0.6rem;
+            background: #1a1a1a;
+            border: 1px solid #222;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .input-prefix .form-input {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .helper-text {
+            font-size: 0.75rem;
+            color: #444;
+            margin-top: 0.25rem;
+        }
+        
+        .week-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .week-btn {
+            flex: 1;
+            padding: 0.6rem;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 6px;
             color: #666;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
-        .metric-input input {
-            padding-left: 2rem;
+        .week-btn:hover { border-color: #333; }
+        .week-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
         
         .btn {
             width: 100%;
-            padding: 1rem;
+            padding: 0.875rem;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             border: none;
             background: #fff;
             color: #0a0a0a;
+            margin-top: 0.5rem;
         }
         .btn:hover { background: #e5e5e5; }
         .btn:disabled {
             background: #333;
-            color: #666;
+            color: #555;
             cursor: not-allowed;
         }
         
-        .success-message {
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #666;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .success-screen {
             text-align: center;
-            padding: 3rem;
+            padding: 2.5rem 1.5rem;
             display: none;
         }
-        .success-icon { font-size: 4rem; margin-bottom: 1rem; }
-        .success-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .success-desc { color: #888; }
-        
-        .helper-text {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
-        
-        .week-selector {
+        .success-check {
+            width: 56px;
+            height: 56px;
+            background: #22c55e;
+            border-radius: 50%;
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
         }
-        .week-btn {
-            flex: 1;
-            padding: 0.75rem;
-            background: #0a0a0a;
-            border: 1px solid #333;
+        .success-check svg { width: 28px; height: 28px; }
+        .success-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .success-desc { color: #666; font-size: 0.9rem; }
+        .success-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            background: #111;
+            border: 1px solid #222;
+            color: #fff;
+            text-decoration: none;
             border-radius: 8px;
-            color: #888;
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.85rem;
-            transition: all 0.2s;
+            font-size: 0.9rem;
         }
-        .week-btn.active {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
+        .success-link:hover { border-color: #333; }
+        
+        .error-msg {
+            background: #1a0a0a;
+            border: 1px solid #3a1a1a;
+            color: #f87171;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .required::after {
+            content: '*';
+            color: #ef4444;
+            margin-left: 0.2rem;
+        }
+        
+        .section-note {
+            font-size: 0.75rem;
+            color: #444;
+            margin-bottom: 1rem;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Actualizar Métricas</h1>
-            <p>Actualiza tus números semanales para trackear tu progreso</p>
+            <div class="logo">GH<span>.</span></div>
+            <h1>Tracking Semanal</h1>
+            <p>Actualiza tus métricas para medir tu progreso</p>
         </div>
+
+        <div id="errorMsg" class="error-msg"></div>
 
         <form id="trackingForm">
             <div class="card">
-                <div class="card-title">👤 Identificación</div>
+                <div class="card-title">Identificación</div>
                 <div class="form-group">
-                    <label class="form-label">Tu nombre</label>
-                    <select class="form-select" name="cliente" required>
-                        <option value="">Selecciona...</option>
-                        <option value="Pablo">Pablo Pérez</option>
-                        <option value="Alejandro">Alejandro Ramos</option>
-                        <option value="Nestor">Néstor</option>
-                        <option value="Nel">Nel</option>
-                        <option value="Alex">Alex</option>
-                        <option value="Marcos">Marcos</option>
+                    <label class="form-label required">Cliente</label>
+                    <select class="form-select" name="cliente" id="clienteSelect" required>
+                        <option value="">Selecciona tu nombre</option>
+                        <option value="pablo">Pablo Pérez</option>
+                        <option value="alejandro">Alejandro Ramos</option>
+                        <option value="nestor">Néstor (@theperfectman)</option>
+                        <option value="nel">Nel Vilella (@nel3d)</option>
+                        <option value="alex">Alex (TikTok Shop)</option>
+                        <option value="marcos">Marcos García (Fitness)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Semana</label>
+                    <label class="form-label">Semana que reportas</label>
                     <div class="week-selector">
                         <div class="week-btn active" data-week="current">Esta semana</div>
                         <div class="week-btn" data-week="last">Semana pasada</div>
@@ -171,80 +253,143 @@
             </div>
 
             <div class="card">
-                <div class="card-title">📱 Redes Sociales</div>
+                <div class="card-title">Métricas de Audiencia</div>
+                <p class="section-note">Datos actuales, no incrementos</p>
+                
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Seguidores Instagram</label>
-                        <input type="number" class="form-input" name="seguidores_ig" placeholder="0">
+                        <input type="number" class="form-input" name="ig_followers" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Seguidores YouTube</label>
-                        <input type="number" class="form-input" name="seguidores_yt" placeholder="0">
+                        <label class="form-label">Suscriptores YouTube</label>
+                        <input type="number" class="form-input" name="yt_subs" placeholder="0">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Views totales esta semana</label>
-                    <input type="number" class="form-input" name="views_semana" placeholder="0">
-                    <p class="helper-text">Suma de todas tus plataformas</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Seguidores TikTok</label>
+                        <input type="number" class="form-input" name="tiktok_followers" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lista de email</label>
+                        <input type="number" class="form-input" name="email_list" placeholder="0">
+                    </div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">💰 Ventas y Leads</div>
-                <div class="form-row">
+                <div class="card-title">Contenido Publicado</div>
+                <p class="section-note">Cantidad publicada esta semana</p>
+                
+                <div class="form-row-3">
                     <div class="form-group">
-                        <label class="form-label">Leads generados</label>
-                        <input type="number" class="form-input" name="leads_semana" placeholder="0">
+                        <label class="form-label">Reels/Shorts</label>
+                        <input type="number" class="form-input" name="reels_published" placeholder="0">
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Stories</label>
+                        <input type="number" class="form-input" name="stories_published" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Videos largos</label>
+                        <input type="number" class="form-input" name="long_videos" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Views totales esta semana</label>
+                    <input type="number" class="form-input" name="total_views" placeholder="0">
+                    <p class="helper-text">Suma aproximada de todas las plataformas</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Embudo de Ventas</div>
+                <p class="section-note">Números de esta semana</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Leads / DMs recibidos</label>
+                        <input type="number" class="form-input" name="leads_week" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Conversaciones iniciadas</label>
+                        <input type="number" class="form-input" name="conversations" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
                         <label class="form-label">Llamadas agendadas</label>
-                        <input type="number" class="form-input" name="llamadas_agendadas" placeholder="0">
+                        <input type="number" class="form-input" name="calls_booked" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Llamadas realizadas</label>
+                        <input type="number" class="form-input" name="calls_done" placeholder="0">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Ventas cerradas</label>
-                        <input type="number" class="form-input" name="ventas_semana" placeholder="0">
+                        <input type="number" class="form-input" name="sales_closed" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Facturación del mes (€)</label>
-                        <div class="metric-input">
+                        <label class="form-label">Ingresos semana</label>
+                        <div class="input-prefix">
                             <span class="prefix">€</span>
-                            <input type="number" class="form-input" name="facturacion_mes" placeholder="0" style="padding-left: 2rem;">
+                            <input type="number" class="form-input" name="revenue_week" placeholder="0">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">📝 Contenido</div>
+                <div class="card-title">Facturación del Mes</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Videos/Reels publicados</label>
-                        <input type="number" class="form-input" name="contenido_publicado" placeholder="0">
+                        <label class="form-label required">Facturado este mes (acumulado)</label>
+                        <div class="input-prefix">
+                            <span class="prefix">€</span>
+                            <input type="number" class="form-input" name="monthly_revenue" placeholder="0" required>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Videos largos (YT)</label>
-                        <input type="number" class="form-input" name="videos_largos" placeholder="0">
+                        <label class="form-label">Clientes activos total</label>
+                        <input type="number" class="form-input" name="active_clients" placeholder="0">
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">💬 Notas</div>
+                <div class="card-title">Tareas y Progreso</div>
+                
                 <div class="form-group">
-                    <label class="form-label">¿Cómo fue la semana? ¿Algún bloqueo?</label>
-                    <textarea class="form-input" name="notas" rows="3" placeholder="Escribe aquí..."></textarea>
+                    <label class="form-label">Tareas completadas del roadmap</label>
+                    <textarea class="form-textarea" name="tasks_completed" placeholder="Lista las tareas que completaste esta semana"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bloqueos o problemas</label>
+                    <textarea class="form-textarea" name="blockers" placeholder="¿Algo te frenó esta semana?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prioridades para la próxima semana</label>
+                    <textarea class="form-textarea" name="next_priorities" placeholder="¿En qué te vas a enfocar?"></textarea>
                 </div>
             </div>
 
-            <button type="submit" class="btn">Enviar actualización ✓</button>
+            <button type="submit" class="btn" id="submitBtn">Enviar tracking</button>
         </form>
 
-        <div class="success-message" id="successMessage">
-            <div class="success-icon">✅</div>
-            <div class="success-title">¡Métricas actualizadas!</div>
-            <div class="success-desc">Tus datos han sido guardados. Guillermo los revisará pronto.</div>
+        <div class="success-screen" id="successScreen">
+            <div class="card">
+                <div class="success-check">
+                    <svg fill="none" stroke="#000" stroke-width="3" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="success-title">Tracking enviado</div>
+                <div class="success-desc">Tus métricas han sido registradas correctamente.</div>
+                <a href="/" class="success-link">Volver al inicio</a>
+            </div>
         </div>
     </div>
 
@@ -257,14 +402,55 @@
             });
         });
 
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function hideError() {
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        // Get week number
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
         // Form submit
         document.getElementById('trackingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            hideError();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>Enviando...';
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
-            data.timestamp = new Date().toISOString();
-            data.semana = document.querySelector('.week-btn.active').dataset.week;
+            
+            // Add metadata
+            const now = new Date();
+            const weekOffset = document.querySelector('.week-btn.active').dataset.week === 'last' ? -7 : 0;
+            const reportDate = new Date(now.getTime() + weekOffset * 24 * 60 * 60 * 1000);
+            
+            data.timestamp = now.toISOString();
+            data.week_type = document.querySelector('.week-btn.active').dataset.week;
+            data.week_number = getWeekNumber(reportDate);
+            data.year = reportDate.getFullYear();
+            data.source = 'tracking_form_v2';
+            
+            // Calculate conversion rates if we have data
+            if (data.leads_week && data.sales_closed && parseInt(data.leads_week) > 0) {
+                data.conversion_rate = ((parseInt(data.sales_closed) / parseInt(data.leads_week)) * 100).toFixed(1);
+            }
+            if (data.calls_booked && data.calls_done && parseInt(data.calls_booked) > 0) {
+                data.show_rate = ((parseInt(data.calls_done) / parseInt(data.calls_booked)) * 100).toFixed(1);
+            }
             
             try {
                 await fetch('https://script.google.com/macros/s/AKfycbxrjDXn2_cov_0ylX8ipqyfkL-249qBjz2EpHTzl5TNKgNurM33rARJkd7wuqrnjmlm/exec', {
@@ -274,11 +460,14 @@
                     body: JSON.stringify({ type: 'tracking', data: data })
                 });
                 
+                // Show success
                 this.style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('successScreen').style.display = 'block';
                 
             } catch (error) {
-                alert('Error al enviar. Intenta de nuevo.');
+                btn.disabled = false;
+                btn.textContent = 'Enviar tracking';
+                showError('Error al enviar. Por favor intenta de nuevo.');
             }
         });
     </script>
