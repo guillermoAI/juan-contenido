@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nel - Dashboard | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .header h1 { font-size: 1.5rem; font-weight: 600; }
+        .header-handle { color: #666; font-size: 0.9rem; }
+        .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        .card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 1.5rem; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .card-title { font-size: 0.9rem; font-weight: 600; color: #888; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-12 { grid-column: span 12; }
+        @media (max-width: 1024px) { .col-4, .col-6 { grid-column: span 12; } }
+        .big-number { font-size: 2.5rem; font-weight: 700; line-height: 1; }
+        .big-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
+        .status-active { background: #0f2d1a; color: #4ade80; }
+        .progress-section { margin-top: 1rem; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .progress-label { font-size: 0.8rem; color: #888; }
+        .progress-value { font-size: 0.8rem; color: #fff; font-weight: 600; }
+        .progress-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); border-radius: 4px; }
+        .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .metric-item { background: #0a0a0a; padding: 1rem; border-radius: 8px; }
+        .metric-value { font-size: 1.5rem; font-weight: 700; }
+        .metric-label { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
+        .timeline { position: relative; padding-left: 1.5rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #222; }
+        .timeline-item { position: relative; padding-bottom: 1.5rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: -1.5rem; top: 0; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; transform: translateX(-4px); }
+        .timeline-dot.pending { background: #666; }
+        .timeline-date { font-size: 0.75rem; color: #666; margin-bottom: 0.25rem; }
+        .timeline-title { font-size: 0.9rem; font-weight: 500; }
+        .timeline-desc { font-size: 0.8rem; color: #888; margin-top: 0.25rem; }
+        .action-list { list-style: none; }
+        .action-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #1a1a1a; }
+        .action-item:last-child { border-bottom: none; }
+        .action-checkbox { width: 18px; height: 18px; border: 2px solid #444; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+        .action-text { font-size: 0.85rem; line-height: 1.4; }
+        .notes-area { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 1rem; font-size: 0.85rem; color: #888; line-height: 1.6; min-height: 150px; }
+        .tag { display: inline-block; background: #1a1a1a; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: #888; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        .edit-btn { background: transparent; border: 1px solid #333; color: #888; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
+        .edit-btn:hover { border-color: #555; color: #fff; }
+        .youtube-badge { background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="avatar">N</div>
+            <div>
+                <h1>Nel</h1>
+                <div class="header-handle">@nel3d · Impresión 3D</div>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">← Todos los clientes</a>
+    </div>
+
+    <div class="grid">
+        <!-- Status -->
+        <div class="card col-4">
+            <div class="card-header">
+                <span class="card-title">Estado</span>
+                <span class="status-badge status-active">Activo</span>
+            </div>
+            <div class="big-number">Fase 2</div>
+            <div class="big-label">Creación de comunidad Skool</div>
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span class="progress-label">Progreso general</span>
+                    <span class="progress-value">50%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas -->
+        <div class="card col-4">
+            <div class="card-header">
+                <span class="card-title">Métricas</span>
+                <span class="youtube-badge">▶ YouTube</span>
+            </div>
+            <div class="metric-grid">
+                <div class="metric-item">
+                    <div class="metric-value">-</div>
+                    <div class="metric-label">Subs YouTube</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">Skool</div>
+                    <div class="metric-label">Plataforma</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">Pago</div>
+                    <div class="metric-label">Modelo</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">-</div>
+                    <div class="metric-label">Miembros</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="card col-4">
+            <div class="card-header">
+                <span class="card-title">Info Rápida</span>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <div class="tag">Impresión 3D</div>
+                <div class="tag">YouTube</div>
+                <div class="tag">Skool</div>
+                <div class="tag">Comunidad</div>
+            </div>
+            <div style="font-size: 0.85rem; color: #888; line-height: 1.5;">
+                <strong style="color: #fff;">Canal:</strong> YouTube potente sobre impresión 3D<br><br>
+                <strong style="color: #fff;">Proyecto:</strong> Comunidad Skool de pago para monetizar<br><br>
+                <strong style="color: #fff;">Avatar:</strong> Personas que quieren facturar con impresión 3D
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="card col-6">
+            <div class="card-header">
+                <span class="card-title">Timeline</span>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot pending"></div>
+                    <div class="timeline-date">En progreso</div>
+                    <div class="timeline-title">Configuración Skool</div>
+                    <div class="timeline-desc">Estructura de la comunidad</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Completado</div>
+                    <div class="timeline-title">Definición de oferta</div>
+                    <div class="timeline-desc">Precio y propuesta de valor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card col-6">
+            <div class="card-header">
+                <span class="card-title">Action Items</span>
+                <button class="edit-btn">+ Añadir</button>
+            </div>
+            <ul class="action-list">
+                <li class="action-item">
+                    <div class="action-checkbox"></div>
+                    <span class="action-text">Definir precio de la comunidad</span>
+                </li>
+                <li class="action-item">
+                    <div class="action-checkbox"></div>
+                    <span class="action-text">Crear estructura de contenido en Skool</span>
+                </li>
+                <li class="action-item">
+                    <div class="action-checkbox"></div>
+                    <span class="action-text">Grabar video de lanzamiento para YouTube</span>
+                </li>
+                <li class="action-item">
+                    <div class="action-checkbox"></div>
+                    <span class="action-text">Configurar página de ventas</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Notas -->
+        <div class="card col-12">
+            <div class="card-header">
+                <span class="card-title">Notas y Contexto</span>
+                <button class="edit-btn">Editar</button>
+            </div>
+            <div class="notes-area">
+                <strong>Situación actual:</strong><br>
+                Nel tiene un canal de YouTube potente sobre impresión 3D. Quiere monetizar su audiencia con una comunidad de pago en Skool.
+                <br><br>
+                <strong>Propuesta de valor de la comunidad:</strong><br>
+                • Enseñar a facturar con impresión 3D<br>
+                • Acceso a la comunidad y networking<br>
+                • Contenido exclusivo no disponible en YouTube
+                <br><br>
+                <strong>Notas de calls:</strong><br>
+                <em>Pendiente importar transcripts de Fathom...</em>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
