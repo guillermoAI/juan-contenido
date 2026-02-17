@@ -6,381 +6,223 @@
     <title>Nel | GH Consulting</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #0a0a0a;
-            color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #222;
-        }
-        .client-info { display: flex; align-items: center; gap: 1.5rem; }
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-        .client-name { font-size: 2rem; font-weight: 700; }
-        .client-handle { color: #ef4444; font-size: 1rem; margin-top: 0.25rem; }
-        .client-status {
-            padding: 0.4rem 1rem;
-            background: #0f2d1a;
-            color: #4ade80;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
-        .back-link:hover { color: #fff; }
-        
-        .header-actions { display: flex; gap: 1rem; align-items: center; }
-        .btn-update {
-            padding: 0.6rem 1.2rem;
-            background: #fff;
-            color: #0a0a0a;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        .btn-update:hover { background: #e5e5e5; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        
-        .card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-        .card-title {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-        
-        .stat-value { font-size: 2.5rem; font-weight: 700; }
-        .stat-label { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
-        
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .info-row:last-child { border-bottom: none; }
-        .info-label { color: #888; }
-        .info-value { font-weight: 500; }
-        
-        .progress-section { margin-top: 1rem; }
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-        }
-        .progress-bar {
-            height: 8px;
-            background: #222;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ef4444, #f97316);
-            border-radius: 4px;
-        }
-        
-        .phase-list { list-style: none; }
-        .phase-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .phase-item:last-child { border-bottom: none; }
-        .phase-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-        }
-        .phase-icon.done { background: #0f2d1a; color: #4ade80; }
-        .phase-icon.current { background: #ef4444; color: #fff; }
-        .phase-icon.pending { background: #222; color: #666; }
-        .phase-name { flex: 1; }
-        .phase-name.current { color: #ef4444; font-weight: 500; }
-        .phase-name.pending { color: #666; }
-        
-        .action-items { list-style: none; }
-        .action-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .action-item:last-child { border-bottom: none; }
-        .action-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #333;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .action-checkbox:hover { border-color: #ef4444; }
-        .action-checkbox.done { background: #ef4444; border-color: #ef4444; }
-        .action-text { flex: 1; font-size: 0.9rem; line-height: 1.4; }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #2d1a1a 0%, #1a0f0f 100%);
-            border: 1px solid #4a2a2a;
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-top: 1rem;
-        }
-        .highlight-title { color: #ef4444; font-weight: 600; margin-bottom: 0.5rem; }
-        .highlight-text { font-size: 0.9rem; color: #c0a0a0; line-height: 1.5; }
-
-        .youtube-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #2d0a0a;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            color: #ef4444;
-            font-weight: 500;
-        }
-
-        .notes-box {
-            background: #0a0a0a;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #888;
-            line-height: 1.5;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #ef4444;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover { background: #dc2626; }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #333;
-            color: #888;
-        }
-        .btn-outline:hover { border-color: #ef4444; color: #ef4444; background: transparent; }
-        
-        .full-width { grid-column: 1 / -1; }
-
-        .contract-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #1a2d1a;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            color: #4ade80;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
+        body { background: #0a0a0a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: #0a0a0a; border-right: 1px solid #1a1a1a; padding: 1.5rem; position: fixed; height: 100vh; overflow-y: auto; }
+        .main { flex: 1; margin-left: 280px; padding: 2rem; }
+        .client-avatar { width: 72px; height: 72px; border-radius: 16px; background: linear-gradient(135deg, #ef4444, #dc2626); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+        .client-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .client-handle { color: #ef4444; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; background: #0f2d1a; color: #4ade80; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+        .contract-badge { display: inline-block; padding: 0.3rem 0.8rem; background: #1a2d1a; color: #4ade80; border-radius: 20px; font-size: 0.75rem; margin-top: 0.5rem; }
+        .sidebar-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #1a1a1a; }
+        .sidebar-label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
+        .sidebar-value { font-size: 0.9rem; color: #ccc; margin-bottom: 0.5rem; }
+        .sidebar-actions { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .btn { display: block; width: 100%; padding: 0.75rem 1rem; text-align: center; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-primary { background: #fff; color: #0a0a0a; }
+        .btn-primary:hover { background: #e5e5e5; }
+        .btn-secondary { background: #111; color: #fff; border: 1px solid #222; }
+        .btn-secondary:hover { background: #1a1a1a; border-color: #333; }
+        .back-link { display: block; margin-top: 1.5rem; color: #555; text-decoration: none; font-size: 0.85rem; }
+        .back-link:hover { color: #888; }
+        .section { margin-bottom: 2rem; }
+        .section-title { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; font-weight: 600; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .sidebar { display: none; } .main { margin-left: 0; } .grid { grid-template-columns: 1fr; } }
+        .metric-card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 1.25rem; }
+        .metric-label { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+        .metric-value { font-size: 2rem; font-weight: 700; }
+        .metric-value.green { color: #4ade80; }
+        .card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 1.5rem; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .card-title { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .card-action { font-size: 0.8rem; color: #555; }
+        .roadmap { display: flex; flex-direction: column; gap: 0.5rem; }
+        .roadmap-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; }
+        .roadmap-dot { width: 10px; height: 10px; border-radius: 50%; background: #333; flex-shrink: 0; }
+        .roadmap-dot.done { background: #4ade80; }
+        .roadmap-dot.current { background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.2); }
+        .roadmap-text { font-size: 0.9rem; color: #666; }
+        .roadmap-text.done { color: #4ade80; }
+        .roadmap-text.current { color: #fff; font-weight: 500; }
+        .progress-bar { height: 4px; background: #222; border-radius: 2px; margin-top: 1rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: #fff; border-radius: 2px; }
+        .todo-list { display: flex; flex-direction: column; }
+        .todo-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #1a1a1a; }
+        .todo-item:last-child { border-bottom: none; }
+        .todo-checkbox { width: 20px; height: 20px; border: 2px solid #333; border-radius: 4px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .todo-checkbox:hover { border-color: #555; }
+        .todo-checkbox.done { background: #4ade80; border-color: #4ade80; }
+        .todo-checkbox.done::after { content: '✓'; color: #0a0a0a; font-size: 0.7rem; font-weight: 700; }
+        .todo-text { flex: 1; font-size: 0.9rem; line-height: 1.4; color: #ccc; }
+        .todo-text.done { text-decoration: line-through; color: #555; }
+        .todo-delete { opacity: 0; background: none; border: none; color: #555; cursor: pointer; }
+        .todo-item:hover .todo-delete { opacity: 1; }
+        .todo-delete:hover { color: #ef4444; }
+        .todo-input-row { display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1a1a1a; }
+        .todo-input { flex: 1; padding: 0.6rem 0.75rem; background: #0a0a0a; border: 1px solid #222; border-radius: 6px; color: #fff; font-size: 0.85rem; }
+        .todo-input:focus { outline: none; border-color: #333; }
+        .todo-input::placeholder { color: #444; }
+        .todo-add { padding: 0.6rem 1rem; background: #1a1a1a; border: none; border-radius: 6px; color: #888; font-size: 0.85rem; cursor: pointer; }
+        .todo-add:hover { background: #222; color: #fff; }
+        .notes-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .note-item { background: #0a0a0a; border-radius: 8px; padding: 1rem; position: relative; }
+        .note-date { font-size: 0.7rem; color: #444; margin-bottom: 0.5rem; }
+        .note-text { font-size: 0.9rem; color: #999; line-height: 1.5; }
+        .note-delete { position: absolute; top: 0.75rem; right: 0.75rem; opacity: 0; background: none; border: none; color: #444; cursor: pointer; }
+        .note-item:hover .note-delete { opacity: 1; }
+        .note-delete:hover { color: #ef4444; }
+        .note-input { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #222; border-radius: 8px; color: #fff; font-size: 0.85rem; resize: none; min-height: 80px; margin-top: 1rem; }
+        .note-input:focus { outline: none; border-color: #333; }
+        .note-input::placeholder { color: #444; }
+        .note-submit { margin-top: 0.5rem; padding: 0.5rem 1rem; background: #1a1a1a; border: none; border-radius: 6px; color: #888; font-size: 0.85rem; cursor: pointer; }
+        .note-submit:hover { background: #222; color: #fff; }
+        .empty-state { text-align: center; padding: 2rem; color: #444; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="client-info">
-                <div class="avatar">N</div>
-                <div>
-                    <div class="client-name">Nel Vilella Farias</div>
-                    <div class="client-handle">@nel3d • YouTube</div>
-                    <div class="contract-badge">📋 6 meses desde 06/02/26</div>
-                </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="client-avatar">N</div>
+            <div class="client-name">Nel Vilella Farias</div>
+            <div class="client-handle">@nel3d • YouTube</div>
+            <span class="status-badge">Activo</span>
+            <div class="contract-badge">6 meses desde 06/02/26</div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Nicho</div>
+                <div class="sidebar-value">Impresión 3D</div>
             </div>
-            <div style="text-align: right;">
-                <span class="client-status">Activo</span>
-                <div style="margin-top: 1rem;">
-                    <div class="header-actions">
-                <a href="../tracking/update.html?c=nel" class="btn-update">Actualizar métricas</a>
-                <a href="index.html" class="back-link">← Volver</a>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Asset principal</div>
+                <div class="sidebar-value" style="color: #ef4444;">Canal YouTube potente</div>
             </div>
-                </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Objetivo</div>
+                <div class="sidebar-value">Monetizar audiencia con Skool de pago</div>
             </div>
-        </div>
-
-        <div class="grid">
-            <!-- Asset Principal -->
-            <div class="card">
-                <div class="card-title">ASSET PRINCIPAL</div>
-                <div class="youtube-badge">
-                    <span>📺</span>
-                    <span>Canal YouTube Potente</span>
-                </div>
-                <div class="info-row" style="margin-top: 1rem;">
-                    <span class="info-label">Nicho</span>
-                    <span class="info-value">Impresión 3D</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Audiencia</span>
-                    <span class="info-value">— (verificar)</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Engagement</span>
-                    <span class="info-value">— (verificar)</span>
-                </div>
+            <div class="sidebar-actions">
+                <a href="../tracking/update.html?c=nel" class="btn btn-primary">Actualizar métricas</a>
+                <a href="https://cal.com/guillermohernandez" class="btn btn-secondary" target="_blank">Agendar call</a>
             </div>
-
-            <!-- Producto -->
-            <div class="card">
-                <div class="card-title">PRODUCTO</div>
-                <div class="info-row">
-                    <span class="info-label">Tipo</span>
-                    <span class="info-value">Comunidad de Pago</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Plataforma</span>
-                    <span class="info-value">Skool</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Precio</span>
-                    <span class="info-value">Por definir</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Avatar</span>
-                    <span class="info-value">Gente que quiere facturar con 3D</span>
-                </div>
-            </div>
-
-            <!-- Progreso -->
-            <div class="card">
-                <div class="card-title">🗺️ ROADMAP</div>
-                <ul class="phase-list">
-                    <li class="phase-item">
-                        <span class="phase-icon done">✓</span>
-                        <span class="phase-name">Onboarding</span>
-                    </li>
-                    <li class="phase-item">
-                        <span class="phase-icon done">✓</span>
-                        <span class="phase-name">Diagnóstico inicial</span>
-                    </li>
-                    <li class="phase-item">
-                        <span class="phase-icon current">3</span>
-                        <span class="phase-name current">Definir oferta Skool</span>
-                    </li>
-                    <li class="phase-item">
-                        <span class="phase-icon pending">4</span>
-                        <span class="phase-name pending">Contenido de conversión</span>
-                    </li>
-                    <li class="phase-item">
-                        <span class="phase-icon pending">5</span>
-                        <span class="phase-name pending">Lanzamiento</span>
-                    </li>
-                </ul>
-                <div class="progress-section">
-                    <div class="progress-header">
-                        <span>Progreso total</span>
-                        <span>50%</span>
+            <a href="index.html" class="back-link">← Todos los clientes</a>
+        </aside>
+        <main class="main">
+            <section class="section">
+                <div class="section-title">Métricas actuales</div>
+                <div class="grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Suscriptores YT</div>
+                        <div class="metric-value" id="metricFollowers">—</div>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 50%"></div>
+                    <div class="metric-card">
+                        <div class="metric-label">Miembros Skool</div>
+                        <div class="metric-value" id="metricClients">—</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">MRR Skool</div>
+                        <div class="metric-value green" id="metricRevenue">—</div>
+                    </div>
+                </div>
+            </section>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Roadmap</span>
+                        <span class="card-action" id="roadmapPhase">Fase 3 de 5</span>
+                    </div>
+                    <div class="roadmap" id="roadmapList"></div>
+                    <div class="progress-bar"><div class="progress-fill" id="roadmapProgress" style="width: 40%"></div></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Tareas pendientes</span>
+                        <span class="card-action" id="todoCount">0 de 0</span>
+                    </div>
+                    <div class="todo-list" id="todoList"></div>
+                    <div class="todo-input-row">
+                        <input type="text" class="todo-input" id="todoInput" placeholder="Añadir tarea...">
+                        <button class="todo-add" id="todoAdd">Añadir</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Foco Actual -->
-            <div class="card">
-                <div class="card-title">FOCO ACTUAL</div>
-                <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">
-                    Monetizar audiencia YT con Skool de pago
+            <section class="section" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <div class="card-header"><span class="card-title">Notas</span></div>
+                    <div class="notes-list" id="notesList"></div>
+                    <textarea class="note-input" id="noteInput" placeholder="Añadir una nota..."></textarea>
+                    <button class="note-submit" id="noteAdd">Guardar nota</button>
                 </div>
-                <div class="notes-box">
-                    <strong>Ventaja competitiva:</strong><br>
-                    Ya tiene la audiencia. El canal de YouTube es el asset. Solo necesita crear el producto y el embudo de conversión.
-                </div>
-                <div class="highlight-box">
-                    <div class="highlight-title">Oportunidad</div>
-                    <div class="highlight-text">Con una audiencia existente en YouTube, el CAC es prácticamente 0. Cada video es un lead magnet orgánico.</div>
-                </div>
-            </div>
-
-            <!-- Action Items -->
-            <div class="card full-width">
-                <div class="card-title">ACTION ITEMS</div>
-                <ul class="action-items">
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Definir estructura de la comunidad Skool (qué incluye)</span>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Establecer pricing (mensual vs anual vs lifetime)</span>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Crear video de YouTube con CTA a Skool</span>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Configurar página de Skool con copy persuasivo</span>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Crear contenido inicial para la comunidad (que haya valor desde día 1)</span>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-checkbox"></div>
-                        <span class="action-text">Plan de lanzamiento: secuencia de videos + community tab</span>
-                    </li>
-                </ul>
-                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                    <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
-                    <a href="../tracking/" class="btn btn-outline">Actualizar Métricas</a>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
-
     <script>
-        document.querySelectorAll('.action-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
-                this.classList.toggle('done');
+        const CLIENT = {
+            id: 'nel',
+            roadmap: [
+                { text: 'Onboarding', status: 'done' },
+                { text: 'Diagnóstico inicial', status: 'done' },
+                { text: 'Definir oferta Skool', status: 'current' },
+                { text: 'Contenido de conversión', status: 'pending' },
+                { text: 'Lanzamiento', status: 'pending' }
+            ],
+            defaultTodos: [
+                'Definir estructura de la comunidad Skool (qué incluye)',
+                'Establecer pricing (mensual vs anual vs lifetime)',
+                'Crear video de YouTube con CTA a Skool',
+                'Configurar página de Skool con copy persuasivo',
+                'Crear contenido inicial para la comunidad',
+                'Plan de lanzamiento: secuencia de videos + community tab'
+            ],
+            defaultNotes: [
+                { date: '2026-02-06', text: 'Nel tiene un canal de YouTube potente en el nicho de impresión 3D. El objetivo es monetizar esa audiencia con una comunidad de pago en Skool. Contrato: 6 meses.' },
+                { date: '2026-02-06', text: 'Ventaja competitiva: Ya tiene la audiencia. El CAC es prácticamente 0. Cada video es un lead magnet orgánico.' }
+            ]
+        };
+        const STORAGE = { todos: `gh_todos_${CLIENT.id}`, notes: `gh_notes_${CLIENT.id}`, metrics: `gh_metrics_${CLIENT.id}` };
+        function init() { renderRoadmap(); renderTodos(); renderNotes(); renderMetrics();
+            document.getElementById('todoAdd').addEventListener('click', addTodo);
+            document.getElementById('todoInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTodo(); });
+            document.getElementById('noteAdd').addEventListener('click', addNote);
+        }
+        function renderRoadmap() {
+            const c = document.getElementById('roadmapList'); c.innerHTML = '';
+            let current = 0, done = 0;
+            CLIENT.roadmap.forEach((item, i) => {
+                if (item.status === 'done') done++;
+                if (item.status === 'current') current = i + 1;
+                c.innerHTML += `<div class="roadmap-item"><div class="roadmap-dot ${item.status}"></div><span class="roadmap-text ${item.status}">${item.text}</span></div>`;
             });
-        });
+            document.getElementById('roadmapProgress').style.width = `${(done / CLIENT.roadmap.length) * 100}%`;
+            document.getElementById('roadmapPhase').textContent = `Fase ${current || done} de ${CLIENT.roadmap.length}`;
+        }
+        function getTodos() { const s = localStorage.getItem(STORAGE.todos); return s ? JSON.parse(s) : CLIENT.defaultTodos.map(t => ({ text: t, done: false })); }
+        function saveTodos(t) { localStorage.setItem(STORAGE.todos, JSON.stringify(t)); }
+        function renderTodos() {
+            const c = document.getElementById('todoList'), todos = getTodos(); c.innerHTML = '';
+            if (!todos.length) c.innerHTML = '<div class="empty-state">Sin tareas</div>';
+            else todos.forEach((t, i) => { c.innerHTML += `<div class="todo-item"><div class="todo-checkbox ${t.done ? 'done' : ''}" data-i="${i}"></div><span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span><button class="todo-delete" data-i="${i}">×</button></div>`; });
+            document.getElementById('todoCount').textContent = `${todos.filter(t => t.done).length} de ${todos.length}`;
+            c.querySelectorAll('.todo-checkbox').forEach(cb => cb.addEventListener('click', () => toggleTodo(+cb.dataset.i)));
+            c.querySelectorAll('.todo-delete').forEach(b => b.addEventListener('click', () => deleteTodo(+b.dataset.i)));
+        }
+        function toggleTodo(i) { const t = getTodos(); t[i].done = !t[i].done; saveTodos(t); renderTodos(); }
+        function deleteTodo(i) { const t = getTodos(); t.splice(i, 1); saveTodos(t); renderTodos(); }
+        function addTodo() { const input = document.getElementById('todoInput'), text = input.value.trim(); if (!text) return; const t = getTodos(); t.push({ text, done: false }); saveTodos(t); renderTodos(); input.value = ''; }
+        function getNotes() { const s = localStorage.getItem(STORAGE.notes); return s ? JSON.parse(s) : CLIENT.defaultNotes || []; }
+        function saveNotes(n) { localStorage.setItem(STORAGE.notes, JSON.stringify(n)); }
+        function renderNotes() {
+            const c = document.getElementById('notesList'), notes = getNotes(); c.innerHTML = '';
+            if (!notes.length) c.innerHTML = '<div class="empty-state">Sin notas</div>';
+            else notes.forEach((n, i) => { c.innerHTML += `<div class="note-item"><div class="note-date">${new Date(n.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</div><div class="note-text">${n.text}</div><button class="note-delete" data-i="${i}">×</button></div>`; });
+            c.querySelectorAll('.note-delete').forEach(b => b.addEventListener('click', () => deleteNote(+b.dataset.i)));
+        }
+        function deleteNote(i) { const n = getNotes(); n.splice(i, 1); saveNotes(n); renderNotes(); }
+        function addNote() { const input = document.getElementById('noteInput'), text = input.value.trim(); if (!text) return; const n = getNotes(); n.unshift({ date: new Date().toISOString(), text }); saveNotes(n); renderNotes(); input.value = ''; }
+        function renderMetrics() { const s = localStorage.getItem(STORAGE.metrics); if (s) { const m = JSON.parse(s); if (m.revenue) document.getElementById('metricRevenue').textContent = `€${m.revenue.toLocaleString()}`; if (m.followers) document.getElementById('metricFollowers').textContent = m.followers.toLocaleString(); if (m.clients) document.getElementById('metricClients').textContent = m.clients; } }
+        init();
     </script>
 </body>
 </html>
