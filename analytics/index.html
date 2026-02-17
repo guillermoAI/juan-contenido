@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .back-link { color: #888; text-decoration: none; }
+        .back-link:hover { color: #fff; }
+        
+        .period-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .period-btn {
+            padding: 0.5rem 1rem;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .period-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .metric-label { color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .metric-value { font-size: 2.5rem; font-weight: 700; }
+        .metric-value.green { color: #4ade80; }
+        .metric-value.yellow { color: #facc15; }
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .metric-change.up { color: #4ade80; }
+        .metric-change.down { color: #ef4444; }
+        
+        .section { margin-bottom: 2rem; }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-placeholder {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .table-container {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 1rem; text-align: left; }
+        th { background: #0a0a0a; color: #888; font-weight: 500; font-size: 0.85rem; }
+        td { border-top: 1px solid #1a1a1a; }
+        tr:hover { background: #1a1a1a; }
+        .client-name { font-weight: 500; }
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+        .status-active { background: #0f2d1a; color: #4ade80; }
+        .status-attention { background: #2d2a0f; color: #facc15; }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+        
+        .funnel-stage {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        .funnel-name { flex: 1; }
+        .funnel-count { font-size: 1.5rem; font-weight: 700; }
+        .funnel-bar {
+            flex: 2;
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .funnel-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #4ade80);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Analytics</h1>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
+        </div>
+
+        <div class="period-selector">
+            <button class="period-btn">7 días</button>
+            <button class="period-btn active">30 días</button>
+            <button class="period-btn">90 días</button>
+            <button class="period-btn">Todo</button>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Revenue Total</div>
+                <div class="metric-value green">€12,000+</div>
+                <div class="metric-change up">↑ Febrero 2026</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Clientes Activos</div>
+                <div class="metric-value">6</div>
+                <div class="metric-change up">↑ +2 vs Enero</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Ticket Promedio</div>
+                <div class="metric-value">€2,500</div>
+                <div class="metric-change">Rango: €2k-5k</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Calls Realizadas</div>
+                <div class="metric-value">55+</div>
+                <div class="metric-change">Ene-Feb 2026</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">€/Suscriptor YouTube</div>
+                <div class="metric-value green">€16.17</div>
+                <div class="metric-change up">3-5x del benchmark</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Retención</div>
+                <div class="metric-value yellow">—</div>
+                <div class="metric-change">Sin datos suficientes</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📈 Funnel de Ventas</h2>
+            <div class="funnel-stage">
+                <span class="funnel-name">Leads (calls agendadas)</span>
+                <span class="funnel-count">—</span>
+                <div class="funnel-bar"><div class="funnel-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="funnel-stage">
+                <span class="funnel-name">Calls completadas</span>
+                <span class="funnel-count">55+</span>
+                <div class="funnel-bar"><div class="funnel-fill" style="width: 80%"></div></div>
+            </div>
+            <div class="funnel-stage">
+                <span class="funnel-name">Propuestas enviadas</span>
+                <span class="funnel-count">—</span>
+                <div class="funnel-bar"><div class="funnel-fill" style="width: 50%"></div></div>
+            </div>
+            <div class="funnel-stage">
+                <span class="funnel-name">Clientes cerrados</span>
+                <span class="funnel-count">6</span>
+                <div class="funnel-bar"><div class="funnel-fill" style="width: 30%"></div></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="section">
+                <h2 class="section-title">👥 Clientes por Estado</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Nicho</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="client-name">Pablo Pérez</td>
+                                <td>Dropshipping</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Alejandro Ramos</td>
+                                <td>Finanzas</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Nel</td>
+                                <td>3D Printing</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Néstor</td>
+                                <td>Marca Personal</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Alex</td>
+                                <td>TikTok Shop</td>
+                                <td><span class="status-badge status-attention">⚠️ Atención</span></td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Marcos</td>
+                                <td>Fitness</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">💰 Revenue por Cliente</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Ticket</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="client-name">Cliente 1</td>
+                                <td>€5,000</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Cliente 2</td>
+                                <td>€3,000</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Nel</td>
+                                <td>—</td>
+                                <td>6 meses</td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Marcos</td>
+                                <td>—</td>
+                                <td>4 meses</td>
+                            </tr>
+                            <tr>
+                                <td class="client-name">Otros</td>
+                                <td>€2,000 x2</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem; padding: 0 1rem;">
+                    * Datos parciales - actualizar con info completa
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📺 YouTube Analytics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Suscriptores</div>
+                    <div class="metric-value">743</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Views Totales</div>
+                    <div class="metric-value">8,319</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Videos</div>
+                    <div class="metric-value">9</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Revenue/Sub</div>
+                    <div class="metric-value green">€16.17</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📅 Próximas Acciones</h2>
+            <div class="chart-placeholder">
+                Integrar con Cal.com para mostrar próximas calls<br>
+                y con tracking para mostrar métricas de clientes
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Period selector
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
