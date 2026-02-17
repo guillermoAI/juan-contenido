@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Métricas | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header p { color: #888; font-size: 0.95rem; }
+        
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #666;
+        }
+        .form-input::placeholder { color: #555; }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .metric-input {
+            position: relative;
+        }
+        .metric-input .prefix {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .metric-input input {
+            padding-left: 2rem;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: #fff;
+            color: #0a0a0a;
+        }
+        .btn:hover { background: #e5e5e5; }
+        .btn:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 3rem;
+            display: none;
+        }
+        .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .success-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .success-desc { color: #888; }
+        
+        .helper-text {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .week-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .week-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .week-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Actualizar Métricas</h1>
+            <p>Actualiza tus números semanales para trackear tu progreso</p>
+        </div>
+
+        <form id="trackingForm">
+            <div class="card">
+                <div class="card-title">👤 Identificación</div>
+                <div class="form-group">
+                    <label class="form-label">Tu nombre</label>
+                    <select class="form-select" name="cliente" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Pablo">Pablo Pérez</option>
+                        <option value="Alejandro">Alejandro Ramos</option>
+                        <option value="Nestor">Néstor</option>
+                        <option value="Nel">Nel</option>
+                        <option value="Alex">Alex</option>
+                        <option value="Marcos">Marcos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Semana</label>
+                    <div class="week-selector">
+                        <div class="week-btn active" data-week="current">Esta semana</div>
+                        <div class="week-btn" data-week="last">Semana pasada</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📱 Redes Sociales</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Seguidores Instagram</label>
+                        <input type="number" class="form-input" name="seguidores_ig" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Seguidores YouTube</label>
+                        <input type="number" class="form-input" name="seguidores_yt" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Views totales esta semana</label>
+                    <input type="number" class="form-input" name="views_semana" placeholder="0">
+                    <p class="helper-text">Suma de todas tus plataformas</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💰 Ventas y Leads</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Leads generados</label>
+                        <input type="number" class="form-input" name="leads_semana" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Llamadas agendadas</label>
+                        <input type="number" class="form-input" name="llamadas_agendadas" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Ventas cerradas</label>
+                        <input type="number" class="form-input" name="ventas_semana" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Facturación del mes (€)</label>
+                        <div class="metric-input">
+                            <span class="prefix">€</span>
+                            <input type="number" class="form-input" name="facturacion_mes" placeholder="0" style="padding-left: 2rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📝 Contenido</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Videos/Reels publicados</label>
+                        <input type="number" class="form-input" name="contenido_publicado" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Videos largos (YT)</label>
+                        <input type="number" class="form-input" name="videos_largos" placeholder="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💬 Notas</div>
+                <div class="form-group">
+                    <label class="form-label">¿Cómo fue la semana? ¿Algún bloqueo?</label>
+                    <textarea class="form-input" name="notas" rows="3" placeholder="Escribe aquí..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Enviar actualización ✓</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">✅</div>
+            <div class="success-title">¡Métricas actualizadas!</div>
+            <div class="success-desc">Tus datos han sido guardados. Guillermo los revisará pronto.</div>
+        </div>
+    </div>
+
+    <script>
+        // Week selector
+        document.querySelectorAll('.week-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form submit
+        document.getElementById('trackingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            data.timestamp = new Date().toISOString();
+            data.semana = document.querySelector('.week-btn.active').dataset.week;
+            
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbxrjDXn2_cov_0ylX8ipqyfkL-249qBjz2EpHTzl5TNKgNurM33rARJkd7wuqrnjmlm/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'tracking', data: data })
+                });
+                
+                this.style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                
+            } catch (error) {
+                alert('Error al enviar. Intenta de nuevo.');
+            }
+        });
+    </script>
+</body>
+</html>

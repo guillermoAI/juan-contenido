@@ -13,6 +13,7 @@
             min-height: 100vh;
             padding: 2rem;
         }
+        .container { max-width: 1200px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
@@ -21,13 +22,10 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #222;
         }
-        .header h1 { font-size: 1.5rem; font-weight: 600; }
-        .back-link {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
+        
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -41,11 +39,34 @@
             padding: 1.5rem;
             text-align: center;
         }
-        .stat-value { font-size: 2rem; font-weight: 700; color: #fff; }
-        .stat-label { font-size: 0.8rem; color: #666; margin-top: 0.5rem; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+        
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        
         .clients-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 1.5rem;
         }
         .client-card {
@@ -58,7 +79,24 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            position: relative;
+            overflow: hidden;
         }
+        .client-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+        .client-card.pablo::before { background: #f97316; }
+        .client-card.alejandro::before { background: #6366f1; }
+        .client-card.nestor::before { background: #667eea; }
+        .client-card.nel::before { background: #ef4444; }
+        .client-card.alex::before { background: #facc15; }
+        .client-card.marcos::before { background: #22c55e; }
+        
         .client-card:hover {
             border-color: #444;
             transform: translateY(-2px);
@@ -69,6 +107,18 @@
             align-items: flex-start;
             margin-bottom: 1rem;
         }
+        .client-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+        .client-info { flex: 1; }
         .client-name { font-size: 1.2rem; font-weight: 600; }
         .client-handle { color: #666; font-size: 0.85rem; }
         .client-status {
@@ -78,8 +128,9 @@
             font-weight: 500;
         }
         .status-active { background: #0f2d1a; color: #4ade80; }
-        .status-onboarding { background: #2d2a0f; color: #facc15; }
-        .status-paused { background: #2d1f0f; color: #f97316; }
+        .status-attention { background: #2d2a0f; color: #facc15; }
+        .status-onboarding { background: #1a1a2d; color: #60a5fa; }
+        
         .client-nicho {
             display: inline-block;
             background: #1a1a1a;
@@ -99,14 +150,14 @@
             border-radius: 8px;
         }
         .metric { text-align: center; }
-        .metric-value { font-size: 1rem; font-weight: 600; }
+        .metric-value { font-size: 1.1rem; font-weight: 600; }
         .metric-label { font-size: 0.7rem; color: #666; }
-        .client-problem {
+        .client-desc {
             font-size: 0.85rem;
             color: #888;
             line-height: 1.4;
         }
-        .problem-label { color: #f97316; font-weight: 500; }
+        .desc-label { color: #f97316; font-weight: 500; }
         .progress-bar {
             height: 4px;
             background: #222;
@@ -119,220 +170,273 @@
             background: linear-gradient(90deg, #4ade80, #22d3ee);
             border-radius: 2px;
         }
+        
+        .add-client {
+            background: #0a0a0a;
+            border: 2px dashed #333;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-client:hover {
+            border-color: #555;
+            background: #111;
+        }
+        .add-client-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .add-client-text { color: #666; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>👥 Clientes Activos</h1>
-        <a href="index.html" class="back-link">← Volver al Hub</a>
-    </div>
-    
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-value">6</div>
-            <div class="stat-label">Clientes Activos</div>
+    <div class="container">
+        <div class="header">
+            <h1>👥 Clientes GH Consulting</h1>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">€12k+</div>
-            <div class="stat-label">MRR Febrero</div>
+        
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Clientes Activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #4ade80;">€12k+</div>
+                <div class="stat-label">MRR Febrero</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">55+</div>
+                <div class="stat-label">Calls Realizadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Satisfacción</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">55+</div>
-            <div class="stat-label">Calls Realizadas</div>
+
+        <div class="filter-bar">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Activos</button>
+            <button class="filter-btn">Atención</button>
+            <button class="filter-btn">Onboarding</button>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Fases Promedio</div>
+
+        <div class="clients-grid">
+            <!-- Pablo -->
+            <a href="pablo.html" class="client-card pablo">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #f97316, #ea580c);">P</div>
+                        <div class="client-info">
+                            <div class="client-name">Pablo Pérez</div>
+                            <div class="client-handle">Dropshipping → Infoproductos</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-active">Activo</span>
+                </div>
+                <div class="client-nicho">Ecommerce / Mentorías</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value" style="color: #4ade80;">€500k</div>
+                        <div class="metric-label">Facturado</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">€1.5-6.9k</div>
+                        <div class="metric-label">Tickets</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">€75-100k</div>
+                        <div class="metric-label">Objetivo/mes</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label">Foco:</span> Lanzar mentoría de dropshipping con sus contactos exclusivos
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
+            </a>
+
+            <!-- Alejandro -->
+            <a href="alejandro.html" class="client-card alejandro">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">A</div>
+                        <div class="client-info">
+                            <div class="client-name">Alejandro Ramos</div>
+                            <div class="client-handle">Finanzas Familiares</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-active">Activo</span>
+                </div>
+                <div class="client-nicho">Finanzas / Educación</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value">€2-5k</div>
+                        <div class="metric-label">Tickets</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3 fases</div>
+                        <div class="metric-label">Metodología</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Top 1</div>
+                        <div class="metric-label">Objetivo</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label">Foco:</span> Educación financiera para familias con hijos 8-16 años
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
+            </a>
+
+            <!-- Néstor -->
+            <a href="nestor.html" class="client-card nestor">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">N</div>
+                        <div class="client-info">
+                            <div class="client-name">Néstor</div>
+                            <div class="client-handle">@theperfectman</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-active">Activo</span>
+                </div>
+                <div class="client-nicho">Marca Personal</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value">€69</div>
+                        <div class="metric-label">Ticket</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Whop</div>
+                        <div class="metric-label">Plataforma</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">-</div>
+                        <div class="metric-label">Ventas</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label">Foco:</span> Curso low ticket sobre cómo crear marca personal
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
+            </a>
+
+            <!-- Nel -->
+            <a href="nel.html" class="client-card nel">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #ef4444, #dc2626);">N</div>
+                        <div class="client-info">
+                            <div class="client-name">Nel</div>
+                            <div class="client-handle">@nel3d • YouTube</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-active">Activo</span>
+                </div>
+                <div class="client-nicho">Impresión 3D</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value">YT</div>
+                        <div class="metric-label">Canal fuerte</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Skool</div>
+                        <div class="metric-label">Proyecto</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Pago</div>
+                        <div class="metric-label">Modelo</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label">Foco:</span> Monetizar audiencia con comunidad de pago sobre impresión 3D
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+            </a>
+
+            <!-- Alex -->
+            <a href="alex.html" class="client-card alex">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #000, #333);">A</div>
+                        <div class="client-info">
+                            <div class="client-name">Alex</div>
+                            <div class="client-handle">TikTok Shop Formula</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-attention">⚠️ Atención</span>
+                </div>
+                <div class="client-nicho">TikTok Shop</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value" style="color: #4ade80;">€20k</div>
+                        <div class="metric-label">Factura/mes</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Skool</div>
+                        <div class="metric-label">Free</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">⚠️</div>
+                        <div class="metric-label">Contenido</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label" style="color: #facc15;">Problema:</span> Contenido no pilla visitas, bloqueado en creación
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 35%; background: linear-gradient(90deg, #facc15, #f97316);"></div></div>
+            </a>
+
+            <!-- Marcos -->
+            <a href="marcos.html" class="client-card marcos">
+                <div class="client-header">
+                    <div style="display: flex; align-items: center;">
+                        <div class="client-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);">M</div>
+                        <div class="client-info">
+                            <div class="client-name">Marcos</div>
+                            <div class="client-handle">Fitness / Transformación</div>
+                        </div>
+                    </div>
+                    <span class="client-status status-active">Activo</span>
+                </div>
+                <div class="client-nicho">Fitness / Mentorías</div>
+                <div class="client-metrics">
+                    <div class="metric">
+                        <div class="metric-value">1:1</div>
+                        <div class="metric-label">Modelo</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Orgánico</div>
+                        <div class="metric-label">Captación</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">⚠️</div>
+                        <div class="metric-label">Leads</div>
+                    </div>
+                </div>
+                <div class="client-desc">
+                    <span class="desc-label">Pendiente:</span> Página con formulario para filtrar leads cualificados
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+            </a>
+
+            <!-- Add Client -->
+            <div class="add-client" onclick="window.location.href='../onboarding/'">
+                <div class="add-client-icon">➕</div>
+                <div class="add-client-text">Añadir nuevo cliente</div>
+            </div>
         </div>
-    </div>
-
-    <div class="clients-grid">
-        <!-- Néstor -->
-        <a href="nestor.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Néstor</div>
-                    <div class="client-handle">@theperfectman</div>
-                </div>
-                <span class="client-status status-active">Activo</span>
-            </div>
-            <div class="client-nicho">Marca Personal</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">€69</div>
-                    <div class="metric-label">Ticket</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Whop</div>
-                    <div class="metric-label">Plataforma</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">Ventas/mes</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Foco:</span> Curso low ticket sobre marca personal
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
-        </a>
-
-        <!-- Pablo -->
-        <a href="pablo.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Pablo Pérez</div>
-                    <div class="client-handle">Ecommerce → Infoproductos</div>
-                </div>
-                <span class="client-status status-active">Activo</span>
-            </div>
-            <div class="client-nicho">Ecommerce / Cursos</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">€500k</div>
-                    <div class="metric-label">Facturado</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">3</div>
-                    <div class="metric-label">Meses</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Arzurus</div>
-                    <div class="metric-label">Mentor</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Objetivo:</span> Transición a vender cursos de ecommerce
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
-        </a>
-
-        <!-- Nel -->
-        <a href="nel.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Nel</div>
-                    <div class="client-handle">@nel3d</div>
-                </div>
-                <span class="client-status status-active">Activo</span>
-            </div>
-            <div class="client-nicho">Impresión 3D</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">YT</div>
-                    <div class="metric-label">Canal</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Skool</div>
-                    <div class="metric-label">Proyecto</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Pago</div>
-                    <div class="metric-label">Modelo</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Proyecto:</span> Comunidad Skool para monetizar impresión 3D
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
-        </a>
-
-        <!-- Alex -->
-        <a href="alex.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Alex</div>
-                    <div class="client-handle">TikTok Shop Formula</div>
-                </div>
-                <span class="client-status status-active">Activo</span>
-            </div>
-            <div class="client-nicho">TikTok Shop</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">€20k</div>
-                    <div class="metric-label">Factura/mes</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Skool</div>
-                    <div class="metric-label">Free</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">⚠️</div>
-                    <div class="metric-label">Contenido</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Problema:</span> Contenido no pilla visitas, perdido en creación
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
-        </a>
-
-        <!-- Marcos -->
-        <a href="marcos.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Marcos</div>
-                    <div class="client-handle">Fitness</div>
-                </div>
-                <span class="client-status status-active">Activo</span>
-            </div>
-            <div class="client-nicho">Fitness / Transformación</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">1:1</div>
-                    <div class="metric-label">Mentorías</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Orgánico</div>
-                    <div class="metric-label">Captación</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">⚠️</div>
-                    <div class="metric-label">Leads</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Problema:</span> Leads poco cualificados, falta página con formulario
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
-        </a>
-
-        <!-- Alejandro -->
-        <a href="alejandro.html" class="client-card">
-            <div class="client-header">
-                <div>
-                    <div class="client-name">Alejandro Ramos</div>
-                    <div class="client-handle">Finanzas</div>
-                </div>
-                <span class="client-status status-onboarding">Onboarding</span>
-            </div>
-            <div class="client-nicho">Finanzas Personales</div>
-            <div class="client-metrics">
-                <div class="metric">
-                    <div class="metric-value">🚧</div>
-                    <div class="metric-label">Producto</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">🚧</div>
-                    <div class="metric-label">Contenido</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">🚧</div>
-                    <div class="metric-label">Posición</div>
-                </div>
-            </div>
-            <div class="client-problem">
-                <span class="problem-label">Estado:</span> Empezando, producto no definido, necesita salto grande
-            </div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 10%"></div></div>
-        </a>
     </div>
 
     <script>
-        // Placeholder para futuras funcionalidades
-        // - Filtros por estado
-        // - Búsqueda
-        // - Ordenar por métricas
+        // Filtros
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Aquí iría la lógica de filtrado
+            });
+        });
     </script>
 </body>
 </html>

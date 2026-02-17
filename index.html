@@ -283,10 +283,13 @@
         
         <nav>
             <a href="index.html" class="active">📊 Dashboard</a>
+            <a href="clientes/">👥 Clientes</a>
             <a href="negocio.html">💼 Negocio</a>
             <a href="personal.html">🧠 Personal</a>
             <a href="ideas.html">💡 Ideas</a>
-            <a href="docs/competitor-insights.md">📚 Research</a>
+            <a href="sistema/">⚙️ Sistema</a>
+            <a href="onboarding/">🚀 Onboarding</a>
+            <a href="tracking/">📊 Tracking</a>
         </nav>
         
         <!-- YouTube Metrics Section -->
@@ -532,6 +535,72 @@
             </div>
         </div>
         
+        <!-- Clientes -->
+        <h2 class="section-title">👥 Clientes Activos</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <a href="clientes/pablo.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #f97316;">
+                    <h3 style="margin-bottom: 8px;">Pablo Pérez</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">Dropshipping → Infoproductos</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-green">Activo</span>
+                        <span style="color: #4ade80; font-weight: 600;">€500k</span>
+                    </div>
+                </div>
+            </a>
+            <a href="clientes/alejandro.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #6366f1;">
+                    <h3 style="margin-bottom: 8px;">Alejandro Ramos</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">Finanzas Familiares</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-green">Activo</span>
+                        <span style="color: #888;">€2-5k</span>
+                    </div>
+                </div>
+            </a>
+            <a href="clientes/nestor.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #667eea;">
+                    <h3 style="margin-bottom: 8px;">Néstor</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">@theperfectman</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-green">Activo</span>
+                        <span style="color: #888;">€69</span>
+                    </div>
+                </div>
+            </a>
+            <a href="clientes/nel.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #ef4444;">
+                    <h3 style="margin-bottom: 8px;">Nel</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">@nel3d • Impresión 3D</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-green">Activo</span>
+                        <span style="color: #888;">Skool</span>
+                    </div>
+                </div>
+            </a>
+            <a href="clientes/alex.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #000;">
+                    <h3 style="margin-bottom: 8px;">Alex</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">TikTok Shop</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-yellow">Atención</span>
+                        <span style="color: #4ade80;">€20k/m</span>
+                    </div>
+                </div>
+            </a>
+            <a href="clientes/marcos.html" class="card-link">
+                <div class="card" style="border-left: 3px solid #22c55e;">
+                    <h3 style="margin-bottom: 8px;">Marcos</h3>
+                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 8px;">Fitness</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="tag tag-green">Activo</span>
+                        <span style="color: #888;">1:1</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <a href="clientes/" style="display: block; text-align: center; margin-top: 15px; color: #00d4ff; text-decoration: none;">Ver todas las dashboards →</a>
+
         <!-- Research -->
         <h2 class="section-title">📚 Research Disponible</h2>
         <div class="grid">
@@ -560,23 +629,40 @@
             </div>
         </div>
         
-        <!-- Para conectar -->
-        <h2 class="section-title">🔧 APIs Pendientes</h2>
-        <div class="card">
-            <div class="question">
-                <strong>Instagram:</strong> ¿Tienes cuenta de Business/Creator? Necesito el Instagram Graph API token.
+        <!-- Estado del Sistema -->
+        <h2 class="section-title">⚙️ Estado del Sistema</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="card">
+                <h3 style="margin-bottom: 15px;">✅ Conectado</h3>
+                <ul class="list">
+                    <li>Google Workspace <span class="tag tag-green">Activo</span></li>
+                    <li>Fathom Webhook <span class="tag tag-green">Activo</span></li>
+                    <li>Cal.com Webhook <span class="tag tag-green">Activo</span></li>
+                    <li>GitHub Pages <span class="tag tag-green">Live</span></li>
+                </ul>
             </div>
-            <div class="question">
-                <strong>Fathom:</strong> El plan Free no incluye transcripts por API. ¿Tienes plan Team? Si no, puedo usar el Google Drive sync como workaround.
+            <div class="card">
+                <h3 style="margin-bottom: 15px;">⏳ Pendiente</h3>
+                <ul class="list">
+                    <li>YouTube OAuth <span class="tag tag-yellow">Código pendiente</span></li>
+                    <li>Instagram API <span class="tag tag-yellow">Business account</span></li>
+                    <li>Stripe <span class="tag tag-yellow">LLC en proceso</span></li>
+                </ul>
             </div>
-            <div class="question">
-                <strong>Revenue:</strong> ¿Usas Stripe, PayPal, o transferencias manuales? Puedo conectar Stripe API para métricas reales.
+            <div class="card">
+                <h3 style="margin-bottom: 15px;">📊 Sheets Activas</h3>
+                <ul class="list">
+                    <li><a href="https://docs.google.com/spreadsheets/d/1HgGc_W_NLLON0a49GbhlsAQKf8w9qbTnMqCuwWRCHNY/edit" target="_blank" style="color: #00d4ff;">Clientes Master</a></li>
+                    <li><a href="https://docs.google.com/spreadsheets/d/1DQL-x67xjo8QZntbW3D9lA2qwEYl2ZoOH2NwvrfvBt0/edit" target="_blank" style="color: #00d4ff;">Fathom Data</a></li>
+                    <li><a href="https://docs.google.com/spreadsheets/d/1fBbHXbsj9BgceP7wmoPzZmeoG2RsvbfmT6_hxQVC7nw/edit" target="_blank" style="color: #00d4ff;">Roadmap</a></li>
+                </ul>
             </div>
         </div>
+        <a href="sistema/" style="display: block; text-align: center; margin-top: 15px; color: #00d4ff; text-decoration: none;">Ver panel completo del sistema →</a>
         
         <footer>
             <p>GH Command Center • Actualizado: <span id="updateTime"></span></p>
-            <p style="margin-top: 10px;">YouTube conectado ✅ | Instagram pendiente | Fathom pendiente</p>
+            <p style="margin-top: 10px;">Google ✅ | Fathom ✅ | Cal.com ✅ | YouTube ⏳ | Instagram ⏳ | Stripe ⏳</p>
         </footer>
     </div>
     
