@@ -73,6 +73,7 @@
         .tag-red { background: rgba(255,68,68,0.2); color: #ff4444; }
         .tag-blue { background: rgba(0,212,255,0.2); color: #00d4ff; }
         .tag-purple { background: rgba(147,51,234,0.2); color: #a855f7; }
+        .tag-orange { background: rgba(255,140,0,0.2); color: #ff8c00; }
         .idea {
             background: #0d1117;
             border: 1px solid #222;
@@ -105,12 +106,54 @@
         .type-yt { background: #ff0000; color: white; }
         .type-reel { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
         .type-story { background: #833AB4; color: white; }
+        .type-series { background: #7b2cbf; color: white; }
         .referent {
             padding: 15px;
             background: #0d1117;
             border-radius: 8px;
             margin-bottom: 10px;
             border-left: 3px solid #00d4ff;
+        }
+        .stats-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .stat-item { text-align: center; }
+        .stat-value { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            background: linear-gradient(90deg, #ff0000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label { color: #888; font-size: 0.85rem; margin-top: 5px; }
+        .new-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .priority-high {
+            border-left: 3px solid #ff4444;
+        }
+        .priority-medium {
+            border-left: 3px solid #ffc800;
         }
     </style>
 </head>
@@ -128,12 +171,82 @@
             <a href="docs/competitor-insights.md">📚 Research</a>
         </nav>
         
+        <!-- YouTube Stats Banner -->
+        <div class="stats-banner">
+            <div class="stat-item">
+                <div class="stat-value">743</div>
+                <div class="stat-label">Suscriptores</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">8,319</div>
+                <div class="stat-label">Views</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">9</div>
+                <div class="stat-label">Videos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">€16.17</div>
+                <div class="stat-label">$/Suscriptor</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">924</div>
+                <div class="stat-label">Views/Video</div>
+            </div>
+        </div>
+        
+        <!-- NEW: Ideas basadas en tus métricas -->
+        <h2 class="section-title">🎯 Ideas Específicas para Tu Canal <span class="new-badge">NUEVO</span></h2>
+        
+        <div class="card">
+            <h3>📊 Basado en tus Métricas Actuales (743 subs, €16.17/sub)</h3>
+            
+            <div class="idea priority-high">
+                <h4>🔥 Serie: "De 743 a 2,000 suscriptores" (Build in Public)</h4>
+                <p>Documenta tu camino de crecimiento en YouTube en tiempo real. Cada video es un update: qué funcionó, qué no, métricas reales. Esto es EXACTAMENTE lo que hace Soowei pero en español. Target: 1 video/semana durante 3 meses.</p>
+                <div class="idea-meta">
+                    <span class="tag tag-red">ALTA PRIORIDAD</span>
+                    <span class="tag tag-green">Build in Public</span>
+                    <span class="tag tag-blue">Soowei Framework</span>
+                </div>
+            </div>
+            
+            <div class="idea priority-high">
+                <h4>💰 "Cómo gano €16 por cada suscriptor" (Tu número REAL)</h4>
+                <p>Tu $/follower es 3-5x mejor que el target de Soowei (€3-5). Este es un GRAN hook. Breakdown completo: cómo monetizas, funnel, pricing. Esto te posiciona como autoridad.</p>
+                <div class="idea-meta">
+                    <span class="tag tag-red">ALTA PRIORIDAD</span>
+                    <span class="tag tag-green">Único en español</span>
+                    <span class="tag tag-purple">Social Proof</span>
+                </div>
+            </div>
+            
+            <div class="idea priority-medium">
+                <h4>📈 "924 views/video → Cómo lo multiplico por 10"</h4>
+                <p>Análisis de thumbnails, títulos y primeros 30 segundos de tus 9 videos. Qué funcionó, qué cambiarías. Framework de Dustin Varano: thumbnail formula + title formula.</p>
+                <div class="idea-meta">
+                    <span class="tag tag-yellow">MEDIA PRIORIDAD</span>
+                    <span class="tag tag-blue">Educativo</span>
+                    <span class="tag tag-orange">Meta-contenido</span>
+                </div>
+            </div>
+            
+            <div class="idea">
+                <h4>🎬 "9 videos, €12k/mes: El embudo invisible"</h4>
+                <p>Cómo con solo 9 videos generas más que muchos con 100. El secreto: backend > views. Esto es puro Hormozi: "Don't scale trash, fix the fundamentals first."</p>
+                <div class="idea-meta">
+                    <span class="tag tag-green">Alto impacto</span>
+                    <span class="tag tag-blue">Hormozi Framework</span>
+                </div>
+            </div>
+        </div>
+        
         <!-- IDEAS DE NEGOCIO -->
         <h2 class="section-title">💡 Ideas de Negocio</h2>
         
         <div class="grid">
             <div>
-                <div class="idea">
+                <div class="idea priority-high">
                     <h4>🎯 Lead Magnet: Curso Gratuito 6h</h4>
                     <p>Siguiendo modelo Dustin Varano. Crear un curso completo gratuito como lead magnet. Dobló revenue de $75k a $150k para Soowei.</p>
                     <div class="idea-meta">
@@ -183,7 +296,7 @@
             </div>
             
             <div>
-                <div class="idea">
+                <div class="idea priority-high">
                     <h4>💰 Pricing DFY Stack</h4>
                     <p>Cada elemento Done-For-You añade €2-3k al precio: DFY Editor, DFY Scripts, DFY Setter placement, DFY VSSL. Soowei cobra €18k con 60% close rate.</p>
                     <div class="idea-meta">
@@ -192,7 +305,7 @@
                     </div>
                 </div>
                 
-                <div class="idea">
+                <div class="idea priority-high">
                     <h4>📱 Profile Funnel (Nik Setting)</h4>
                     <p>Instagram como funnel principal. Ads → Perfil → Stories → DMs → Call → Close. VSSL funnels están outdated.</p>
                     <div class="idea-meta">
@@ -239,11 +352,40 @@
             </div>
         </div>
         
-        <!-- IDEAS DE CONTENIDO -->
-        <h2 class="section-title">🎥 Ideas de Contenido</h2>
+        <!-- NEW: Ideas de Contenido basadas en Research -->
+        <h2 class="section-title">🎥 Ideas de Contenido (Research-Based) <span class="new-badge">ACTUALIZADO</span></h2>
         
         <div class="card">
-            <h3>YouTube (Long-form)</h3>
+            <h3>📺 Series de YouTube (Framework Soowei: 7-Hour Rule)</h3>
+            <p style="color: #888; margin-bottom: 20px;">Meta: 7 horas de contenido que pre-calienta al prospecto antes de la call. Actualmente tienes 9 videos → apunta a 20-25.</p>
+            
+            <div class="content-idea">
+                <span class="type type-series">SERIE</span>
+                <div>
+                    <strong>📊 "Behind the €12k" (Serie 4-5 videos)</strong>
+                    <p style="color: #888; margin-top: 5px;">Ep1: El sistema completo | Ep2: Cómo cierro a €3-5k | Ep3: Mi backend (lo que nadie ve) | Ep4: Errores que me costaron €X | Ep5: Mi rutina de trabajo</p>
+                </div>
+            </div>
+            
+            <div class="content-idea">
+                <span class="type type-series">SERIE</span>
+                <div>
+                    <strong>🧠 "Frameworks de los Tops" (Serie 6 videos)</strong>
+                    <p style="color: #888; margin-top: 5px;">Un video por referente: Hormozi, Nik Setting, Iman Gadzhi, Soowei, Dustin Varano, Sigurd Foss. Breakdown + cómo lo aplicas tú.</p>
+                </div>
+            </div>
+            
+            <div class="content-idea">
+                <span class="type type-series">SERIE</span>
+                <div>
+                    <strong>🌏 "Bangkok Diaries" (Serie lifestyle)</strong>
+                    <p style="color: #888; margin-top: 5px;">Day in the life semanal. Hook: "Tengo 18 años y vivo solo en Bangkok ganando €12k/mes". El location es parte del brand.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>🎬 YouTube Long-form (Individuales)</h3>
             <div class="content-idea">
                 <span class="type type-yt">YT</span>
                 <div>
@@ -296,7 +438,13 @@
         </div>
         
         <div class="card">
-            <h3>Reels/Shorts</h3>
+            <h3>📱 Reels/Shorts (Hooks de 3 segundos)</h3>
+            <p style="color: #888; margin-bottom: 15px;">Framework Nik Setting: Primer frame = scroll-stopper. Cada reel es un ad para tu perfil.</p>
+            
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>"€16 por cada suscriptor. Así es como."</strong></div>
+            </div>
             <div class="content-idea">
                 <span class="type type-reel">REEL</span>
                 <div><strong>Por qué no tomo café (y cómo mantengo energía)</strong></div>
@@ -329,6 +477,10 @@
                 <span class="type type-reel">REEL</span>
                 <div><strong>POV: Vives en Bangkok con 18 años</strong></div>
             </div>
+            <div class="content-idea">
+                <span class="type type-reel">REEL</span>
+                <div><strong>"Mi agencia de IA facturó €0. Aquí está lo que hice después."</strong></div>
+            </div>
         </div>
         
         <!-- FRAMEWORKS DE REFERENTES -->
@@ -349,6 +501,10 @@
                     <strong>Theory of Constraints</strong><br>
                     <span style="color: #888;">Un constraint a la vez, enfoque total</span>
                 </div>
+                <div class="referent">
+                    <strong>Value Equation</strong><br>
+                    <span style="color: #888;">Dream Outcome × Likelihood / Time × Effort = Value</span>
+                </div>
             </div>
             
             <div class="card">
@@ -365,6 +521,10 @@
                     <strong>ROI Scaling Rules</strong><br>
                     <span style="color: #888;">10x ROI = 3x spend, 4x = 2x spend</span>
                 </div>
+                <div class="referent">
+                    <strong>3-Second Hook Rule</strong><br>
+                    <span style="color: #888;">El primer frame decide si ven el resto</span>
+                </div>
             </div>
             
             <div class="card">
@@ -379,7 +539,11 @@
                 </div>
                 <div class="referent">
                     <strong>$/Follower Ratio</strong><br>
-                    <span style="color: #888;">Target: $3-5 por follower</span>
+                    <span style="color: #888;">Target: $3-5 por follower (TÚ: €16.17 🔥)</span>
+                </div>
+                <div class="referent">
+                    <strong>Radical Transparency</strong><br>
+                    <span style="color: #888;">Muestra TODO: revenue, errores, proceso</span>
                 </div>
             </div>
             
@@ -400,10 +564,28 @@
             </div>
         </div>
         
-        <!-- SUGERENCIAS -->
-        <h2 class="section-title">💭 Sugerencias que quizás no has considerado</h2>
+        <!-- SUGERENCIAS BASADAS EN RESEARCH -->
+        <h2 class="section-title">💭 Sugerencias del Research (Aplicables HOY) <span class="new-badge">NUEVO</span></h2>
         
         <div class="card">
+            <div class="idea priority-high">
+                <h4>📹 Thumbnail Formula (Dustin Varano)</h4>
+                <p>Tus 9 videos → revisa thumbnails. Regla: cara + texto grande + contraste de color. A/B test cada thumbnail. Esto puede 2x tus views sin nuevo contenido.</p>
+                <div class="idea-meta">
+                    <span class="tag tag-red">HACER HOY</span>
+                    <span class="tag tag-green">Quick Win</span>
+                </div>
+            </div>
+            
+            <div class="idea priority-high">
+                <h4>🎙️ Primeros 30 segundos (Sigurd Foss)</h4>
+                <p>Análisis: ¿Tus videos enganchan en los primeros 30 seg? El retention de primeros 30 seg predice el éxito del video. Añade pattern interrupts, cambia planos, usa B-roll.</p>
+                <div class="idea-meta">
+                    <span class="tag tag-red">HACER HOY</span>
+                    <span class="tag tag-blue">Edición</span>
+                </div>
+            </div>
+            
             <div class="idea">
                 <h4>🎙️ Podcast con clientes</h4>
                 <p>Entrevistas mensuales a tus clientes sobre sus resultados. Contenido + social proof + relación con cliente. Triple win.</p>
@@ -428,10 +610,47 @@
                 <h4>📍 Contenido "desde Bangkok"</h4>
                 <p>El location es parte de tu brand. "Consejos de negocio desde un rooftop en Bangkok" es más memorable que desde Madrid.</p>
             </div>
+            
+            <div class="idea">
+                <h4>⚡ CTA en cada video</h4>
+                <p>Cada video debe tener un CTA claro: "Link en descripción para call gratuita" o "Sígueme en IG para contenido diario". Sin CTA = views perdidas.</p>
+            </div>
+        </div>
+        
+        <!-- Next Actions -->
+        <h2 class="section-title">⚡ Próximas Acciones Recomendadas</h2>
+        <div class="card">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="padding: 15px; background: #0d1117; border-radius: 8px; border-left: 3px solid #ff4444;">
+                    <strong style="color: #ff4444;">Esta semana</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px; color: #888;">
+                        <li>Revisar thumbnails de 9 videos</li>
+                        <li>Grabar video "€16/suscriptor"</li>
+                        <li>Crear 3 reels con hooks potentes</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: #0d1117; border-radius: 8px; border-left: 3px solid #ffc800;">
+                    <strong style="color: #ffc800;">Este mes</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px; color: #888;">
+                        <li>Serie "Behind the €12k" (4 videos)</li>
+                        <li>Lead magnet 6h (outline)</li>
+                        <li>Profile funnel en IG</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: #0d1117; border-radius: 8px; border-left: 3px solid #00d4ff;">
+                    <strong style="color: #00d4ff;">Q1 2026</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px; color: #888;">
+                        <li>20+ videos publicados</li>
+                        <li>1,500+ suscriptores</li>
+                        <li>Curso gratuito lanzado</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         
         <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #222; text-align: center; color: #444;">
-            GH Command Center • Ideas de Negocio
+            GH Command Center • Ideas de Negocio y Contenido<br>
+            <span style="color: #666;">Basado en research de: Hormozi, Nik Setting, Soowei, Iman Gadzhi, Dustin Varano, Sigurd Foss</span>
         </footer>
     </div>
 </body>
