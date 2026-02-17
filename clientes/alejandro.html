@@ -14,6 +14,20 @@
         .header-handle { color: #666; font-size: 0.9rem; }
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
+        
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .btn-update {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-update:hover { background: #e5e5e5; }
         .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
         .card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 1.5rem; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -69,7 +83,10 @@
                 <div class="header-handle">Finanzas Familiares</div>
             </div>
         </div>
-        <a href="index.html" class="back-link">← Todos los clientes</a>
+        <div class="header-actions">
+                <a href="../tracking/update.html?c=alejandro" class="btn-update">Actualizar métricas</a>
+                <a href="index.html" class="back-link">← Volver</a>
+            </div>
     </div>
 
     <div class="grid">
@@ -80,7 +97,7 @@
                 <span class="status-badge status-active">Activo</span>
             </div>
             <div class="objective">
-                <div class="objective-label">🎯 Objetivo en 6 meses</div>
+                <div class="objective-label">Objetivo en 6 meses</div>
                 <div class="objective-text">Posicionarse como TOP 1 en educación financiera familiar y crear comunidad de gestores de dinero</div>
             </div>
             <div class="progress-section">
@@ -124,8 +141,8 @@
                 <div class="card-header">
                     <span class="card-title">Canales</span>
                 </div>
-                <div class="channel-badge">📸 Instagram</div>
-                <div class="channel-badge">📺 YouTube</div>
+                <div class="channel-badge">Instagram</div>
+                <div class="channel-badge">YouTube</div>
                 <div class="channel-badge">🗣️ Boca a boca</div>
             </div>
         </div>

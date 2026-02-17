@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Métricas | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 500px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .logo { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .logo span { color: #00d4ff; }
+        .header h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .client-name { color: #00d4ff; font-size: 0.9rem; }
+        
+        .card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group { margin-bottom: 1rem; }
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #999;
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #444;
+        }
+        .form-input::placeholder, .form-textarea::placeholder { color: #444; }
+        .form-textarea { min-height: 80px; resize: vertical; }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        @media (max-width: 500px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+        
+        .input-prefix {
+            display: flex;
+        }
+        .input-prefix .prefix {
+            padding: 0.75rem 0.6rem;
+            background: #1a1a1a;
+            border: 1px solid #222;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .input-prefix .form-input {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .helper-text {
+            font-size: 0.75rem;
+            color: #444;
+            margin-top: 0.25rem;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: #fff;
+            color: #0a0a0a;
+            margin-top: 0.5rem;
+        }
+        .btn:hover { background: #e5e5e5; }
+        .btn:disabled {
+            background: #333;
+            color: #555;
+            cursor: not-allowed;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #666;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .success-screen {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            display: none;
+        }
+        .success-check {
+            width: 56px;
+            height: 56px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .success-check svg { width: 28px; height: 28px; }
+        .success-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .success-desc { color: #666; font-size: 0.9rem; }
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            background: #111;
+            border: 1px solid #222;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { border-color: #333; }
+        
+        .error-screen {
+            text-align: center;
+            padding: 3rem;
+        }
+        .error-screen h2 { margin-bottom: 0.5rem; }
+        .error-screen p { color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">GH<span>.</span></div>
+            <h1>Actualizar Métricas</h1>
+            <div class="client-name" id="clientDisplay"></div>
+        </div>
+
+        <div id="errorScreen" class="error-screen" style="display: none;">
+            <div class="card">
+                <h2>Acceso no válido</h2>
+                <p>Este formulario requiere un enlace válido desde tu dashboard.</p>
+            </div>
+        </div>
+
+        <form id="trackingForm" style="display: none;">
+            <input type="hidden" name="cliente" id="clienteInput">
+            
+            <div class="card">
+                <div class="card-title">Métricas de Audiencia</div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Seguidores Instagram</label>
+                        <input type="number" class="form-input" name="ig_followers" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Suscriptores YouTube</label>
+                        <input type="number" class="form-input" name="yt_subs" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Seguidores TikTok</label>
+                        <input type="number" class="form-input" name="tiktok_followers" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lista de email</label>
+                        <input type="number" class="form-input" name="email_list" placeholder="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Ventas y Facturación</div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Leads esta semana</label>
+                        <input type="number" class="form-input" name="leads_week" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ventas cerradas</label>
+                        <input type="number" class="form-input" name="sales_closed" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Facturación del mes</label>
+                        <div class="input-prefix">
+                            <span class="prefix">€</span>
+                            <input type="number" class="form-input" name="monthly_revenue" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Clientes activos</label>
+                        <input type="number" class="form-input" name="active_clients" placeholder="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Contenido Publicado (esta semana)</div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Reels / Shorts</label>
+                        <input type="number" class="form-input" name="reels_published" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Videos largos</label>
+                        <input type="number" class="form-input" name="long_videos" placeholder="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Situación Actual</div>
+                
+                <div class="form-group">
+                    <label class="form-label">Problemas o inquietudes principales</label>
+                    <textarea class="form-textarea" name="problemas" placeholder="¿Qué te está frenando? ¿Dónde necesitas ayuda?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Victorias o avances de la semana</label>
+                    <textarea class="form-textarea" name="victorias" placeholder="¿Qué salió bien? ¿Algún logro?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preguntas para la próxima call</label>
+                    <textarea class="form-textarea" name="preguntas" placeholder="¿Qué quieres resolver en nuestra próxima sesión?"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Enviar actualización</button>
+        </form>
+
+        <div class="success-screen" id="successScreen">
+            <div class="card">
+                <div class="success-check">
+                    <svg fill="none" stroke="#000" stroke-width="3" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="success-title">Métricas actualizadas</div>
+                <div class="success-desc">Guillermo revisará tu progreso antes de la próxima call.</div>
+                <a href="#" class="back-link" id="backLink">Volver a mi dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get client from URL parameter
+        const params = new URLSearchParams(window.location.search);
+        const cliente = params.get('c') || params.get('cliente');
+        
+        if (!cliente) {
+            document.getElementById('errorScreen').style.display = 'block';
+        } else {
+            document.getElementById('trackingForm').style.display = 'block';
+            document.getElementById('clienteInput').value = cliente;
+            
+            // Display client name nicely
+            const displayName = cliente.charAt(0).toUpperCase() + cliente.slice(1);
+            document.getElementById('clientDisplay').textContent = displayName;
+            
+            // Set back link
+            document.getElementById('backLink').href = `/juan-contenido/clientes/${cliente}.html`;
+        }
+
+        // Get week number
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        // Form submit
+        document.getElementById('trackingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>Enviando...';
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Add metadata
+            const now = new Date();
+            data.timestamp = now.toISOString();
+            data.week_number = getWeekNumber(now);
+            data.year = now.getFullYear();
+            data.source = 'client_dashboard';
+            
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbxrjDXn2_cov_0ylX8ipqyfkL-249qBjz2EpHTzl5TNKgNurM33rARJkd7wuqrnjmlm/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'tracking', data: data })
+                });
+                
+                // Show success
+                this.style.display = 'none';
+                document.getElementById('successScreen').style.display = 'block';
+                
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = 'Enviar actualización';
+                alert('Error al enviar. Por favor intenta de nuevo.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -39,6 +39,20 @@
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
         
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .btn-update {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-update:hover { background: #e5e5e5; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
         
         .card {
@@ -165,16 +179,19 @@
                     <div class="client-nicho">Dropshipping / Infoproductos</div>
                 </div>
             </div>
-            <a href="index.html" class="back-link">← Todos los clientes</a>
+            <div class="header-actions">
+                <a href="../tracking/update.html?c=pablo" class="btn-update">Actualizar métricas</a>
+                <a href="index.html" class="back-link">← Volver</a>
+            </div>
         </div>
 
         <div class="grid">
             <!-- Documentos -->
             <div class="card">
-                <div class="card-title">📄 Documentos</div>
+                <div class="card-title">Documentos</div>
                 <div class="info-row">
                     <span class="info-label">Diagnóstico</span>
-                    <span class="status-badge status-yes">✓ Completado</span>
+                    <span class="status-badge status-yes">Completado</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Link diagnóstico</span>
@@ -182,17 +199,17 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">Onboarding</span>
-                    <span class="status-badge status-pending">⏳ Pendiente verificar</span>
+                    <span class="status-badge status-pending">Pendiente verificar</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Contrato</span>
-                    <span class="status-badge status-pending">⏳ Pendiente verificar</span>
+                    <span class="status-badge status-pending">Pendiente verificar</span>
                 </div>
             </div>
 
             <!-- Datos del Diagnóstico -->
             <div class="card">
-                <div class="card-title">📊 Del Diagnóstico</div>
+                <div class="card-title">Del Diagnóstico</div>
                 <div class="info-row">
                     <span class="info-label">Facturado (ecomm)</span>
                     <span class="info-value" style="color: #4ade80;">€500k en 3 meses</span>
@@ -209,7 +226,7 @@
 
             <!-- Producto / Oferta -->
             <div class="card">
-                <div class="card-title">📦 Producto / Oferta</div>
+                <div class="card-title">Producto / Oferta</div>
                 <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
                     Mentoría de dropshipping con información privilegiada, proveedores privados, asesores fiscales - de 0 a experto.
                 </p>
@@ -235,30 +252,30 @@
 
             <!-- Avatar y Captación -->
             <div class="card">
-                <div class="card-title">🎯 Avatar & Captación</div>
+                <div class="card-title">Avatar y Captación</div>
                 <p style="color: #888; font-size: 0.85rem; margin-bottom: 1rem;">A quién ayuda:</p>
                 <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
                     Emprendedores en dropshipping con ads, futuros emprendedores que buscan cambiar su vida.
                 </p>
                 <p style="color: #888; font-size: 0.85rem; margin-bottom: 0.5rem;">Canales de captación:</p>
                 <div class="tag-list">
-                    <span class="tag">📸 Instagram</span>
-                    <span class="tag">📺 YouTube</span>
+                    <span class="tag">Instagram</span>
+                    <span class="tag">YouTube</span>
                 </div>
             </div>
 
             <!-- Historial de Calls -->
             <div class="card full-width">
-                <div class="card-title">📞 Historial de Calls</div>
+                <div class="card-title">Historial de Calls</div>
                 <div class="no-calls">
-                    <p>⏳ Esperando datos de Fathom</p>
+                    <p>Esperando datos de Fathom</p>
                     <p style="font-size: 0.8rem; margin-top: 0.5rem;">Los transcripts de llamadas aparecerán aquí automáticamente</p>
                 </div>
             </div>
 
             <!-- Action Items -->
             <div class="card">
-                <div class="card-title">✅ Action Items (del diagnóstico)</div>
+                <div class="card-title">Action Items</div>
                 <ul class="action-items">
                     <li class="action-item">
                         <div class="action-checkbox"></div>
@@ -285,7 +302,7 @@
 
             <!-- Notas -->
             <div class="card">
-                <div class="card-title">📝 Notas</div>
+                <div class="card-title">Notas</div>
                 <div class="notes-box">
                     <strong>Situación actual:</strong><br>
                     Pablo ha facturado €500k en 3 meses con ecommerce (dropshipping). Quiere transicionar a vender cursos/mentorías. Ya tiene su primera venta (€2,500 - sala 3 meses).<br><br>

@@ -47,6 +47,20 @@
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
         
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .btn-update {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-update:hover { background: #e5e5e5; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         
         .card {
@@ -221,7 +235,10 @@
             <div style="text-align: right;">
                 <span class="client-status">Activo</span>
                 <div style="margin-top: 1rem;">
-                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                    <div class="header-actions">
+                <a href="../tracking/update.html?c=nel" class="btn-update">Actualizar métricas</a>
+                <a href="index.html" class="back-link">← Volver</a>
+            </div>
                 </div>
             </div>
         </div>
@@ -229,7 +246,7 @@
         <div class="grid">
             <!-- Asset Principal -->
             <div class="card">
-                <div class="card-title">🎬 ASSET PRINCIPAL</div>
+                <div class="card-title">ASSET PRINCIPAL</div>
                 <div class="youtube-badge">
                     <span>📺</span>
                     <span>Canal YouTube Potente</span>
@@ -250,7 +267,7 @@
 
             <!-- Producto -->
             <div class="card">
-                <div class="card-title">📦 PRODUCTO</div>
+                <div class="card-title">PRODUCTO</div>
                 <div class="info-row">
                     <span class="info-label">Tipo</span>
                     <span class="info-value">Comunidad de Pago</span>
@@ -307,7 +324,7 @@
 
             <!-- Foco Actual -->
             <div class="card">
-                <div class="card-title">🎯 FOCO ACTUAL</div>
+                <div class="card-title">FOCO ACTUAL</div>
                 <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">
                     Monetizar audiencia YT con Skool de pago
                 </div>
@@ -316,14 +333,14 @@
                     Ya tiene la audiencia. El canal de YouTube es el asset. Solo necesita crear el producto y el embudo de conversión.
                 </div>
                 <div class="highlight-box">
-                    <div class="highlight-title">💡 Oportunidad</div>
+                    <div class="highlight-title">Oportunidad</div>
                     <div class="highlight-text">Con una audiencia existente en YouTube, el CAC es prácticamente 0. Cada video es un lead magnet orgánico.</div>
                 </div>
             </div>
 
             <!-- Action Items -->
             <div class="card full-width">
-                <div class="card-title">✅ ACTION ITEMS</div>
+                <div class="card-title">ACTION ITEMS</div>
                 <ul class="action-items">
                     <li class="action-item">
                         <div class="action-checkbox"></div>
@@ -352,7 +369,7 @@
                 </ul>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
                     <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
-                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                    <a href="../tracking/" class="btn btn-outline">Actualizar Métricas</a>
                 </div>
             </div>
         </div>

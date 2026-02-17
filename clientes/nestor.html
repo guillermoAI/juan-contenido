@@ -47,6 +47,20 @@
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
         
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .btn-update {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-update:hover { background: #e5e5e5; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         
         .card {
@@ -200,7 +214,10 @@
             <div style="text-align: right;">
                 <span class="client-status">Activo</span>
                 <div style="margin-top: 1rem;">
-                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                    <div class="header-actions">
+                <a href="../tracking/update.html?c=nestor" class="btn-update">Actualizar métricas</a>
+                <a href="index.html" class="back-link">← Volver</a>
+            </div>
                 </div>
             </div>
         </div>
@@ -208,7 +225,7 @@
         <div class="grid">
             <!-- Producto -->
             <div class="card">
-                <div class="card-title">📦 PRODUCTO</div>
+                <div class="card-title">PRODUCTO</div>
                 <div class="info-row">
                     <span class="info-label">Tipo</span>
                     <span class="info-value">Curso Low Ticket</span>
@@ -229,7 +246,7 @@
 
             <!-- Métricas -->
             <div class="card">
-                <div class="card-title">📊 MÉTRICAS</div>
+                <div class="card-title">MÉTRICAS</div>
                 <div class="info-row">
                     <span class="info-label">Ventas totales</span>
                     <span class="info-value">— (pendiente)</span>
@@ -286,7 +303,7 @@
 
             <!-- Foco Actual -->
             <div class="card">
-                <div class="card-title">🎯 FOCO ACTUAL</div>
+                <div class="card-title">FOCO ACTUAL</div>
                 <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">
                     Lanzar curso de marca personal en Whop
                 </div>
@@ -298,7 +315,7 @@
 
             <!-- Action Items -->
             <div class="card full-width">
-                <div class="card-title">✅ ACTION ITEMS</div>
+                <div class="card-title">ACTION ITEMS</div>
                 <ul class="action-items">
                     <li class="action-item">
                         <div class="action-checkbox"></div>
@@ -323,7 +340,7 @@
                 </ul>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
                     <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
-                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                    <a href="../tracking/" class="btn btn-outline">Actualizar Métricas</a>
                 </div>
             </div>
         </div>

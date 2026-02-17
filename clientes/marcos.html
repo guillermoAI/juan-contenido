@@ -47,6 +47,20 @@
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
         
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .btn-update {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-update:hover { background: #e5e5e5; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         
         .card {
@@ -250,7 +264,10 @@
             <div style="text-align: right;">
                 <span class="client-status">Activo</span>
                 <div style="margin-top: 1rem;">
-                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                    <div class="header-actions">
+                <a href="../tracking/update.html?c=marcos" class="btn-update">Actualizar métricas</a>
+                <a href="index.html" class="back-link">← Volver</a>
+            </div>
                 </div>
             </div>
         </div>
@@ -258,7 +275,7 @@
         <div class="grid">
             <!-- Producto -->
             <div class="card">
-                <div class="card-title">📦 PRODUCTO</div>
+                <div class="card-title">PRODUCTO</div>
                 <div class="fitness-badge" style="margin-bottom: 1rem;">
                     <span>💪</span>
                     <span>Mentorías Fitness 1:1</span>
@@ -279,7 +296,7 @@
 
             <!-- Problema Principal -->
             <div class="card">
-                <div class="card-title">🎯 PROBLEMA A RESOLVER</div>
+                <div class="card-title">PROBLEMA A RESOLVER</div>
                 <div style="font-size: 1.2rem; font-weight: 600; color: #facc15; margin-bottom: 1rem;">
                     Leads poco cualificados
                 </div>
@@ -288,7 +305,7 @@
                     Llegan leads pero no están filtrados. Pierde tiempo con personas que no son su cliente ideal o no pueden pagar.
                 </div>
                 <div class="highlight-box">
-                    <div class="highlight-title">💡 Solución propuesta</div>
+                    <div class="highlight-title">Solución propuesta</div>
                     <div class="highlight-text">Página con formulario de cualificación que filtre antes de agendar call. Preguntas sobre presupuesto, compromiso, situación actual.</div>
                 </div>
             </div>
@@ -357,7 +374,7 @@
 
             <!-- Action Items -->
             <div class="card full-width">
-                <div class="card-title">✅ ACTION ITEMS</div>
+                <div class="card-title">ACTION ITEMS</div>
                 <ul class="action-items">
                     <li class="action-item">
                         <div class="action-checkbox"></div>
@@ -386,13 +403,13 @@
                 </ul>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
                     <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
-                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                    <a href="../tracking/" class="btn btn-outline">Actualizar Métricas</a>
                 </div>
             </div>
 
             <!-- Notas -->
             <div class="card full-width">
-                <div class="card-title">📝 NOTAS ADICIONALES</div>
+                <div class="card-title">NOTAS ADICIONALES</div>
                 <div class="notes-box" style="margin-top: 0;">
                     <strong>Contexto:</strong><br>
                     Marcos es entrenador personal con modelo 1:1. Su problema no es el producto ni el contenido, 
