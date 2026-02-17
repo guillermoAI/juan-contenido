@@ -3,214 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex - Dashboard | GH Consulting</title>
+    <title>Alex | GH Consulting</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0a0a0a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; padding: 2rem; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #222; }
-        .header-left { display: flex; align-items: center; gap: 1rem; }
-        .avatar { width: 48px; height: 48px; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; }
-        .header h1 { font-size: 1.5rem; font-weight: 600; }
-        .header-handle { color: #666; font-size: 0.9rem; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #222;
+        }
+        .client-info { display: flex; align-items: center; gap: 1.5rem; }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #000, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            border: 2px solid #333;
+        }
+        .client-name { font-size: 2rem; font-weight: 700; }
+        .client-handle { color: #888; font-size: 1rem; margin-top: 0.25rem; }
+        .client-status {
+            padding: 0.4rem 1rem;
+            background: #2d2a0f;
+            color: #facc15;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-        .card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 1.5rem; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .card-title { font-size: 0.9rem; font-weight: 600; color: #888; }
-        .col-4 { grid-column: span 4; }
-        .col-6 { grid-column: span 6; }
-        .col-12 { grid-column: span 12; }
-        @media (max-width: 1024px) { .col-4, .col-6 { grid-column: span 12; } }
-        .big-number { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-        .big-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
-        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
-        .status-active { background: #0f2d1a; color: #4ade80; }
-        .status-warning { background: #2d2a0f; color: #facc15; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .card-title {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .stat-value { font-size: 2.5rem; font-weight: 700; }
+        .stat-label { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: #888; }
+        .info-value { font-weight: 500; }
+        
         .progress-section { margin-top: 1rem; }
-        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-        .progress-label { font-size: 0.8rem; color: #888; }
-        .progress-value { font-size: 0.8rem; color: #fff; font-weight: 600; }
-        .progress-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #000, #666); border-radius: 4px; }
-        .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .metric-item { background: #0a0a0a; padding: 1rem; border-radius: 8px; }
-        .metric-value { font-size: 1.5rem; font-weight: 700; }
-        .metric-label { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
-        .timeline { position: relative; padding-left: 1.5rem; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #222; }
-        .timeline-item { position: relative; padding-bottom: 1.5rem; }
-        .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-dot { position: absolute; left: -1.5rem; top: 0; width: 10px; height: 10px; background: #facc15; border-radius: 50%; transform: translateX(-4px); }
-        .timeline-dot.pending { background: #666; }
-        .timeline-date { font-size: 0.75rem; color: #666; margin-bottom: 0.25rem; }
-        .timeline-title { font-size: 0.9rem; font-weight: 500; }
-        .timeline-desc { font-size: 0.8rem; color: #888; margin-top: 0.25rem; }
-        .action-list { list-style: none; }
-        .action-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #1a1a1a; }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #facc15, #f97316);
+            border-radius: 4px;
+        }
+        
+        .phase-list { list-style: none; }
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .phase-item:last-child { border-bottom: none; }
+        .phase-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        .phase-icon.done { background: #0f2d1a; color: #4ade80; }
+        .phase-icon.current { background: #facc15; color: #000; }
+        .phase-icon.pending { background: #222; color: #666; }
+        .phase-name { flex: 1; }
+        .phase-name.current { color: #facc15; font-weight: 500; }
+        .phase-name.pending { color: #666; }
+        
+        .action-items { list-style: none; }
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
         .action-item:last-child { border-bottom: none; }
-        .action-checkbox { width: 18px; height: 18px; border: 2px solid #444; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
-        .action-text { font-size: 0.85rem; line-height: 1.4; }
-        .notes-area { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 1rem; font-size: 0.85rem; color: #888; line-height: 1.6; min-height: 150px; }
-        .tag { display: inline-block; background: #1a1a1a; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: #888; margin-right: 0.5rem; margin-bottom: 0.5rem; }
-        .edit-btn { background: transparent; border: 1px solid #333; color: #888; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
-        .edit-btn:hover { border-color: #555; color: #fff; }
-        .tiktok-badge { background: linear-gradient(135deg, #000 0%, #25F4EE 50%, #FE2C55 100%); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
-        .warning-box { background: #2d2a0f; border: 1px solid #5c4d1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-        .warning-title { color: #facc15; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .warning-text { color: #a3a385; font-size: 0.85rem; }
+        .action-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-checkbox:hover { border-color: #facc15; }
+        .action-checkbox.done { background: #facc15; border-color: #facc15; }
+        .action-text { flex: 1; font-size: 0.9rem; line-height: 1.4; }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #2d2a0f 0%, #1a180a 100%);
+            border: 1px solid #4a4520;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .alert-title { color: #facc15; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .alert-text { font-size: 0.9rem; color: #a3a385; line-height: 1.5; }
+
+        .tiktok-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            border: 1px solid #333;
+        }
+
+        .notes-box {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .revenue-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .revenue-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #4ade80;
+        }
+        .revenue-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        .revenue-note {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #facc15;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #eab308; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+        }
+        .btn-outline:hover { border-color: #facc15; color: #facc15; background: transparent; }
+        
+        .full-width { grid-column: 1 / -1; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="avatar">A</div>
-            <div>
-                <h1>Alex</h1>
-                <div class="header-handle">TikTok Shop Formula</div>
+    <div class="container">
+        <div class="header">
+            <div class="client-info">
+                <div class="avatar">A</div>
+                <div>
+                    <div class="client-name">Alex</div>
+                    <div class="client-handle">TikTok Shop Formula</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span class="client-status">⚠️ Atención</span>
+                <div style="margin-top: 1rem;">
+                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                </div>
             </div>
         </div>
-        <a href="index.html" class="back-link">← Todos los clientes</a>
+
+        <!-- Alerta Principal -->
+        <div class="alert-box">
+            <div class="alert-title">⚠️ Requiere Atención</div>
+            <div class="alert-text">
+                El contenido no está pillando visitas. Bloqueado en la fase de creación de contenido. 
+                Necesita revisar estrategia de hooks y formatos.
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Revenue -->
+            <div class="card revenue-card">
+                <div class="revenue-value">€20k</div>
+                <div class="revenue-label">Facturación mensual</div>
+                <div class="revenue-note">TikTok Shop</div>
+            </div>
+
+            <!-- Producto -->
+            <div class="card">
+                <div class="card-title">📦 PRODUCTO</div>
+                <div class="tiktok-badge" style="margin-bottom: 1rem;">
+                    <span>🎵</span>
+                    <span>TikTok Shop</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tipo</span>
+                    <span class="info-value">Comunidad Skool</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Modelo</span>
+                    <span class="info-value">Gratis (por ahora)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Objetivo</span>
+                    <span class="info-value">Monetizar conocimiento</span>
+                </div>
+            </div>
+
+            <!-- Problema Principal -->
+            <div class="card">
+                <div class="card-title">🚨 PROBLEMA PRINCIPAL</div>
+                <div style="font-size: 1.2rem; font-weight: 600; color: #facc15; margin-bottom: 1rem;">
+                    Contenido sin tracción
+                </div>
+                <div class="notes-box" style="margin-top: 0;">
+                    <strong>Síntomas:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1rem; color: #888;">
+                        <li>Videos no pillan visitas</li>
+                        <li>Algoritmo no empuja</li>
+                        <li>Hooks débiles</li>
+                        <li>Formato no optimizado</li>
+                    </ul>
+                </div>
+                <div class="notes-box">
+                    <strong>Hipótesis:</strong><br>
+                    El contenido es demasiado genérico. Necesita diferenciación clara + hooks más fuertes + prueba social.
+                </div>
+            </div>
+
+            <!-- Progreso -->
+            <div class="card">
+                <div class="card-title">🗺️ ROADMAP</div>
+                <ul class="phase-list">
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Onboarding</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Setup Skool (gratis)</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon current">3</span>
+                        <span class="phase-name current">Contenido de captación ⚠️</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">4</span>
+                        <span class="phase-name pending">Monetizar Skool</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">5</span>
+                        <span class="phase-name pending">Escala</span>
+                    </li>
+                </ul>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Progreso total</span>
+                        <span style="color: #facc15;">35% (bloqueado)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Items -->
+            <div class="card full-width">
+                <div class="card-title">✅ ACTION ITEMS (Prioridad: Desbloquear contenido)</div>
+                <ul class="action-items">
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text"><strong>URGENTE:</strong> Analizar top 5 creadores de TikTok Shop que sí pillan views → extraer patrones</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Crear nueva biblioteca de hooks específicos para TikTok Shop (no genéricos)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Grabar 3 videos con nuevo formato y testear</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Añadir prueba social al contenido (mostrar resultados €20k/mes)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Revisar horarios de publicación</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Una vez tenga tracción: migrar Skool a pago</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <a href="https://cal.com/guillermohernandez" class="btn">📅 Call Urgente</a>
+                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                </div>
+            </div>
+
+            <!-- Notas Estratégicas -->
+            <div class="card full-width">
+                <div class="card-title">💡 NOTAS ESTRATÉGICAS</div>
+                <div class="notes-box" style="margin-top: 0;">
+                    <strong>Ventaja:</strong> Ya factura €20k/mes con TikTok Shop → tiene resultados reales que mostrar.<br><br>
+                    <strong>Problema:</strong> No sabe comunicarlo bien en contenido.<br><br>
+                    <strong>Solución:</strong> Contenido tipo "Cómo gano €20k/mes con TikTok Shop" mostrando proceso real, no teoría. 
+                    Los resultados venden, la teoría aburre.
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="grid">
-        <!-- Status -->
-        <div class="card col-4">
-            <div class="warning-box">
-                <div class="warning-title">⚠️ Problema Principal</div>
-                <div class="warning-text">Contenido no pilla visitas, perdido en creación</div>
-            </div>
-            <div class="card-header">
-                <span class="card-title">Estado</span>
-                <span class="status-badge status-warning">Atención</span>
-            </div>
-            <div class="big-number">Fase 1</div>
-            <div class="big-label">Estrategia de contenido</div>
-            <div class="progress-section">
-                <div class="progress-header">
-                    <span class="progress-label">Progreso general</span>
-                    <span class="progress-value">35%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 35%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Métricas -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Métricas</span>
-                <span class="tiktok-badge">TikTok Shop</span>
-            </div>
-            <div class="metric-grid">
-                <div class="metric-item">
-                    <div class="metric-value" style="color: #4ade80;">€20k</div>
-                    <div class="metric-label">Factura/mes</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">Skool</div>
-                    <div class="metric-label">Plataforma</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">Free</div>
-                    <div class="metric-label">Modelo actual</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">Miembros Skool</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Info -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Info Rápida</span>
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <div class="tag">TikTok Shop</div>
-                <div class="tag">Skool Free</div>
-                <div class="tag">Contenido</div>
-            </div>
-            <div style="font-size: 0.85rem; color: #888; line-height: 1.5;">
-                <strong style="color: #fff;">Logro:</strong> €20k/mes con TikTok Shop<br><br>
-                <strong style="color: #fff;">Proyecto:</strong> Skool free "TikTok Shop Formula"<br><br>
-                <strong style="color: #fff;">Bloqueo:</strong> Contenido no funciona, pocas visitas
-            </div>
-        </div>
-
-        <!-- Timeline -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Timeline</span>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Urgente</div>
-                    <div class="timeline-title">Revisar estrategia de contenido</div>
-                    <div class="timeline-desc">Analizar qué falla en los videos</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot pending"></div>
-                    <div class="timeline-date">Pendiente</div>
-                    <div class="timeline-title">Redefinir hooks y formatos</div>
-                    <div class="timeline-desc">Aplicar frameworks que funcionan</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Action Items (Prioridad Alta)</span>
-                <button class="edit-btn">+ Añadir</button>
-            </div>
-            <ul class="action-list">
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Analizar top creators en TikTok Shop nicho</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Revisar hooks de los últimos 10 videos</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Crear 5 hooks nuevos basados en análisis</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Definir calendario de contenido semanal</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Notas -->
-        <div class="card col-12">
-            <div class="card-header">
-                <span class="card-title">Diagnóstico del Problema</span>
-                <button class="edit-btn">Editar</button>
-            </div>
-            <div class="notes-area">
-                <strong>Situación:</strong><br>
-                Alex factura €20k/mes con TikTok Shop pero está bloqueado en la creación de contenido para vender cursos. Sus videos no pillan visitas.
-                <br><br>
-                <strong>Posibles causas a investigar:</strong><br>
-                • Hooks débiles (no captan atención)<br>
-                • Formato incorrecto para el nicho<br>
-                • Falta de consistencia<br>
-                • Targeting de audiencia erróneo<br>
-                • Calidad de producción insuficiente
-                <br><br>
-                <strong>Proyecto actual:</strong><br>
-                Skool free "TikTok Shop Formula" - necesita convertir miembros free a paid
-                <br><br>
-                <strong>Notas de calls:</strong><br>
-                <em>Pendiente importar transcripts de Fathom...</em>
-            </div>
-        </div>
-    </div>
+    <script>
+        document.querySelectorAll('.action-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('done');
+            });
+        });
+    </script>
 </body>
 </html>

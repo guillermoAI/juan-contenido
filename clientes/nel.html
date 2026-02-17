@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nel - Dashboard | GH Consulting</title>
+    <title>Nel | GH Consulting</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -13,215 +13,357 @@
             min-height: 100vh;
             padding: 2rem;
         }
+        .container { max-width: 1000px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid #222;
         }
-        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .client-info { display: flex; align-items: center; gap: 1.5rem; }
         .avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border-radius: 12px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
         }
-        .header h1 { font-size: 1.5rem; font-weight: 600; }
-        .header-handle { color: #666; font-size: 0.9rem; }
+        .client-name { font-size: 2rem; font-weight: 700; }
+        .client-handle { color: #ef4444; font-size: 1rem; margin-top: 0.25rem; }
+        .client-status {
+            padding: 0.4rem 1rem;
+            background: #0f2d1a;
+            color: #4ade80;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-        .card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 1.5rem; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .card-title { font-size: 0.9rem; font-weight: 600; color: #888; }
-        .col-4 { grid-column: span 4; }
-        .col-6 { grid-column: span 6; }
-        .col-12 { grid-column: span 12; }
-        @media (max-width: 1024px) { .col-4, .col-6 { grid-column: span 12; } }
-        .big-number { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-        .big-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
-        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
-        .status-active { background: #0f2d1a; color: #4ade80; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .card-title {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .stat-value { font-size: 2.5rem; font-weight: 700; }
+        .stat-label { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: #888; }
+        .info-value { font-weight: 500; }
+        
         .progress-section { margin-top: 1rem; }
-        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-        .progress-label { font-size: 0.8rem; color: #888; }
-        .progress-value { font-size: 0.8rem; color: #fff; font-weight: 600; }
-        .progress-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); border-radius: 4px; }
-        .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .metric-item { background: #0a0a0a; padding: 1rem; border-radius: 8px; }
-        .metric-value { font-size: 1.5rem; font-weight: 700; }
-        .metric-label { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
-        .timeline { position: relative; padding-left: 1.5rem; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #222; }
-        .timeline-item { position: relative; padding-bottom: 1.5rem; }
-        .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-dot { position: absolute; left: -1.5rem; top: 0; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; transform: translateX(-4px); }
-        .timeline-dot.pending { background: #666; }
-        .timeline-date { font-size: 0.75rem; color: #666; margin-bottom: 0.25rem; }
-        .timeline-title { font-size: 0.9rem; font-weight: 500; }
-        .timeline-desc { font-size: 0.8rem; color: #888; margin-top: 0.25rem; }
-        .action-list { list-style: none; }
-        .action-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #1a1a1a; }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f97316);
+            border-radius: 4px;
+        }
+        
+        .phase-list { list-style: none; }
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .phase-item:last-child { border-bottom: none; }
+        .phase-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        .phase-icon.done { background: #0f2d1a; color: #4ade80; }
+        .phase-icon.current { background: #ef4444; color: #fff; }
+        .phase-icon.pending { background: #222; color: #666; }
+        .phase-name { flex: 1; }
+        .phase-name.current { color: #ef4444; font-weight: 500; }
+        .phase-name.pending { color: #666; }
+        
+        .action-items { list-style: none; }
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
         .action-item:last-child { border-bottom: none; }
-        .action-checkbox { width: 18px; height: 18px; border: 2px solid #444; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
-        .action-text { font-size: 0.85rem; line-height: 1.4; }
-        .notes-area { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 1rem; font-size: 0.85rem; color: #888; line-height: 1.6; min-height: 150px; }
-        .tag { display: inline-block; background: #1a1a1a; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: #888; margin-right: 0.5rem; margin-bottom: 0.5rem; }
-        .edit-btn { background: transparent; border: 1px solid #333; color: #888; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
-        .edit-btn:hover { border-color: #555; color: #fff; }
-        .youtube-badge { background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); color: white; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .action-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-checkbox:hover { border-color: #ef4444; }
+        .action-checkbox.done { background: #ef4444; border-color: #ef4444; }
+        .action-text { flex: 1; font-size: 0.9rem; line-height: 1.4; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #2d1a1a 0%, #1a0f0f 100%);
+            border: 1px solid #4a2a2a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+        .highlight-title { color: #ef4444; font-weight: 600; margin-bottom: 0.5rem; }
+        .highlight-text { font-size: 0.9rem; color: #c0a0a0; line-height: 1.5; }
+
+        .youtube-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2d0a0a;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        .notes-box {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #ef4444;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #dc2626; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+        }
+        .btn-outline:hover { border-color: #ef4444; color: #ef4444; background: transparent; }
+        
+        .full-width { grid-column: 1 / -1; }
+
+        .contract-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #1a2d1a;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            color: #4ade80;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="avatar">N</div>
-            <div>
-                <h1>Nel</h1>
-                <div class="header-handle">@nel3d · Impresión 3D</div>
+    <div class="container">
+        <div class="header">
+            <div class="client-info">
+                <div class="avatar">N</div>
+                <div>
+                    <div class="client-name">Nel Vilella Farias</div>
+                    <div class="client-handle">@nel3d • YouTube</div>
+                    <div class="contract-badge">📋 6 meses desde 06/02/26</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span class="client-status">Activo</span>
+                <div style="margin-top: 1rem;">
+                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                </div>
             </div>
         </div>
-        <a href="index.html" class="back-link">← Todos los clientes</a>
+
+        <div class="grid">
+            <!-- Asset Principal -->
+            <div class="card">
+                <div class="card-title">🎬 ASSET PRINCIPAL</div>
+                <div class="youtube-badge">
+                    <span>📺</span>
+                    <span>Canal YouTube Potente</span>
+                </div>
+                <div class="info-row" style="margin-top: 1rem;">
+                    <span class="info-label">Nicho</span>
+                    <span class="info-value">Impresión 3D</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Audiencia</span>
+                    <span class="info-value">— (verificar)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Engagement</span>
+                    <span class="info-value">— (verificar)</span>
+                </div>
+            </div>
+
+            <!-- Producto -->
+            <div class="card">
+                <div class="card-title">📦 PRODUCTO</div>
+                <div class="info-row">
+                    <span class="info-label">Tipo</span>
+                    <span class="info-value">Comunidad de Pago</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Plataforma</span>
+                    <span class="info-value">Skool</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Precio</span>
+                    <span class="info-value">Por definir</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Avatar</span>
+                    <span class="info-value">Gente que quiere facturar con 3D</span>
+                </div>
+            </div>
+
+            <!-- Progreso -->
+            <div class="card">
+                <div class="card-title">🗺️ ROADMAP</div>
+                <ul class="phase-list">
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Onboarding</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Diagnóstico inicial</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon current">3</span>
+                        <span class="phase-name current">Definir oferta Skool</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">4</span>
+                        <span class="phase-name pending">Contenido de conversión</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">5</span>
+                        <span class="phase-name pending">Lanzamiento</span>
+                    </li>
+                </ul>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Progreso total</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foco Actual -->
+            <div class="card">
+                <div class="card-title">🎯 FOCO ACTUAL</div>
+                <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">
+                    Monetizar audiencia YT con Skool de pago
+                </div>
+                <div class="notes-box">
+                    <strong>Ventaja competitiva:</strong><br>
+                    Ya tiene la audiencia. El canal de YouTube es el asset. Solo necesita crear el producto y el embudo de conversión.
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-title">💡 Oportunidad</div>
+                    <div class="highlight-text">Con una audiencia existente en YouTube, el CAC es prácticamente 0. Cada video es un lead magnet orgánico.</div>
+                </div>
+            </div>
+
+            <!-- Action Items -->
+            <div class="card full-width">
+                <div class="card-title">✅ ACTION ITEMS</div>
+                <ul class="action-items">
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Definir estructura de la comunidad Skool (qué incluye)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Establecer pricing (mensual vs anual vs lifetime)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Crear video de YouTube con CTA a Skool</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Configurar página de Skool con copy persuasivo</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Crear contenido inicial para la comunidad (que haya valor desde día 1)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Plan de lanzamiento: secuencia de videos + community tab</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
+                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="grid">
-        <!-- Status -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Estado</span>
-                <span class="status-badge status-active">Activo</span>
-            </div>
-            <div class="big-number">Fase 2</div>
-            <div class="big-label">Creación de comunidad Skool</div>
-            <div class="progress-section">
-                <div class="progress-header">
-                    <span class="progress-label">Progreso general</span>
-                    <span class="progress-value">50%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 50%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Métricas -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Métricas</span>
-                <span class="youtube-badge">▶ YouTube</span>
-            </div>
-            <div class="metric-grid">
-                <div class="metric-item">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">Subs YouTube</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">Skool</div>
-                    <div class="metric-label">Plataforma</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">Pago</div>
-                    <div class="metric-label">Modelo</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">Miembros</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Info -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Info Rápida</span>
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <div class="tag">Impresión 3D</div>
-                <div class="tag">YouTube</div>
-                <div class="tag">Skool</div>
-                <div class="tag">Comunidad</div>
-            </div>
-            <div style="font-size: 0.85rem; color: #888; line-height: 1.5;">
-                <strong style="color: #fff;">Canal:</strong> YouTube potente sobre impresión 3D<br><br>
-                <strong style="color: #fff;">Proyecto:</strong> Comunidad Skool de pago para monetizar<br><br>
-                <strong style="color: #fff;">Avatar:</strong> Personas que quieren facturar con impresión 3D
-            </div>
-        </div>
-
-        <!-- Timeline -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Timeline</span>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot pending"></div>
-                    <div class="timeline-date">En progreso</div>
-                    <div class="timeline-title">Configuración Skool</div>
-                    <div class="timeline-desc">Estructura de la comunidad</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Completado</div>
-                    <div class="timeline-title">Definición de oferta</div>
-                    <div class="timeline-desc">Precio y propuesta de valor</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Action Items</span>
-                <button class="edit-btn">+ Añadir</button>
-            </div>
-            <ul class="action-list">
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Definir precio de la comunidad</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Crear estructura de contenido en Skool</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Grabar video de lanzamiento para YouTube</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Configurar página de ventas</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Notas -->
-        <div class="card col-12">
-            <div class="card-header">
-                <span class="card-title">Notas y Contexto</span>
-                <button class="edit-btn">Editar</button>
-            </div>
-            <div class="notes-area">
-                <strong>Situación actual:</strong><br>
-                Nel tiene un canal de YouTube potente sobre impresión 3D. Quiere monetizar su audiencia con una comunidad de pago en Skool.
-                <br><br>
-                <strong>Propuesta de valor de la comunidad:</strong><br>
-                • Enseñar a facturar con impresión 3D<br>
-                • Acceso a la comunidad y networking<br>
-                • Contenido exclusivo no disponible en YouTube
-                <br><br>
-                <strong>Notas de calls:</strong><br>
-                <em>Pendiente importar transcripts de Fathom...</em>
-            </div>
-        </div>
-    </div>
+    <script>
+        document.querySelectorAll('.action-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('done');
+            });
+        });
+    </script>
 </body>
 </html>

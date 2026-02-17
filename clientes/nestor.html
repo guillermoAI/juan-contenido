@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Néstor - Dashboard | GH Consulting</title>
+    <title>Néstor | GH Consulting</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -13,89 +13,78 @@
             min-height: 100vh;
             padding: 2rem;
         }
+        .container { max-width: 1000px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid #222;
         }
-        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .client-info { display: flex; align-items: center; gap: 1.5rem; }
         .avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
         }
-        .header h1 { font-size: 1.5rem; font-weight: 600; }
-        .header-handle { color: #666; font-size: 0.9rem; }
-        .back-link {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.9rem;
+        .client-name { font-size: 2rem; font-weight: 700; }
+        .client-handle { color: #667eea; font-size: 1rem; margin-top: 0.25rem; }
+        .client-status {
+            padding: 0.4rem 1rem;
+            background: #0f2d1a;
+            color: #4ade80;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
+        .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-        }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        
         .card {
             background: #111;
             border: 1px solid #222;
             border-radius: 16px;
             padding: 1.5rem;
         }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
         .card-title {
             font-size: 0.9rem;
-            font-weight: 600;
             color: #888;
-        }
-        .col-4 { grid-column: span 4; }
-        .col-6 { grid-column: span 6; }
-        .col-8 { grid-column: span 8; }
-        .col-12 { grid-column: span 12; }
-        @media (max-width: 1024px) {
-            .col-4, .col-6, .col-8 { grid-column: span 12; }
-        }
-        .big-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-        .big-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            margin-bottom: 1rem;
             font-weight: 500;
         }
-        .status-active { background: #0f2d1a; color: #4ade80; }
+        
+        .stat-value { font-size: 2.5rem; font-weight: 700; }
+        .stat-label { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+        .stat-change { font-size: 0.85rem; margin-top: 0.5rem; }
+        .stat-change.positive { color: #4ade80; }
+        .stat-change.negative { color: #ef4444; }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: #888; }
+        .info-value { font-weight: 500; }
+        
         .progress-section { margin-top: 1rem; }
         .progress-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
+            font-size: 0.85rem;
         }
-        .progress-label { font-size: 0.8rem; color: #888; }
-        .progress-value { font-size: 0.8rem; color: #fff; font-weight: 600; }
         .progress-bar {
             height: 8px;
             background: #222;
@@ -104,73 +93,36 @@
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4ade80, #22d3ee);
+            background: linear-gradient(90deg, #667eea, #764ba2);
             border-radius: 4px;
-            transition: width 0.3s;
         }
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+        
+        .phase-list { list-style: none; }
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #1a1a1a;
         }
-        .metric-item {
-            background: #0a0a0a;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .metric-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .metric-label {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: 0.25rem;
-        }
-        .timeline {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #222;
-        }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-        }
-        .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-dot {
-            position: absolute;
-            left: -1.5rem;
-            top: 0;
-            width: 10px;
-            height: 10px;
-            background: #4ade80;
+        .phase-item:last-child { border-bottom: none; }
+        .phase-icon {
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            transform: translateX(-4px);
-        }
-        .timeline-dot.pending { background: #666; }
-        .timeline-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 0.25rem;
         }
-        .timeline-title {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .timeline-desc {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.25rem;
-        }
-        .action-list { list-style: none; }
+        .phase-icon.done { background: #0f2d1a; color: #4ade80; }
+        .phase-icon.current { background: #667eea; color: #fff; }
+        .phase-icon.pending { background: #222; color: #666; }
+        .phase-name { flex: 1; }
+        .phase-name.current { color: #667eea; font-weight: 500; }
+        .phase-name.pending { color: #666; }
+        
+        .action-items { list-style: none; }
         .action-item {
             display: flex;
             align-items: flex-start;
@@ -180,188 +132,209 @@
         }
         .action-item:last-child { border-bottom: none; }
         .action-checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #444;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
             border-radius: 4px;
-            flex-shrink: 0;
-            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .action-checkbox.done {
-            background: #4ade80;
-            border-color: #4ade80;
+        .action-checkbox:hover { border-color: #667eea; }
+        .action-checkbox.done { background: #667eea; border-color: #667eea; }
+        .action-text { flex: 1; font-size: 0.9rem; line-height: 1.4; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1rem;
         }
-        .action-text { font-size: 0.85rem; line-height: 1.4; }
-        .action-text.done { color: #666; text-decoration: line-through; }
-        .notes-area {
+        .highlight-title { color: #667eea; font-weight: 600; margin-bottom: 0.5rem; }
+        .highlight-text { font-size: 0.9rem; color: #a0a0c0; line-height: 1.5; }
+
+        .notes-box {
             background: #0a0a0a;
-            border: 1px solid #222;
             border-radius: 8px;
             padding: 1rem;
-            font-size: 0.85rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
             color: #888;
-            line-height: 1.6;
-            min-height: 150px;
+            line-height: 1.5;
         }
-        .tag {
+        
+        .btn {
             display: inline-block;
-            background: #1a1a1a;
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: #888;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-        .edit-btn {
+        .btn:hover { background: #5a6fd6; }
+        .btn-outline {
             background: transparent;
             border: 1px solid #333;
             color: #888;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
         }
-        .edit-btn:hover { border-color: #555; color: #fff; }
+        .btn-outline:hover { border-color: #667eea; color: #667eea; background: transparent; }
+        
+        .full-width { grid-column: 1 / -1; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="avatar">N</div>
-            <div>
-                <h1>Néstor</h1>
-                <div class="header-handle">@theperfectman · Marca Personal</div>
+    <div class="container">
+        <div class="header">
+            <div class="client-info">
+                <div class="avatar">N</div>
+                <div>
+                    <div class="client-name">Néstor</div>
+                    <div class="client-handle">@theperfectman</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span class="client-status">Activo</span>
+                <div style="margin-top: 1rem;">
+                    <a href="index.html" class="back-link">← Todos los clientes</a>
+                </div>
             </div>
         </div>
-        <a href="index.html" class="back-link">← Todos los clientes</a>
+
+        <div class="grid">
+            <!-- Producto -->
+            <div class="card">
+                <div class="card-title">📦 PRODUCTO</div>
+                <div class="info-row">
+                    <span class="info-label">Tipo</span>
+                    <span class="info-value">Curso Low Ticket</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Plataforma</span>
+                    <span class="info-value">Whop</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Precio</span>
+                    <span class="info-value" style="color: #4ade80;">€69</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tema</span>
+                    <span class="info-value">Marca Personal</span>
+                </div>
+            </div>
+
+            <!-- Métricas -->
+            <div class="card">
+                <div class="card-title">📊 MÉTRICAS</div>
+                <div class="info-row">
+                    <span class="info-label">Ventas totales</span>
+                    <span class="info-value">— (pendiente)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Seguidores IG</span>
+                    <span class="info-value">— (pendiente)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Leads/semana</span>
+                    <span class="info-value">— (pendiente)</span>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-title">⚠️ Métricas pendientes</div>
+                    <div class="highlight-text">Necesitamos que Néstor actualice sus números en el formulario de tracking.</div>
+                </div>
+            </div>
+
+            <!-- Progreso -->
+            <div class="card">
+                <div class="card-title">🗺️ ROADMAP</div>
+                <ul class="phase-list">
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Onboarding</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon done">✓</span>
+                        <span class="phase-name">Diagnóstico inicial</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon current">3</span>
+                        <span class="phase-name current">Definir oferta y pricing</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">4</span>
+                        <span class="phase-name pending">Contenido y posicionamiento</span>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-icon pending">5</span>
+                        <span class="phase-name pending">Funnel de captación</span>
+                    </li>
+                </ul>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Progreso total</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foco Actual -->
+            <div class="card">
+                <div class="card-title">🎯 FOCO ACTUAL</div>
+                <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">
+                    Lanzar curso de marca personal en Whop
+                </div>
+                <div class="notes-box">
+                    <strong>Contexto:</strong><br>
+                    Néstor quiere monetizar su audiencia con un curso sobre cómo crear una marca personal atractiva. Ticket bajo (€69) para volumen.
+                </div>
+            </div>
+
+            <!-- Action Items -->
+            <div class="card full-width">
+                <div class="card-title">✅ ACTION ITEMS</div>
+                <ul class="action-items">
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Definir estructura del curso (módulos y lecciones)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Crear página de ventas en Whop</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Grabar contenido del curso</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Preparar secuencia de lanzamiento (stories + reels)</span>
+                    </li>
+                    <li class="action-item">
+                        <div class="action-checkbox"></div>
+                        <span class="action-text">Definir bonuses y urgencia</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <a href="https://cal.com/guillermohernandez" class="btn">📅 Agendar Call</a>
+                    <a href="../tracking/" class="btn btn-outline">📊 Actualizar Métricas</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="grid">
-        <!-- Status Card -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Estado</span>
-                <span class="status-badge status-active">Activo</span>
-            </div>
-            <div class="big-number">Fase 2</div>
-            <div class="big-label">de 4 fases del roadmap</div>
-            <div class="progress-section">
-                <div class="progress-header">
-                    <span class="progress-label">Progreso general</span>
-                    <span class="progress-value">40%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 40%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Métricas del Negocio -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Métricas del Negocio</span>
-                <button class="edit-btn">Actualizar</button>
-            </div>
-            <div class="metric-grid">
-                <div class="metric-item">
-                    <div class="metric-value">€69</div>
-                    <div class="metric-label">Precio curso</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">Ventas/mes</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">Whop</div>
-                    <div class="metric-label">Plataforma</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">-</div>
-                    <div class="metric-label">MRR</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Info Rápida -->
-        <div class="card col-4">
-            <div class="card-header">
-                <span class="card-title">Info Rápida</span>
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <div class="tag">Marca Personal</div>
-                <div class="tag">Low Ticket</div>
-                <div class="tag">Whop</div>
-            </div>
-            <div style="font-size: 0.85rem; color: #888; line-height: 1.5;">
-                <strong style="color: #fff;">Producto:</strong> Curso de €69 sobre cómo crear marca personal<br><br>
-                <strong style="color: #fff;">Objetivo:</strong> Escalar ventas del curso low ticket
-            </div>
-        </div>
-
-        <!-- Timeline -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Timeline de Calls</span>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Próxima call</div>
-                    <div class="timeline-title">Por agendar</div>
-                    <div class="timeline-desc">Revisar progreso Fase 2</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Última call</div>
-                    <div class="timeline-title">Pendiente Fathom</div>
-                    <div class="timeline-desc">Transcript por importar</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action Items -->
-        <div class="card col-6">
-            <div class="card-header">
-                <span class="card-title">Action Items</span>
-                <button class="edit-btn">+ Añadir</button>
-            </div>
-            <ul class="action-list">
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Definir estructura del funnel de ventas</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Crear página de ventas optimizada</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Configurar secuencia de emails</span>
-                </li>
-                <li class="action-item">
-                    <div class="action-checkbox"></div>
-                    <span class="action-text">Revisar contenido del curso</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Notas / Problemas -->
-        <div class="card col-12">
-            <div class="card-header">
-                <span class="card-title">Notas y Problemas Identificados</span>
-                <button class="edit-btn">Editar</button>
-            </div>
-            <div class="notes-area">
-                <em>Los datos de las calls de Fathom se importarán aquí automáticamente...</em>
-                <br><br>
-                Problemas identificados:
-                <br>• [Pendiente análisis de calls]
-                <br><br>
-                Sugerencias:
-                <br>• [Pendiente análisis de calls]
-            </div>
-        </div>
-    </div>
+    <script>
+        document.querySelectorAll('.action-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('done');
+            });
+        });
+    </script>
 </body>
 </html>
