@@ -13,6 +13,7 @@
             min-height: 100vh;
             padding: 2rem;
         }
+        .container { max-width: 1200px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
@@ -21,11 +22,13 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #222;
         }
-        .header h1 { font-size: 1.5rem; font-weight: 600; }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .last-check { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
         .back-link { color: #888; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #fff; }
-        .last-check { color: #666; font-size: 0.8rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        
         .card {
             background: #111;
             border: 1px solid #222;
@@ -36,20 +39,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
         .card-title { font-size: 1rem; font-weight: 600; }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .status-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            display: inline-block;
-            margin-right: 0.5rem;
         }
-        .status-active { background: #4ade80; box-shadow: 0 0 8px #4ade8066; }
-        .status-warning { background: #facc15; box-shadow: 0 0 8px #facc1566; }
-        .status-inactive { background: #666; }
-        .status-error { background: #ef4444; box-shadow: 0 0 8px #ef444466; }
+        .status-dot.active { background: #4ade80; box-shadow: 0 0 8px #4ade8066; }
+        .status-dot.warning { background: #facc15; box-shadow: 0 0 8px #facc1566; }
+        .status-dot.inactive { background: #666; }
+        .status-dot.error { background: #ef4444; box-shadow: 0 0 8px #ef444466; }
+        
         .service-list { list-style: none; }
         .service-item {
             display: flex;
@@ -59,8 +67,8 @@
             border-bottom: 1px solid #1a1a1a;
         }
         .service-item:last-child { border-bottom: none; }
-        .service-name { display: flex; align-items: center; gap: 0.5rem; }
-        .service-icon { font-size: 1.2rem; }
+        .service-name { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+        .service-icon { font-size: 1.1rem; }
         .service-status {
             font-size: 0.75rem;
             padding: 0.25rem 0.6rem;
@@ -69,7 +77,7 @@
         .status-ok { background: #0f2d1a; color: #4ade80; }
         .status-pending { background: #2d2a0f; color: #facc15; }
         .status-off { background: #1a1a1a; color: #666; }
-        .status-err { background: #2d1a1a; color: #ef4444; }
+        
         .info-box {
             background: #0a0a0a;
             border-radius: 8px;
@@ -77,6 +85,7 @@
             margin-top: 1rem;
             font-size: 0.85rem;
             color: #888;
+            line-height: 1.5;
         }
         .info-box code {
             background: #1a1a1a;
@@ -84,241 +93,314 @@
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.8rem;
+            color: #fff;
         }
-        .refresh-note {
-            text-align: center;
-            padding: 1rem;
-            color: #666;
-            font-size: 0.8rem;
+        .info-box a {
+            color: #00d4ff;
+            text-decoration: none;
         }
-        .suggestions {
-            margin-top: 1.5rem;
+        .info-box a:hover { text-decoration: underline; }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #222;
         }
-        .suggestion-item {
-            background: #111;
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .quick-link {
+            display: block;
+            background: #0a0a0a;
             border: 1px solid #222;
+            border-radius: 8px;
+            padding: 1rem;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.2s;
+        }
+        .quick-link:hover {
+            border-color: #444;
+            background: #111;
+        }
+        .quick-link-title { font-weight: 600; margin-bottom: 0.25rem; }
+        .quick-link-desc { font-size: 0.8rem; color: #666; }
+        
+        .webhook-url {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #888;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .action-needed {
+            background: linear-gradient(135deg, #2d2a0f 0%, #1a1a0a 100%);
+            border: 1px solid #4a4520;
             border-radius: 12px;
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        .suggestion-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .suggestion-desc { font-size: 0.85rem; color: #888; }
-        .priority-high { color: #ef4444; }
-        .priority-medium { color: #facc15; }
-        .priority-low { color: #4ade80; }
+        .action-title { color: #facc15; font-weight: 600; margin-bottom: 0.5rem; }
+        .action-desc { font-size: 0.85rem; color: #a3a385; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div>
-            <h1>⚙️ Estado del Sistema</h1>
-            <div class="last-check">Última verificación: 17 Feb 2026, 12:30 BKK</div>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>⚙️ Estado del Sistema</h1>
+                <div class="last-check">Última verificación: <span id="lastCheck"></span></div>
+            </div>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
         </div>
-        <a href="/index.html" class="back-link">← Volver al Hub</a>
+
+        <div class="grid">
+            <!-- Google Workspace -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🔵 Google Workspace</span>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span style="color: #4ade80; font-size: 0.85rem;">Conectado</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📧</span> Gmail</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📅</span> Calendar</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📁</span> Drive</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📊</span> Sheets</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📝</span> Docs</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>Cuenta:</strong> guillermo.hernandez.fuertes@gmail.com<br>
+                    <strong>Token:</strong> Auto-refresh ✅
+                </div>
+            </div>
+
+            <!-- Fathom -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🎙️ Fathom</span>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span style="color: #4ade80; font-size: 0.85rem;">Activo</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔑</span> API Key</span>
+                        <span class="service-status status-ok">Configurada</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔗</span> Webhook</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📄</span> Transcripts</span>
+                        <span class="service-status status-ok">Automático</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">✅</span> Action Items</span>
+                        <span class="service-status status-ok">Automático</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>Destino:</strong> <a href="https://docs.google.com/spreadsheets/d/1DQL-x67xjo8QZntbW3D9lA2qwEYl2ZoOH2NwvrfvBt0/edit" target="_blank">GH_Consulting_Fathom_Data</a>
+                </div>
+            </div>
+
+            <!-- Cal.com -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">📅 Cal.com</span>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span style="color: #4ade80; font-size: 0.85rem;">Activo</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔗</span> Webhook</span>
+                        <span class="service-status status-ok">Activo</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📋</span> Booking Created</span>
+                        <span class="service-status status-ok">✓</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔄</span> Rescheduled</span>
+                        <span class="service-status status-ok">✓</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">❌</span> Cancelled</span>
+                        <span class="service-status status-ok">✓</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>URL:</strong> <a href="https://cal.com/guillermohernandez" target="_blank">cal.com/guillermohernandez</a>
+                </div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">🐙 GitHub Pages</span>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span style="color: #4ade80; font-size: 0.85rem;">Live</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📦</span> Repo</span>
+                        <span class="service-status status-ok">juan-contenido</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🌐</span> Hub</span>
+                        <span class="service-status status-ok">Live</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">👥</span> Dashboards</span>
+                        <span class="service-status status-ok">6 clientes</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>URL:</strong> <a href="https://guillermoai.github.io/juan-contenido/" target="_blank">guillermoai.github.io/juan-contenido</a>
+                </div>
+            </div>
+
+            <!-- YouTube -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">📺 YouTube</span>
+                    <div class="status-indicator">
+                        <span class="status-dot warning"></span>
+                        <span style="color: #facc15; font-size: 0.85rem;">Parcial</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📝</span> TranscriptAPI</span>
+                        <span class="service-status status-ok">~80 créditos</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔑</span> OAuth</span>
+                        <span class="service-status status-pending">Pendiente</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">📊</span> Analytics</span>
+                        <span class="service-status status-off">No conectado</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>Canal:</strong> @GuilleHernandezF (743 subs)
+                </div>
+            </div>
+
+            <!-- Stripe -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">💳 Stripe</span>
+                    <div class="status-indicator">
+                        <span class="status-dot inactive"></span>
+                        <span style="color: #666; font-size: 0.85rem;">Pendiente</span>
+                    </div>
+                </div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔑</span> API Key</span>
+                        <span class="service-status status-off">No configurada</span>
+                    </li>
+                    <li class="service-item">
+                        <span class="service-name"><span class="service-icon">🔗</span> Webhooks</span>
+                        <span class="service-status status-off">No configurado</span>
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>Estado:</strong> LLC en proceso de creación
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📊 Google Sheets</h2>
+        <div class="quick-links">
+            <a href="https://docs.google.com/spreadsheets/d/1HgGc_W_NLLON0a49GbhlsAQKf8w9qbTnMqCuwWRCHNY/edit" target="_blank" class="quick-link">
+                <div class="quick-link-title">👥 Clientes Master</div>
+                <div class="quick-link-desc">Base de datos de todos los clientes</div>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1DQL-x67xjo8QZntbW3D9lA2qwEYl2ZoOH2NwvrfvBt0/edit" target="_blank" class="quick-link">
+                <div class="quick-link-title">🎙️ Fathom Data</div>
+                <div class="quick-link-desc">Transcripts y action items de calls</div>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1fBbHXbsj9BgceP7wmoPzZmeoG2RsvbfmT6_hxQVC7nw/edit" target="_blank" class="quick-link">
+                <div class="quick-link-title">📋 Roadmap</div>
+                <div class="quick-link-desc">Roadmap del programa para clientes</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">🔗 Webhook Endpoint</h2>
+        <div class="webhook-url">
+            https://script.google.com/macros/s/AKfycbxrjDXn2_cov_0ylX8ipqyfkL-249qBjz2EpHTzl5TNKgNurM33rARJkd7wuqrnjmlm/exec
+        </div>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">
+            Este endpoint recibe webhooks de: Fathom, Cal.com, Formulario de Onboarding, Tracking de Métricas
+        </p>
+
+        <h2 class="section-title">🚀 Links Rápidos</h2>
+        <div class="quick-links">
+            <a href="../clientes/" class="quick-link">
+                <div class="quick-link-title">👥 Dashboards Clientes</div>
+                <div class="quick-link-desc">Ver todas las dashboards</div>
+            </a>
+            <a href="../onboarding/" class="quick-link">
+                <div class="quick-link-title">🚀 Formulario Onboarding</div>
+                <div class="quick-link-desc">Para nuevos clientes</div>
+            </a>
+            <a href="../tracking/" class="quick-link">
+                <div class="quick-link-title">📊 Tracking Métricas</div>
+                <div class="quick-link-desc">Actualización semanal de clientes</div>
+            </a>
+            <a href="https://cal.com/guillermohernandez" target="_blank" class="quick-link">
+                <div class="quick-link-title">📅 Agendar Call</div>
+                <div class="quick-link-desc">Cal.com booking</div>
+            </a>
+        </div>
     </div>
 
-    <div class="grid">
-        <!-- Google Services -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">🔵 Google Workspace</span>
-                <span><span class="status-dot status-active"></span>Conectado</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📧</span> Gmail</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📅</span> Calendar</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📁</span> Drive</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📊</span> Sheets</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📝</span> Docs</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">👥</span> Contacts</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                <strong>Cuenta:</strong> guillermo.hernandez.fuertes@gmail.com<br>
-                <strong>Token válido hasta:</strong> Auto-refresh habilitado<br>
-                <strong>Refresh token:</strong> ✅ Permanente
-            </div>
-        </div>
-
-        <!-- Fathom -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">🎙️ Fathom</span>
-                <span><span class="status-dot status-warning"></span>Parcial</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔑</span> API Key</span>
-                    <span class="service-status status-ok">Configurada</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔗</span> Webhook</span>
-                    <span class="service-status status-pending">Pendiente</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📄</span> Transcripts</span>
-                    <span class="service-status status-pending">Via webhook</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                <strong>Acción requerida:</strong> Configurar webhook en Fathom<br>
-                <strong>URL:</strong> <code>Pendiente crear endpoint</code>
-            </div>
-        </div>
-
-        <!-- YouTube -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">📺 YouTube</span>
-                <span><span class="status-dot status-warning"></span>Parcial</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔑</span> OAuth</span>
-                    <span class="service-status status-pending">Pendiente código</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📊</span> Analytics</span>
-                    <span class="service-status status-off">No conectado</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📝</span> TranscriptAPI</span>
-                    <span class="service-status status-ok">~80 créditos</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                <strong>Canal:</strong> @GuilleHernandezF<br>
-                <strong>Acción:</strong> Completar OAuth para métricas en vivo
-            </div>
-        </div>
-
-        <!-- Stripe -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">💳 Stripe</span>
-                <span><span class="status-dot status-inactive"></span>No conectado</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔑</span> API Key</span>
-                    <span class="service-status status-off">Pendiente</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔗</span> Webhooks</span>
-                    <span class="service-status status-off">Pendiente</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                Conectar para automatizar:<br>
-                • Onboarding al pagar<br>
-                • Tracking de ingresos
-            </div>
-        </div>
-
-        <!-- Podia -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">🎓 Podia</span>
-                <span><span class="status-dot status-inactive"></span>No conectado</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔑</span> API</span>
-                    <span class="service-status status-off">Sin API pública</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📚</span> Clases</span>
-                    <span class="service-status status-pending">Manual</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                Podia no tiene API pública. Acceso manual a clases.
-            </div>
-        </div>
-
-        <!-- GitHub -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">🐙 GitHub</span>
-                <span><span class="status-dot status-active"></span>Conectado</span>
-            </div>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🔑</span> Token</span>
-                    <span class="service-status status-ok">Activo</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">📦</span> Repo</span>
-                    <span class="service-status status-ok">juan-contenido</span>
-                </li>
-                <li class="service-item">
-                    <span class="service-name"><span class="service-icon">🌐</span> Pages</span>
-                    <span class="service-status status-ok">Live</span>
-                </li>
-            </ul>
-            <div class="info-box">
-                <strong>URL:</strong> guillermoai.github.io/
-            </div>
-        </div>
-    </div>
-
-    <div class="suggestions">
-        <h2 style="margin-bottom: 1rem;">🎯 Acciones Pendientes</h2>
-        
-        <div class="suggestion-item">
-            <div class="suggestion-title">
-                <span class="priority-high">●</span> Configurar Webhook de Fathom
-            </div>
-            <div class="suggestion-desc">
-                Ir a Fathom → Settings → API Access → Add Webhook<br>
-                Activar: Transcript, Summary, Action Items
-            </div>
-        </div>
-
-        <div class="suggestion-item">
-            <div class="suggestion-title">
-                <span class="priority-medium">●</span> Completar OAuth de YouTube
-            </div>
-            <div class="suggestion-desc">
-                Falta el código de autorización para conectar YouTube Analytics y obtener métricas en tiempo real.
-            </div>
-        </div>
-
-        <div class="suggestion-item">
-            <div class="suggestion-title">
-                <span class="priority-low">●</span> Conectar Stripe (cuando esté listo)
-            </div>
-            <div class="suggestion-desc">
-                API key para automatizar onboarding cuando un cliente paga.
-            </div>
-        </div>
-    </div>
-
-    <div class="refresh-note">
-        Este panel se actualiza manualmente. Juan verifica el estado de las conexiones periódicamente.
-    </div>
+    <script>
+        document.getElementById('lastCheck').textContent = new Date().toLocaleString('es-ES', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    </script>
 </body>
 </html>
