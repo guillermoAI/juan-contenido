@@ -112,6 +112,9 @@
 | Dashboard Marcos | https://guillermoai.github.io/juan-contenido/clientes/marcos.html |
 | Template Propuesta | https://guillermoai.github.io/juan-contenido/propuesta/ |
 | Analytics | https://guillermoai.github.io/juan-contenido/analytics/ |
+| Recursos | https://guillermoai.github.io/juan-contenido/recursos/ |
+| Ideas Contenido | https://guillermoai.github.io/juan-contenido/contenido/ |
+| Tareas Kanban | https://guillermoai.github.io/juan-contenido/tareas/ |
 
 ### Google Sheets
 | Sheet | ID | Uso |
