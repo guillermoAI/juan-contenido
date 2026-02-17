@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas | GH Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 700; }
+        .back-link { color: #888; text-decoration: none; }
+        .back-link:hover { color: #fff; }
+        
+        .kanban {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            min-height: 70vh;
+        }
+        @media (max-width: 1000px) {
+            .kanban { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .kanban { grid-template-columns: 1fr; }
+        }
+        
+        .column {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #222;
+        }
+        .column-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .column-count {
+            background: #222;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        .task {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .task:hover { border-color: #333; transform: translateY(-1px); }
+        .task-title { font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .task-desc { color: #666; font-size: 0.8rem; line-height: 1.4; margin-bottom: 0.75rem; }
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-tag {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .tag-backend { background: #1a2d1a; color: #4ade80; }
+        .tag-contenido { background: #2d1a2d; color: #e879f9; }
+        .tag-cliente { background: #1a1a2d; color: #60a5fa; }
+        .tag-sistema { background: #2d2a1a; color: #facc15; }
+        .tag-urgente { background: #2d1a1a; color: #ef4444; }
+        
+        .task-priority {
+            font-size: 0.7rem;
+            color: #666;
+        }
+        .priority-high { color: #ef4444; }
+        .priority-medium { color: #facc15; }
+        
+        .column.backlog .column-title::before { content: '📋'; margin-right: 0.25rem; }
+        .column.todo .column-title::before { content: '📌'; margin-right: 0.25rem; }
+        .column.progress .column-title::before { content: '🔄'; margin-right: 0.25rem; }
+        .column.done .column-title::before { content: '✅'; margin-right: 0.25rem; }
+        
+        .add-task {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: 2px dashed #222;
+            border-radius: 8px;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .add-task:hover { border-color: #444; color: #888; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #222;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #22d3ee);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .stats-row span { color: #fff; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Tareas del Sistema</h1>
+            <a href="../index.html" class="back-link">← Volver al Hub</a>
+        </div>
+
+        <div class="stats-row">
+            <div>Total: <span>20</span> tareas</div>
+            <div>Completadas: <span>12</span></div>
+            <div>En progreso: <span>3</span></div>
+            <div>Pendientes: <span>5</span></div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%"></div>
+        </div>
+
+        <div class="kanban">
+            <!-- Backlog -->
+            <div class="column backlog">
+                <div class="column-header">
+                    <div class="column-title">Backlog</div>
+                    <span class="column-count">5</span>
+                </div>
+                <div class="task">
+                    <div class="task-title">Conectar YouTube Analytics</div>
+                    <div class="task-desc">OAuth completo para métricas en vivo del canal.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-sistema">Sistema</span>
+                        <span class="task-priority">Normal</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Instagram Graph API</div>
+                    <div class="task-desc">Cuando tenga Business account, conectar métricas.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-sistema">Sistema</span>
+                        <span class="task-priority">Normal</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Calculadora de Pricing</div>
+                    <div class="task-desc">Mini-app interactiva para calcular precios.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-contenido">Contenido</span>
+                        <span class="task-priority">Baja</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Generador de Oferta</div>
+                    <div class="task-desc">Tool basado en diagnóstico para crear ofertas.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                        <span class="task-priority">Normal</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Sistema de Setters</div>
+                    <div class="task-desc">Cuando escale, sistema para appointment setters.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                        <span class="task-priority">Baja</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- To Do -->
+            <div class="column todo">
+                <div class="column-header">
+                    <div class="column-title">Por Hacer</div>
+                    <span class="column-count">5</span>
+                </div>
+                <div class="task">
+                    <div class="task-title">Configurar Brevo API</div>
+                    <div class="task-desc">Conectar para envío de emails automáticos.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                        <span class="task-priority priority-high">Alta</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Datos de Alex (diagnóstico)</div>
+                    <div class="task-desc">Completar dashboard con info del diagnóstico.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-cliente">Cliente</span>
+                        <span class="task-priority priority-medium">Media</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Datos de Néstor (diagnóstico)</div>
+                    <div class="task-desc">Completar dashboard con info del diagnóstico.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-cliente">Cliente</span>
+                        <span class="task-priority priority-medium">Media</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Stripe Integration</div>
+                    <div class="task-desc">Cuando LLC esté lista, conectar pagos.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                        <span class="task-priority priority-high">Alta</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Flujo Luz Verde</div>
+                    <div class="task-desc">Automatización completa post-pago.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                        <span class="task-priority priority-high">Alta</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In Progress -->
+            <div class="column progress">
+                <div class="column-header">
+                    <div class="column-title">En Progreso</div>
+                    <span class="column-count">3</span>
+                </div>
+                <div class="task">
+                    <div class="task-title">Hub Command Center</div>
+                    <div class="task-desc">Dashboard principal con todas las secciones.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-sistema">Sistema</span>
+                        <span class="task-priority">90% ✓</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Research de Referentes</div>
+                    <div class="task-desc">Análisis de Dustin, Nik, Sigurd, Max.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-contenido">Contenido</span>
+                        <span class="task-priority">70% ✓</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Dashboards de Clientes</div>
+                    <div class="task-desc">6 dashboards, faltan datos de algunos.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-cliente">Cliente</span>
+                        <span class="task-priority">80% ✓</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Done -->
+            <div class="column done">
+                <div class="column-header">
+                    <div class="column-title">Completado</div>
+                    <span class="column-count">12</span>
+                </div>
+                <div class="task">
+                    <div class="task-title">Google Workspace</div>
+                    <div class="task-desc">Gmail, Calendar, Drive, Sheets conectados.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-sistema">Sistema</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Fathom Webhook</div>
+                    <div class="task-desc">Transcripts automáticos a Sheet.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Cal.com Webhook</div>
+                    <div class="task-desc">Bookings automáticos a Sheet.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Formulario Onboarding</div>
+                    <div class="task-desc">Multi-step con envío a Sheet.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Formulario Tracking</div>
+                    <div class="task-desc">Métricas semanales de clientes.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Template Propuesta</div>
+                    <div class="task-desc">Dossier editable post-llamada.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-contenido">Contenido</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Secuencia Emails</div>
+                    <div class="task-desc">5 emails de onboarding listos.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-contenido">Contenido</span>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task-title">Apps Script v2</div>
+                    <div class="task-desc">Handler para Fathom, Cal, Onboarding, Tracking.</div>
+                    <div class="task-meta">
+                        <span class="task-tag tag-backend">Backend</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
