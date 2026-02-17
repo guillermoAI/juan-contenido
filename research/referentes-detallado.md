@@ -169,4 +169,21 @@ Videos largos recomendados:
 
 ---
 
+## Referentes en Español
+
+### Adrián Sáenz (@adriansaenz)
+- **Nicho:** High ticket closing / Ventas
+- **Videos relevantes:**
+  - "Curso GRATIS De Closer De Ventas" (245k views)
+  - "Cómo Ser Closer De Ventas Desde Cero" (105k views)
+- **Posible competidor/referente** para el mercado hispanohablante
+
+### Alfonso y Christian
+- **Nicho:** Ventas / Objeciones
+- **Videos relevantes:**
+  - "¿Cómo responder a la objeción 'no me interesa'?" (120k views)
+- **Enfoque:** Contenido táctico sobre objeciones de ventas
+
+---
+
 *Este documento se actualiza conforme encuentro más información.*
